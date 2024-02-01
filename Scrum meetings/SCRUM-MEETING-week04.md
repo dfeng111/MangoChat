@@ -89,16 +89,17 @@
     </tr>
     <tr >
         <th>Issues capacity</th>
-        <th>Member 1: 4 hours 
-            <br>Member 2: 4 hours
-            <br>Member 3: 4 hours 
-            <br>Member 4: 4 hours
-            <br>Member 5: 4 hours
+        <th>Member 1: Dichen Feng, 4 hours 
+            <br>Member 2: Cameron Gillespie, 4 hours
+            <br>Member 3: Chris Hill, 4 hours 
+            <br>Member 4: Sawneet Sood, 4 hours
+            <br>Member 5: Jacob Tizel, 4 hours
         </th>
     </tr>
     <tr >
         <th>Potential risks</th>
         <th>Misunderstand the weekly requirements for the project</th>
+>>>>>>> f77cc7e453d9bb5471f99863fbc7e8ad51970b99
     </tr>
     <tr >
         <th>Mitigations</th>
@@ -107,3 +108,4 @@
 </table>
 <h3>Sprint planning resources</h3>
 <br>• Slides From TA
+<br>• https://discord.gg/krADCHa4
