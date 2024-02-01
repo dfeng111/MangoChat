@@ -8,9 +8,9 @@
         <th>Follow up</th>
     <tr>
     <tr >
-        <th></th>
-        <th></th>
-        <th></th>
+        <th>Team Organization</th>
+        <th>Disscussing platform and programming langauge needed for the project</th>
+        <th>Another meeting on fill out the weekly template</th>
     </tr>
 </table>
 <h3>Sprint team members</h3>
@@ -20,24 +20,24 @@
         <th>Role</th>
     <tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Dichen Feng</th>
+        <th>Not decide yet</th>
     </tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Cameron Gillespie</th>
+        <th>Not decide yet</th>
     </tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Chris Hill</th>
+        <th>Not decide yet</th>
     </tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Sawneet Sood</th>
+        <th>Not decide yet</th>
     </tr>
     <tr>
-        <th></th>
-        <th></th>
+        <th>Jacob Tizel</th>
+        <th>Not decide yet</th>
     </tr>
 </table>
 
@@ -48,23 +48,23 @@
 <table border = "2">
     <tr>
         <th>Sprint theme</th>
-        <th>e.g., Bugs</th>
+        <th>M2 Project Description and Requirements</th>
     <tr>
     <tr >
         <th>Issues completed</th>
-        <th></th>
+        <th>Diagram of the basic features about our Discord clone project</th>
     </tr>
     <tr >
         <th>Issues left</th>
-        <th></th>
+        <th>Project Requriement</th>
     </tr>
     <tr >
         <th>Team Capacity</th>
-        <th></th>
+        <th>6 hours per week</th>
     </tr>
     <tr >
         <th>Summary</th>
-        <th></th>
+        <th>Completed part of the project description.Planning to complete project description and project requirement in next two week.</th>
     </tr>
 </table>
 
@@ -73,38 +73,37 @@
 <table border = "2">
     <tr>
         <th>Start date</th>
-        <th></th>  
+        <th>1/29/2024</th>  
     <tr>
     <tr >
         <th>End date</th>
-        <th></th>
+        <th>2/5/2024</th>
     </tr>
     <tr >
         <th>Sprint theme</th>
-        <th></th>
+        <th>M2 Project Description and Requirements</th>
     </tr>
     <tr >
         <th>Team Capacity</th>
-        <th></th>
+        <th>2 hours in monday lab, 1 hour for Wednesday Meeting </th>
     </tr>
     <tr >
         <th>Issues capacity</th>
-        <th>Member 1
-            <br>Member 2
-            <br>Member 3
-            <br>Member 4
-            <br>Member 5
+        <th>Member 1: 4 hours 
+            <br>Member 2: 4 hours
+            <br>Member 3: 4 hours 
+            <br>Member 4: 4 hours
+            <br>Member 5: 4 hours
         </th>
     </tr>
     <tr >
         <th>Potential risks</th>
-        <th></th>
+        <th>Missundestood the weekly requirements for the project</th>
     </tr>
     <tr >
         <th>Mitigations</th>
-        <th></th>
+        <th>Show up in every lecture and labs</th>
     </tr>
 </table>
 <h3>Sprint planning resources</h3>
-<br>•
-<br>•
+<br>• Slides From TA
