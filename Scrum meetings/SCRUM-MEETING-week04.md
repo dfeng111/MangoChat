@@ -99,7 +99,6 @@
     <tr >
         <th>Potential risks</th>
         <th>Misunderstand the weekly requirements for the project</th>
->>>>>>> f77cc7e453d9bb5471f99863fbc7e8ad51970b99
     </tr>
     <tr >
         <th>Mitigations</th>
