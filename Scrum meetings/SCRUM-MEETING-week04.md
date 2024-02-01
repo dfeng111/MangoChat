@@ -21,23 +21,23 @@
     <tr>
     <tr >
         <th>Dichen Feng</th>
-        <th>Not decide yet</th>
+        <th>Not yet decided</th>
     </tr>
     <tr >
         <th>Cameron Gillespie</th>
-        <th>Not decide yet</th>
+        <th>Not yet decided</th>
     </tr>
     <tr >
         <th>Chris Hill</th>
-        <th>Not decide yet</th>
+        <th>Not yet decided</th>
     </tr>
     <tr >
         <th>Sawneet Sood</th>
-        <th>Not decide yet</th>
+        <th>Not yet decided</th>
     </tr>
     <tr>
         <th>Jacob Tizel</th>
-        <th>Not decide yet</th>
+        <th>Not yet decided</th>
     </tr>
 </table>
 
@@ -64,7 +64,7 @@
     </tr>
     <tr >
         <th>Summary</th>
-        <th>Completed part of the project description.Planning to complete project description and project requirement in next two week.</th>
+        <th>Completed part of the project description. Planning to complete project description and project requirement in next two week.</th>
     </tr>
 </table>
 
@@ -98,7 +98,7 @@
     </tr>
     <tr >
         <th>Potential risks</th>
-        <th>Missundestood the weekly requirements for the project</th>
+        <th>Misunderstand the weekly requirements for the project</th>
     </tr>
     <tr >
         <th>Mitigations</th>
