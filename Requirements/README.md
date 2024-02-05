@@ -1,1 +1,1 @@
-Placeholder
+MangoChat is a modern and user-friendly chat application designed to facilitate seamless communication and collaboration. With its intuitive interface and a range of features, MangoChat aims to provide users with an enjoyable and efficient chatting experience.  Whether for casual conversations or professional communication, MangoChat aims to be a versatile and reliable solution for users seeking an enhanced chat experience.
