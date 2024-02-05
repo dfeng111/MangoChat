@@ -9,20 +9,20 @@ Users of MangoChat will be able to create and join Lobbies. These Lobbies will c
 
 
 ### User Requirements 
-Allow users to log into account 
-Allow Users to join & Leave lobbies 
-Allow users to Send messages to each other and within lobbies 
-Users can Add/remove friends 
-invite other users to lobbies
+Allow users to log into account   
+Allow Users to join & Leave lobbies   
+Allow users to Send messages to each other and within lobbies   
+Users can Add/remove friends   
+invite other users to lobbies  
 
 
 ### System Requirements 
 
-Hide Lobbies user is not in
-Database containing all lobbies, including message/channel history, connected users, banned users and admins. 
-User can only view lobbies and friends when logged in 
-Store Lobby ID's to invite other users to lobby 
-Hide lobbies 
+Hide Lobbies user is not in  
+Database containing all lobbies, including message/channel history, connected users, banned users and admins.   
+User can only view lobbies and friends when logged in   
+Store Lobby ID's to invite other users to lobby   
+Hide lobbies   
 
 ## Class Diagram
 ![Mango Chat Class Diagram](Requirements/MangoClassDiag.png)
