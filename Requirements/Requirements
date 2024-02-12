@@ -1,27 +1,27 @@
 # Requirements
 
 ## User Requirements 
-Allow users to log into account
-Allow new Users to Register for an account
-Allow Users to join & Leave Channels
-Allow users to Send messages to each other and within a channel
-Users can Add/remove friends 
-invite other users to Channels
+Allow users to log into account\
+Allow new Users to Register for an account\
+Allow Users to join & Leave Channels\
+Allow users to Send messages to each other and within a channel\
+Users can Add/remove friends \
+invite other users to Channels\
 Users should be able to input personal info
 
 ## Admin Requirements
-Admins should be allowed to Manage channels
-Admins should beable to remove memebers of channels 
+Admins should be allowed to Manage channels\
+Admins should beable to remove memebers of channels \
 Appoint other users to be admins of a channel
 
 
 ## System Requirements 
 
-Hide Channeks user is not in
-Database containing all Channels, including message/channel history, connected users, banned users and admins. 
-User can only view channels and friends when logged in 
-Store channel ID's to invite other users to channel
-System should store user's personal information and not display it publically
+Hide Channeks user is not in\
+Database containing all Channels, including message/channel history, connected users, banned users and admins. \
+User can only view channels and friends when logged in \
+Store channel ID's to invite other users to channel\
+System should store user's personal information and not display it publically\
 System should store a list of Admins and Regular users 
 
 
