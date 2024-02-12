@@ -8,9 +8,13 @@
         <th>Follow up</th>
     <tr>
     <tr >
-        <th></th>
-        <th></th>
-        <th></th>
+        <th>Decide to use Flask
+        <br>Finish writing user stories
+        <br></th>
+        <th>pdf Summary for M2
+        <br>Use Case Diagram</th>
+        <th>Set up Flask
+        <br>M3</th>
     </tr>
 </table>
 <h3>Sprint team members</h3>
@@ -20,24 +24,24 @@
         <th>Role</th>
     <tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Dichen Feng</th>
+        <th>Not yet decided</th>
     </tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Cameron Gillespie</th>
+        <th>Not yet decided</th>
     </tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Chris Hill</th>
+        <th>Not yet decided</th>
     </tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Sawneet Sood</th>
+        <th>Not yet decided</th>
     </tr>
     <tr>
-        <th></th>
-        <th></th>
+        <th>Jacob Tizel</th>
+        <th>Not yet decided</th>
     </tr>
 </table>
 
@@ -48,23 +52,28 @@
 <table border = "2">
     <tr>
         <th>Sprint theme</th>
-        <th>e.g., Bugs</th>
+        <th>M2 Project Description and Requirements</th>
     <tr>
     <tr >
         <th>Issues completed</th>
-        <th></th>
+        <th>UML Class Diagram
+        <br>Decide Server and CLient Language
+        <br>Research difference between Flask and Django
+        <br>Write Project Description
+        <br>User Stories</th>
     </tr>
     <tr >
         <th>Issues left</th>
-        <th></th>
+        <th>Use Case Diagram
+        <br>M2 PDF Report</th>
     </tr>
     <tr >
         <th>Team Capacity</th>
-        <th></th>
+        <th>6 hours each</th>
     </tr>
     <tr >
         <th>Summary</th>
-        <th></th>
+        <th>Finished majority part of M2 and Disscussed about what programming langauge to use for the project. </th>
     </tr>
 </table>
 
@@ -73,38 +82,40 @@
 <table border = "2">
     <tr>
         <th>Start date</th>
-        <th></th>  
+        <th>2/12/2024</th>  
     <tr>
     <tr >
         <th>End date</th>
-        <th></th>
+        <th>2/19/2024</th>
     </tr>
     <tr >
         <th>Sprint theme</th>
-        <th></th>
+        <th>M2 & Set up for M3</th>
     </tr>
     <tr >
         <th>Team Capacity</th>
-        <th></th>
+        <th>8 hours each</th>
     </tr>
     <tr >
         <th>Issues capacity</th>
-        <th>Member 1
-            <br>Member 2
-            <br>Member 3
-            <br>Member 4
-            <br>Member 5
+        <th>Member 1: 2 issues
+            <br>Member 2: 2 issues
+            <br>Member 3: 2 issues
+            <br>Member 4: 2 issues
+            <br>Member 5: 2 issues
         </th>
     </tr>
     <tr >
         <th>Potential risks</th>
-        <th></th>
+        <th>Incompletement fue to Midterms</th>
     </tr>
     <tr >
         <th>Mitigations</th>
-        <th></th>
+        <th>Midterms
+        <br>Show up in every lecture and labs</th>
     </tr>
 </table>
 <h3>Sprint planning resources</h3>
-<br>•
-<br>•
+<br>•Course Slides
+<br>•https://flask.palletsprojects.com/en/3.0.x/
+<br>•Astah
