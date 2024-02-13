@@ -1,7 +1,7 @@
 The following commands are made for bash (through vscode or wsl) but could also be run through powershell, if you have access to python through it. You can use WSL or git bash to use bash for this. Useful info at the end of this doc.
 
 
-1. Go to the root project directory and run this command: 
+1. Go to the `flask` directory and run this command: 
 <!---->
     python3 -m venv mangoflask
 
