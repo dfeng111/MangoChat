@@ -12,7 +12,8 @@
         <br>Finish writing user stories
         <br></th>
         <th>pdf Summary for M2
-        <br>Use Case Diagram</th>
+        <br>Use Case Diagram
+        <br>DFD</th>
         <th>Set up Flask
         <br>M3</th>
     </tr>
@@ -65,7 +66,7 @@
     <tr >
         <th>Issues left</th>
         <th>Use Case Diagram
-        <br>M2 PDF Report</th>
+        <br>DFD</th>
     </tr>
     <tr >
         <th>Team Capacity</th>
@@ -73,7 +74,7 @@
     </tr>
     <tr >
         <th>Summary</th>
-        <th>Finished majority part of M2 and Disscussed about what programming langauge to use for the project. </th>
+        <th>Finished majority part of M2 and Disscussed about what programming langauge to use for the project. Finished 5 issues out of 6 issues addressed.</th>
     </tr>
 </table>
 
@@ -86,7 +87,7 @@
     <tr>
     <tr >
         <th>End date</th>
-        <th>2/19/2024</th>
+        <th>2/26/2024</th>
     </tr>
     <tr >
         <th>Sprint theme</th>
@@ -98,21 +99,20 @@
     </tr>
     <tr >
         <th>Issues capacity</th>
-        <th>Member 1: 2 issues
-            <br>Member 2: 2 issues
-            <br>Member 3: 2 issues
-            <br>Member 4: 2 issues
-            <br>Member 5: 2 issues
+        <th>Member 1: 4 hours per issue
+            <br>Member 2: 4 hours per issue
+            <br>Member 3: 4 hours per issue
+            <br>Member 4: 4 hours per issue
+            <br>Member 5: 4 hours per issue
         </th>
     </tr>
     <tr >
         <th>Potential risks</th>
-        <th>Incompletement fue to Midterms</th>
+        <th>Incompletement due to Midterms</th>
     </tr>
     <tr >
         <th>Mitigations</th>
-        <th>Midterms
-        <br>Show up in every lecture and labs</th>
+        <th>Chris will cover for other member's imcomplete work</th>
     </tr>
 </table>
 <h3>Sprint planning resources</h3>
