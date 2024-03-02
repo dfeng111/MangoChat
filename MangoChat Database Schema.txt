@@ -35,3 +35,56 @@ CREATE TABLE IF NOT EXISTS Messages (
     FOREIGN KEY (ChannelID) REFERENCES Channels(ChannelID) ON DELETE CASCADE,
     FOREIGN KEY (SenderID) REFERENCES Users(UserID) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS Friends (
+    FriendID INT AUTO_INCREMENT PRIMARY KEY,
+    UserID1 INT,
+    UserID2 INT,
+    Status ENUM('Pending', 'Accepted', 'Blocked') NOT NULL DEFAULT 'Pending',
+    FOREIGN KEY (UserID1) REFERENCES Users(UserID) ON DELETE CASCADE,
+    FOREIGN KEY (UserID2) REFERENCES Users(UserID) ON DELETE CASCADE,
+    UNIQUE(UserID1, UserID2)
+);
+
+CREATE TABLE IF NOT EXISTS Blocks (
+    BlockID INT AUTO_INCREMENT PRIMARY KEY,
+    BlockerID INT,
+    BlockedID INT,
+    FOREIGN KEY (BlockerID) REFERENCES Users(UserID) ON DELETE CASCADE,
+    FOREIGN KEY (BlockedID) REFERENCES Users(UserID) ON DELETE CASCADE,
+    UNIQUE(BlockerID, BlockedID)
+);
+
+
+-- SQL Commands with placeholder values
+
+-- Insert a new channel into Channels table
+INSERT INTO Channel (ChannelName) VALUES ('New Channel Name');
+
+-- Delete a channel by its ID
+DELETE FROM Channel WHERE ChannelID = 1;
+
+-- Insert a new user into Users table
+INSERT INTO Users (Username, Email, Password) VALUES ('NewUser', 'newuser@example.com', 'password123');
+
+-- Addding Friend
+-- Assuming both users already exist in Users table
+-- User1 sends friend request to User2
+INSERT INTO Friends (UserID1, UserID2, Status) VALUES (1, 2, 'Pending');
+
+-- User2 accepts the friend request
+UPDATE Friends SET Status = 'Accepted' WHERE UserID1 = 1 AND UserID2 = 2;
+
+-- Removing Friend
+-- Assuming both users are already friends
+-- User1 removes User2 from friends
+DELETE FROM Friends WHERE (UserID1 = 1 AND UserID2 = 2) OR (UserID1 = 2 AND UserID2 = 1);
+
+--Blocking User
+-- User1 blocks User2
+INSERT INTO Blocks (BlockerID, BlockedID) VALUES (1, 2);
+
+-- Insert a new message into Messages table
+INSERT INTO Messages (ConversationID, SenderID, Content) VALUES (1, 1, 'Hello, this is a message!');
+
+
