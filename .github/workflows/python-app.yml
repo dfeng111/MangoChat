@@ -18,11 +18,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Start Mysql
-        run: sudo /etc/init.d/mysql start
-
+    - name: Start Mysql
+      run: sudo /etc/init.d/mysql start
     - uses: actions/checkout@v3
-
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
