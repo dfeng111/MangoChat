@@ -9,3 +9,7 @@ def hello_world():
 @app.route("/index")
 def index():
     return render_template("index.html", sample_text="Yo Country")
+
+@app.route("/login")
+def login():
+    return render_template("login.html");
