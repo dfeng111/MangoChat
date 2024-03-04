@@ -21,6 +21,8 @@ CREATE TABLE IF NOT EXISTS user_channel (
     userChanID INT AUTO_INCREMENT PRIMARY KEY,
     userID INT,
     channelID INT,
+    isModerator BOOLEAN,
+    isBanned BOOLEAN,
     FOREIGN KEY (userID) REFERENCES user(userID) ON DELETE CASCADE,
     FOREIGN KEY (channelID) REFERENCES channel(channelID) ON DELETE CASCADE,
     UNIQUE(userID, channelID)
@@ -66,8 +68,8 @@ INSERT INTO channel(channelName) VALUES ('New Channel Name');
 DELETE FROM channel WHERE channelID = 1;
 
 -- Insert a new user into Users table
-INSERT INTO user (username, email, password) VALUES ('NewUser', 'newuser@example.com', 'password123');
-INSERT INTO user (username, email, password) VALUES ('anotherUser', 'anotheruser@example.com', 'password124');
+INSERT INTO user (username, password) VALUES ('NewUser', 'password123');
+INSERT INTO user (username, password) VALUES ('anotherUser', 'password124');
 
 -- Adding Friend
 -- Assuming both users already exist in Users table
