@@ -1,14 +1,13 @@
 -- Create database
-CREATE DATABASE IF NOT EXISTS MangoChat;
-USE MangoChat;
+CREATE DATABASE IF NOT EXISTS mangochat;
+USE mangochat;
 
 -- Table for Users
 CREATE TABLE IF NOT EXISTS user (
     userID INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    email VARCHAR(100) NOT NULL,
-    password VARCHAR(100) NOT NULL,
-
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL
 );
 
 -- Table for Channels
@@ -38,7 +37,7 @@ CREATE TABLE IF NOT EXISTS message (
     FOREIGN KEY (senderID) REFERENCES user(userID) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS friends (
+CREATE TABLE IF NOT EXISTS friend (
     friendID INT AUTO_INCREMENT PRIMARY KEY,
     userID1 INT,
     userID2 INT,
@@ -68,8 +67,9 @@ DELETE FROM channel WHERE channelID = 1;
 
 -- Insert a new user into Users table
 INSERT INTO user (username, email, password) VALUES ('NewUser', 'newuser@example.com', 'password123');
+INSERT INTO user (username, email, password) VALUES ('anotherUser', 'anotheruser@example.com', 'password124');
 
--- Addding Friend
+-- Adding Friend
 -- Assuming both users already exist in Users table
 -- User1 sends friend request to User2
 INSERT INTO friend (userID1, userID2, status) VALUES (1, 2, 'Pending');
@@ -87,6 +87,6 @@ DELETE FROM friend WHERE (userID1 = 1 AND userID2 = 2) OR (userID1 = 2 AND userI
 INSERT INTO block (blockerID, blockedID) VALUES (1, 2);
 
 -- Insert a new message into Messages table
-INSERT INTO message (conversationID, senderID, content) VALUES (1, 1, 'Hello, this is a message!');
+INSERT INTO message (messageID, senderID, content) VALUES (1, 1, 'Hello, this is a message!');
 
 
