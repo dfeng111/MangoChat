@@ -3,88 +3,90 @@ CREATE DATABASE IF NOT EXISTS MangoChat;
 USE MangoChat;
 
 -- Table for Users
-CREATE TABLE IF NOT EXISTS Users (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
-    Username VARCHAR(50) NOT NULL,
-    Password VARCHAR(100) NOT NULL
+CREATE TABLE IF NOT EXISTS user (
+    userID INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+
 );
 
 -- Table for Channels
-CREATE TABLE IF NOT EXISTS Channels (
-    ChannelID INT AUTO_INCREMENT PRIMARY KEY,
-    ChannelName VARCHAR(100) NOT NULL
+CREATE TABLE IF NOT EXISTS channel (
+    channelID INT AUTO_INCREMENT PRIMARY KEY,
+    channelName VARCHAR(100) NOT NULL
 );
 
 -- Table for User-Channel Relationship
-CREATE TABLE IF NOT EXISTS User_Channel (
-    UserChanID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID INT,
-    ChannelID INT,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE,
-    FOREIGN KEY (ChannelID) REFERENCES Channel(ChannelID) ON DELETE CASCADE,
-    UNIQUE(UserID, ChannelID)
+CREATE TABLE IF NOT EXISTS user_channel (
+    userChanID INT AUTO_INCREMENT PRIMARY KEY,
+    userID INT,
+    channelID INT,
+    FOREIGN KEY (userID) REFERENCES user(userID) ON DELETE CASCADE,
+    FOREIGN KEY (channelID) REFERENCES channel(channelID) ON DELETE CASCADE,
+    UNIQUE(userID, channelID)
 );
 
 -- Table for Messages
-CREATE TABLE IF NOT EXISTS Messages (
-    MessageID INT AUTO_INCREMENT PRIMARY KEY,
-    ChannelID INT,
-    SenderID INT,
-    Content TEXT,
-    Timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (ChannelID) REFERENCES Channels(ChannelID) ON DELETE CASCADE,
-    FOREIGN KEY (SenderID) REFERENCES Users(UserID) ON DELETE CASCADE
+CREATE TABLE IF NOT EXISTS message (
+    messageID INT AUTO_INCREMENT PRIMARY KEY,
+    channelID INT,
+    senderID INT,
+    content TEXT,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (channelID) REFERENCES channel(channelID) ON DELETE CASCADE,
+    FOREIGN KEY (senderID) REFERENCES user(userID) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS Friends (
-    FriendID INT AUTO_INCREMENT PRIMARY KEY,
-    UserID1 INT,
-    UserID2 INT,
-    Status ENUM('Pending', 'Accepted', 'Blocked') NOT NULL DEFAULT 'Pending',
-    FOREIGN KEY (UserID1) REFERENCES Users(UserID) ON DELETE CASCADE,
-    FOREIGN KEY (UserID2) REFERENCES Users(UserID) ON DELETE CASCADE,
-    UNIQUE(UserID1, UserID2)
+CREATE TABLE IF NOT EXISTS friends (
+    friendID INT AUTO_INCREMENT PRIMARY KEY,
+    userID1 INT,
+    userID2 INT,
+    status ENUM('Pending', 'Accepted', 'Blocked') NOT NULL DEFAULT 'Pending',
+    FOREIGN KEY (userID1) REFERENCES user(userID) ON DELETE CASCADE,
+    FOREIGN KEY (userID2) REFERENCES user(userID) ON DELETE CASCADE,
+    UNIQUE(userID1, userID2)
 );
 
-CREATE TABLE IF NOT EXISTS Blocks (
-    BlockID INT AUTO_INCREMENT PRIMARY KEY,
-    BlockerID INT,
-    BlockedID INT,
-    FOREIGN KEY (BlockerID) REFERENCES Users(UserID) ON DELETE CASCADE,
-    FOREIGN KEY (BlockedID) REFERENCES Users(UserID) ON DELETE CASCADE,
-    UNIQUE(BlockerID, BlockedID)
+CREATE TABLE IF NOT EXISTS block (
+    blockID INT AUTO_INCREMENT PRIMARY KEY,
+    blockerID INT,
+    blockedID INT,
+    FOREIGN KEY (blockerID) REFERENCES user(userID) ON DELETE CASCADE,
+    FOREIGN KEY (blockedID) REFERENCES user(userID) ON DELETE CASCADE,
+    UNIQUE(blockerID, blockedID)
 );
 
 
 -- SQL Commands with placeholder values
 
 -- Insert a new channel into Channels table
-INSERT INTO Channel (ChannelName) VALUES ('New Channel Name');
+INSERT INTO channel(channelName) VALUES ('New Channel Name');
 
 -- Delete a channel by its ID
-DELETE FROM Channel WHERE ChannelID = 1;
+DELETE FROM channel WHERE channelID = 1;
 
 -- Insert a new user into Users table
-INSERT INTO Users (Username, Email, Password) VALUES ('NewUser', 'newuser@example.com', 'password123');
+INSERT INTO user (username, email, password) VALUES ('NewUser', 'newuser@example.com', 'password123');
 
 -- Addding Friend
 -- Assuming both users already exist in Users table
 -- User1 sends friend request to User2
-INSERT INTO Friends (UserID1, UserID2, Status) VALUES (1, 2, 'Pending');
+INSERT INTO friend (userID1, userID2, status) VALUES (1, 2, 'Pending');
 
 -- User2 accepts the friend request
-UPDATE Friends SET Status = 'Accepted' WHERE UserID1 = 1 AND UserID2 = 2;
+UPDATE friend SET status = 'Accepted' WHERE userID1 = 1 AND userID2 = 2;
 
 -- Removing Friend
 -- Assuming both users are already friends
 -- User1 removes User2 from friends
-DELETE FROM Friends WHERE (UserID1 = 1 AND UserID2 = 2) OR (UserID1 = 2 AND UserID2 = 1);
+DELETE FROM friend WHERE (userID1 = 1 AND userID2 = 2) OR (userID1 = 2 AND userID2 = 1);
 
---Blocking User
+-- Blocking User
 -- User1 blocks User2
-INSERT INTO Blocks (BlockerID, BlockedID) VALUES (1, 2);
+INSERT INTO block (blockerID, blockedID) VALUES (1, 2);
 
 -- Insert a new message into Messages table
-INSERT INTO Messages (ConversationID, SenderID, Content) VALUES (1, 1, 'Hello, this is a message!');
+INSERT INTO message (conversationID, senderID, content) VALUES (1, 1, 'Hello, this is a message!');
 
 
