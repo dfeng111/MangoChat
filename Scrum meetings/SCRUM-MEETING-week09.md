@@ -52,11 +52,11 @@
     <tr>
     <tr >
         <th>Issues completed</th>
-        <th>6</th>
+        <th>7</th>
     </tr>
     <tr >
         <th>Issues left</th>
-        <th>1</th>
+        <th>0</th>
     </tr>
     <tr >
         <th>Team Capacity</th>
@@ -85,7 +85,7 @@
     </tr>
     <tr >
         <th>Team Capacity</th>
-        <th>5</th>
+        <th>10</th>
     </tr>
     <tr >
         <th>Issues capacity</th>
