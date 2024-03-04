@@ -39,3 +39,9 @@ body {
 .btn:hover {
     background-color: #0056b3;
 }
+
+#logo {
+    display: block;
+    width: 50%;
+    margin: auto;
+}
