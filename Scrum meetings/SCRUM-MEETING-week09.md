@@ -8,9 +8,9 @@
         <th>Follow up</th>
     <tr>
     <tr >
-        <th></th>
-        <th></th>
-        <th></th>
+        <th>Testing Plan, Class Diagram, Design Patterns, Database Schema</th>
+        <th>Sequence Diagram, Basic Coding</th>
+        <th>M3</th>
     </tr>
 </table>
 <h3>Sprint team members</h3>
@@ -20,24 +20,24 @@
         <th>Role</th>
     <tr>
     <tr >
-        <th></th>
-        <th></th>
+                <th>Dichen Feng</th>
+        <th>Not yet decided</th>
     </tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Cameron Gillespie</th>
+        <th>Not yet decided</th>
     </tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Chris Hill</th>
+        <th>Not yet decided</th>
     </tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Sawneet Sood</th>
+        <th>Not yet decided</th>
     </tr>
     <tr>
-        <th></th>
-        <th></th>
+        <th>Jacob Tizel</th>
+        <th>Not yet decided</th>
     </tr>
 </table>
 
@@ -48,23 +48,23 @@
 <table border = "2">
     <tr>
         <th>Sprint theme</th>
-        <th>e.g., Bugs</th>
+        <th>M3</th>
     <tr>
     <tr >
         <th>Issues completed</th>
-        <th></th>
+        <th>6</th>
     </tr>
     <tr >
         <th>Issues left</th>
-        <th></th>
+        <th>1</th>
     </tr>
     <tr >
         <th>Team Capacity</th>
-        <th></th>
+        <th>6 hours each</th>
     </tr>
     <tr >
         <th>Summary</th>
-        <th></th>
+        <th>Completed Design Patterns, Testing Plan, Class Diagram, SQL Database Schema Created, Base HTML and Login Page Created</th>
     </tr>
 </table>
 
@@ -73,38 +73,38 @@
 <table border = "2">
     <tr>
         <th>Start date</th>
-        <th></th>  
+        <th>04 March 2024</th>  
     <tr>
     <tr >
         <th>End date</th>
-        <th></th>
+        <th>11 March 2024</th>
     </tr>
     <tr >
         <th>Sprint theme</th>
-        <th></th>
+        <th>Basic Code Foundation</th>
     </tr>
     <tr >
         <th>Team Capacity</th>
-        <th></th>
+        <th>5</th>
     </tr>
     <tr >
         <th>Issues capacity</th>
-        <th>Member 1
-            <br>Member 2
-            <br>Member 3
-            <br>Member 4
-            <br>Member 5
+        <th>Member 1 - 6 hrs
+            <br>Member 2 - 6 hrs
+            <br>Member 3 - 6 hrs
+            <br>Member 4 - 6 hrs
+            <br>Member 5 - 6 hrs
         </th>
     </tr>
     <tr >
         <th>Potential risks</th>
-        <th></th>
+        <th>Unpredictable learning curve with Python and Flask</th>
     </tr>
     <tr >
         <th>Mitigations</th>
-        <th></th>
+        <th>Start coding earlier in the week and pick up issues conservatively.</th>
     </tr>
 </table>
 <h3>Sprint planning resources</h3>
-<br>•
-<br>•
+<br>• Course Slides
+<br>• https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world
