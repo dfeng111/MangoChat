@@ -14,7 +14,7 @@ class LoginTestCase(unittest.TestCase):
 
     def test_login_correct_credentials(self):
         # Simulate a POST request with correct credentials
-        response = self.app.post('/login', data=dict(username='john', password='password'), follow_redirects=True)
+        response = self.app.post('/login', data=dict(username='chris', password='password'), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Welcome back, john!', response.data)
 
@@ -26,7 +26,7 @@ class LoginTestCase(unittest.TestCase):
 
     def test_login_incorrect_password(self):
         # Simulate a POST request with incorrect password
-        response = self.app.post('/login', data=dict(username='john', password='wrongpassword'), follow_redirects=True)
+        response = self.app.post('/login', data=dict(username='chris', password='wrongpassword'), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
         self.assertIn(b'Invalid username or password. Please try again.', response.data)
 
