@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-# Test users
+# Test users (PLACEHOLDER. Replace with SQL queries)
 users = {
     "chris": "password",
     "hill": "123456"
