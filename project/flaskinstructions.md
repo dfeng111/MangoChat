@@ -11,6 +11,10 @@ This directory is included in the .gitignore, since it should be installed separ
 <!--  -->
     source mangoflask/bin/activate
 
+or 
+
+    source mangoflask/Scripts/activate
+
 or, if using powershell
 
     .\mangoflask\Scripts\Activate.ps1
@@ -29,17 +33,14 @@ If you decide the package you install is useful to the project and you use it, u
 
     pip freeze > requirements.txt
 
-4. Set the flask path (file name may vary):
-<!---->
-    export FLASK_APP=main.py
 
-Or for powershell:
-
-    $env:FLASK_APP="main.py"
-
-5. Run flask - this will run it so you can access it at localhost:3000 in your browser. 
+4. Run flask - this will run it so you can access it at localhost:3000 in your browser. 
 <!---->
     flask run -h localhost -p 3000
+
+NOTE: This doesn't seem to work since we made it into a module. You can run the server now with:
+
+    python app.py
 
 Ctrl-C will stop the server, and you can exit the container with:
 
