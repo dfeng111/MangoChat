@@ -1,19 +1,60 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
-    <h2>Login</h2>
-    <form action="" method="POST" novalidate>
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./register_css/register.css">
+</head>
+<body>
+  <header>
+    <h1>Mango Chat</h1>
+  </header>
+  <div class="background-wrapper">
+    <div class="container">
+      <input type="checkbox" id="check">
+      <div class="login form">
+        <header>Login</header>
+        <form name="loginForm" onsubmit="return validateLoginForm()" method="post">
+          Email: <input type="text" name="name" id="logName" placeholder="Enter your email">
+          Password: <input type="password" name="password" id="logPassword" placeholder="***********">
+          <a href="#">Forgot password?</a>
+          <input type="submit" class="button" value="Login(User)">
+        </form>
+        <div class="signup">
+          <span class="signup">Don't have an account?
+            <label for="check">Register</label>
+          </span>
         </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+      </div>
+      <div class="registration form">
+        <header>Register</header>
+        <form name="registerForm" onsubmit="return validateRegisterForm()" method="post">
+          Email: <input type="email" name="email" id="registerEmail" placeholder="Enter your email" autocomplete="off">
+          Password: <input type="password" name="password" id="registerPassword" placeholder="Create a password" autocomplete="off">
+          Confirm Password: <input type="password" placeholder="Confirm your password" autocomplete="off">
+          <input type="submit" class="button" value="Register">
+        </form>
+        <div class="signup">
+          <span class="signup">Already have an account?
+            <label for="check">Login</label>
+          </span>
         </div>
-        <button type="submit" class="btn">Login</button>
-    </form>
-</div>
+      </div>
+    </div>
+  </div>
+  <footer>
+    <h4>Copyright Cosc 360</h4>
+    <p>Why we ripped off Reddit</p>
+    <p>Why we'll do it again</p>
+  </footer>
+  <script src="index.js"></script>  
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+</body>
+</html>
 {% endblock %}
