@@ -1,5 +1,5 @@
 import pytest
-from messaging import User, Channel
+from project.messaging import User, Channel
 
 @pytest.fixture
 def channel():
