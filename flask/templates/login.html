@@ -8,7 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="./register_css/register.css">
+  <link rel="stylesheet" href="register.css">
 </head>
 <body>
   <header>
@@ -18,6 +18,7 @@
     <div class="container">
       <input type="checkbox" id="check">
       <div class="login form">
+        <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
         <header>Login</header>
         <form name="loginForm" onsubmit="return validateLoginForm()" method="post">
           Email: <input type="text" name="name" id="logName" placeholder="Enter your email">
@@ -47,11 +48,6 @@
       </div>
     </div>
   </div>
-  <footer>
-    <h4>Copyright Cosc 360</h4>
-    <p>Why we ripped off Reddit</p>
-    <p>Why we'll do it again</p>
-  </footer>
   <script src="index.js"></script>  
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
