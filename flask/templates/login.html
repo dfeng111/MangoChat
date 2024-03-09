@@ -8,11 +8,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="register.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
   <header>
-    <h1>Mango Chat</h1>
+    <h1>MangoChat</h1>
   </header>
   <div class="background-wrapper">
     <div class="container">
@@ -21,10 +21,10 @@
         <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
         <header>Login</header>
         <form name="loginForm" onsubmit="return validateLoginForm()" method="post">
-          Email: <input type="text" name="name" id="logName" placeholder="Enter your email">
+          Username: <input type="text" name="name" id="logName" placeholder="Enter your username">
           Password: <input type="password" name="password" id="logPassword" placeholder="***********">
           <a href="#">Forgot password?</a>
-          <input type="submit" class="button" value="Login(User)">
+          <input type="submit" class="button" value="Login">
         </form>
         <div class="signup">
           <span class="signup">Don't have an account?
@@ -35,7 +35,7 @@
       <div class="registration form">
         <header>Register</header>
         <form name="registerForm" onsubmit="return validateRegisterForm()" method="post">
-          Email: <input type="email" name="email" id="registerEmail" placeholder="Enter your email" autocomplete="off">
+          Username: <input type="text" name="name" id="registerUsername" placeholder="Enter your username" autocomplete="off">
           Password: <input type="password" name="password" id="registerPassword" placeholder="Create a password" autocomplete="off">
           Confirm Password: <input type="password" placeholder="Confirm your password" autocomplete="off">
           <input type="submit" class="button" value="Register">
@@ -54,3 +54,4 @@
 </body>
 </html>
 {% endblock %}
+x 

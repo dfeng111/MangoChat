@@ -1,0 +1,84 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  h1{
+      color:black;
+      font-size: 3em;
+      background: rgba(255, 255, 255, 0.8);
+  }
+  body{
+    background: orange;
+    width: 100%;
+  }
+  .container{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    max-width: 430px;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 7px;
+  }
+  .container .registration.form{
+    display: none;
+  }
+  #check:checked ~ .container .registration.form{
+    display: block;
+  }
+  #check:checked ~ .container .login.form{
+    display: none;
+  }
+  #check{
+    display: none;
+  }
+  .container .form{
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.8);
+  }
+  .form header{
+    font-size: 2rem;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .form input{
+     height: 60px;
+     width: 100%;
+     padding: 0 15px;
+     font-size: 17px;
+     margin-bottom: 1.3rem;
+     border: 1px solid #ddd;
+     border-radius: 6px;
+     outline: none;
+  }
+  .form a{
+    font-size: 16px;
+    color: black;
+    text-decoration: none;
+  }
+  .form a:hover{
+    text-decoration: underline;
+  }
+  .form input.button{
+    color: black;
+    background: orange;
+    font-size: 1.2rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 1.7rem;
+    cursor: pointer;
+  }
+  .signup{
+    font-size: 17px;
+    text-align: center;
+  }
+  .signup label{
+    color: black;
+    cursor: pointer;
+  }
+  .signup label:hover{
+    text-decoration: underline;
+  }
