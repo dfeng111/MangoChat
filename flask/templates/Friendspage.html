@@ -77,7 +77,7 @@
                         <div class="card-body">
                           <h5 class="card-title">John Smith</h5>
                           <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed tempor mi, sed dapibus ligula.</p>
-                          <a href="#" class="btn btn-Danger">Remove Friend</a>
+                          <button type="button" class="btn btn-Danger" data-bs-toggle="modal" data-bs-target="#Confirmation">Remove Friend</button>
                           <a href="#" class="btn btn-primary">Invite</a>
                         </div>
                       </div>
@@ -90,7 +90,7 @@
                         <div class="card-body">
                           <h5 class="card-title">John Smith</h5>
                           <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed tempor mi, sed dapibus ligula.</p>
-                          <a href="#" class="btn btn-Danger">Remove Friend</a>
+                          <button type="button" class="btn btn-Danger" data-bs-toggle="modal" data-bs-target="#Confirmation">Remove Friend</button>
                           <a href="#" class="btn btn-primary">Invite</a>
                         </div>
                       </div>
@@ -103,7 +103,7 @@
                             <div class="card-body">
                               <h5 class="card-title">John Smith</h5>
                               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed tempor mi, sed dapibus ligula.</p>
-                              <a href="#" class="btn btn-Danger">Remove Friend</a>
+                              <button type="button" class="btn btn-Danger" data-bs-toggle="modal" data-bs-target="#Confirmation">Remove Friend</button>
                               <a href="#" class="btn btn-primary">Invite</a>
                             </div>
                           </div>
@@ -116,7 +116,7 @@
                             <div class="card-body">
                               <h5 class="card-title">John Smith</h5>
                               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed tempor mi, sed dapibus ligula.</p>
-                              <a href="#" class="btn btn-Danger">Remove Friend</a>
+                              <button type="button" class="btn btn-Danger" data-bs-toggle="modal" data-bs-target="#Confirmation">Remove Friend</button>
                               <a href="#" class="btn btn-primary">Invite</a>
                             </div>
                           </div>
@@ -129,7 +129,7 @@
                             <div class="card-body">
                               <h5 class="card-title">John Smith</h5>
                               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed tempor mi, sed dapibus ligula.</p>
-                              <a href="#" class="btn btn-Danger">Remove Friend</a>
+                              <button type="button" class="btn btn-Danger" data-bs-toggle="modal" data-bs-target="#Confirmation">Remove Friend</button>
                               <a href="#" class="btn btn-primary">Invite</a>
                             </div>
                           </div>
@@ -142,7 +142,7 @@
                             <div class="card-body">
                               <h5 class="card-title">John Smith</h5>
                               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed tempor mi, sed dapibus ligula.</p>
-                              <a href="#" class="btn btn-Danger">Remove Friend</a>
+                              <button type="button" class="btn btn-Danger" data-bs-toggle="modal" data-bs-target="#Confirmation">Remove Friend</button>
                               <a href="#" class="btn btn-primary">Invite</a>
                             </div>
                           </div>
@@ -155,7 +155,7 @@
                             <div class="card-body">
                               <h5 class="card-title">John Smith</h5>
                               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed tempor mi, sed dapibus ligula.</p>
-                              <a href="#" class="btn btn-Danger">Remove Friend</a>
+                              <button type="button" class="btn btn-Danger" data-bs-toggle="modal" data-bs-target="#Confirmation">Remove Friend</button>
                               <a href="#" class="btn btn-primary">Invite</a>
                             </div>
                           </div>
@@ -168,7 +168,7 @@
                             <div class="card-body">
                               <h5 class="card-title">John Smith</h5>
                               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed tempor mi, sed dapibus ligula.</p>
-                              <a href="#" class="btn btn-Danger">Remove Friend</a>
+                              <button type="button" class="btn btn-Danger" data-bs-toggle="modal" data-bs-target="#Confirmation">Remove Friend</button>
                               <a href="#" class="btn btn-primary">Invite</a>
                             </div>
                           </div>
@@ -181,7 +181,7 @@
                             <div class="card-body">
                               <h5 class="card-title">John Smith</h5>
                               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed tempor mi, sed dapibus ligula.</p>
-                              <a href="#" class="btn btn-Danger">Remove Friend</a>
+                              <button type="button" class="btn btn-Danger" data-bs-toggle="modal" data-bs-target="#Confirmation">Remove Friend</button>
                               <a href="#" class="btn btn-primary">Invite</a>
                             </div>
                           </div>
@@ -194,15 +194,34 @@
                             <div class="card-body">
                               <h5 class="card-title">John Smith</h5>
                               <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque sed tempor mi, sed dapibus ligula.</p>
-                              <a href="#" class="btn btn-Danger">Remove Friend</a>
+                              <button type="button" class="btn btn-Danger" data-bs-toggle="modal" data-bs-target="#Confirmation">Remove Friend</button>
                               <a href="#" class="btn btn-primary">Invite</a>
                             </div>
                           </div>
                     </div>
             </div>
+
+            <div class="modal fade" id="Confirmation" tabindex="-1" aria-labelledby="ConfirmationLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="ConfirmationLabel">Modal title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                   Are you sure you would like to remove John Smith as your Friend?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-Success" data-bs-dismiss="modal">Confirm</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
     </div>
-  
+
+    
 </body>
 
 </html>
