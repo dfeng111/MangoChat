@@ -6,8 +6,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Register/Login</title>
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
@@ -33,11 +33,12 @@
         </div>
       </div>
       <div class="registration form">
+        <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
         <header>Register</header>
         <form name="registerForm" onsubmit="return validateRegisterForm()" method="post">
-          Username: <input type="text" name="name" id="registerUsername" placeholder="Enter your username" autocomplete="off">
-          Password: <input type="password" name="password" id="registerPassword" placeholder="Create a password" autocomplete="off">
-          Confirm Password: <input type="password" placeholder="Confirm your password" autocomplete="off">
+          Username: <input type="text" name="name" id="registerName" placeholder="Enter your username">
+          Password: <input type="password" name="password" id="registerPassword" placeholder="Create a password">
+          Confirm Password: <input type="password" placeholder="Confirm your password">
           <input type="submit" class="button" value="Register">
         </form>
         <div class="signup">
@@ -48,10 +49,7 @@
       </div>
     </div>
   </div>
-  <script src="index.js"></script>  
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='css/login.js') }}"></script>
 </body>
 </html>
 {% endblock %}
-x 

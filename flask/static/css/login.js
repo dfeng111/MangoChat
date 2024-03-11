@@ -23,10 +23,10 @@ function validateLoginForm() {
 }
 
 function validateRegisterForm() {
-    var mail = document.getElementById('registerEmail').value;
+    var name = document.getElementById('registerName').value;
     var password = document.getElementById('registerPassword').value;
 
-    if (mail == "" || password == "") {
+    if (name == "" || password == "") {
       alert("Please fill the required fields");
       return false;
     }
