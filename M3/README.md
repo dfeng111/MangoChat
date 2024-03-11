@@ -40,10 +40,10 @@ We will run regression testing to ensure that after every change there are no un
 
 ##Sequence Diagrams 
 ### Registration
-![Registration Sequence Diagram](M3/MangoSeqDiagram.png)
+![Registration Sequence Diagram](M3/RegisterSequenceDiagram.png)
 
 ### Sending messages
-![Sending Messages Sequence Diagram](M3/Sending Message Diagram.png)
+![Sending Message Sequence Diagram](M3/SendMessageDiagram.jpg)
 
 ## Class Diagram
 ![Mango Chat Class Diagram](M3/MangoClassDiag.png)
