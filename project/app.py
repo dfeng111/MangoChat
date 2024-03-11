@@ -1,6 +1,22 @@
 from flask import Flask, render_template, request, redirect, url_for
+from database_setup import db, User, Channel, UserChannel, Message, Friend, Block
 
-app = Flask(__name__, static_url_path='/static') 
+app = Flask(__name__, static_url_path='/static')
+
+# Configuration for SQLAlchemy
+# *****************************
+# PLACEHOLDER URI
+# Make sure to change in future
+#
+# *****************************
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://your_username:your_password@localhost/mangochat'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db.init_app(app)
+
+# Create all tables
+with app.app_context():
+    db.create_all()
 
 # Test users
 users = {
@@ -24,7 +40,8 @@ def login():
         password = request.form["password"]
 
         # Check if username and password are valid
-        if username in users and users[username] == password:
+        user = User.query.filter_by(username=username, password=password).first()
+        if user:
             # Redirect to a success page
             return redirect(url_for("success", username=username))
         else:
