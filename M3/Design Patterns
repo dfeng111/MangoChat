@@ -12,7 +12,7 @@ USeful for the facilitation of Chatroom classes as well as the the creating of u
 Both user and Admin users are utlizing the same functionality as each other but admin would have greater permissions within a chatroom itself, therefore they are within the same "family" as a user and 
 utilize the same related classes across the entirety of the program.
 
-Abstract factory methods could also be utilized in facilitation of who is in what chat room since the connected users would be contained under the same family of objects utilizing the same class 
+2) Abstract Factory methods could also be utilized in facilitation of who is in what chat room since the connected users would be contained under the same family of objects utilizing the same class 
 for the rooms istself as well as for assigning which users are in which rooms.
 
 
