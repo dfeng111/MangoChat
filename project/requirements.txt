@@ -3,6 +3,7 @@ click==8.1.7
 colorama==0.4.6
 exceptiongroup==1.2.0
 Flask==3.0.2
+Flask-SQLAlchemy==3.1.1
 greenlet==3.0.3
 iniconfig==2.0.0
 itsdangerous==2.1.2
@@ -11,7 +12,7 @@ MarkupSafe==2.1.5
 packaging==23.2
 pluggy==1.4.0
 pytest==8.0.2
-SQLAlchemy==2.0.26
+SQLAlchemy==2.0.28
 tomli==2.0.1
 typing_extensions==4.9.0
 Werkzeug==3.0.1
