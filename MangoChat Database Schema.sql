@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS user (
     password VARCHAR(100) NOT NULL
     image BLOB,
     password VARCHAR(100) NOT NULL
+    image BLOB,
 );
 
 -- Table for Channels
