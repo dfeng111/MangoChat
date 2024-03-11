@@ -10,15 +10,18 @@
 
 </head>
 
+<!-- Header Page-->
 <div class = "container-fluid bg-dark text-white text-center border">
     <h1> Friends list</h1>
     <div class="row">
         <div class="col-sm-6">
-    <button type="button" class="btn btn-primary">Add Friend</button>
+          <!-- Add friend button connects to modal-->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddFriend">Add Friend</button>
     </div>
     <div class="col-sm-6">
     <form action="" method="POST" novalidate>
         <div class="form-group">
+          <!-- Friend search bar-->
             <label for="username">Search:</label>
             <input type="text" id="username" name="username" required>
         </div>
@@ -62,7 +65,7 @@
                             </a>
                     </li>
                     <li class = "nav-item py-2 py-sm-0">
-                        <a href = "http://localhost:3000/login" class = "nav-link text-white"> 
+                        <a href = "#" class = "nav-link text-white"> 
                             <i class = "fa-solid fa-right-from-bracket fs-5"></i>
                                 <span class = " fs-4 ms-1 d-sm-inline">Logout</span>
                             </a>
@@ -218,6 +221,30 @@
                 </div>
               </div>
             </div>
+
+            <div class="modal fade" id="AddFriend" tabindex="-1" aria-labelledby="FriendSearch" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="FriendSearch">Add Friend</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <form action="" method="POST" novalidate>
+                      <div class="form-group">
+                          <label for="username">Search:</label>
+                          <input type="text" id="username" name="username" required>
+                      </div>
+                          </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-Success" data-bs-dismiss="modal">Send Friend request</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
         </div>
     </div>
   </div>
