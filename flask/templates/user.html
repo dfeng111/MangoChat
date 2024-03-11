@@ -2,5 +2,123 @@
 {% extends "base.html" %}
 
 {% block content %}
+<html>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <style>
+      body {
+          background-color: #36393f; 
+          color: #ffffff; 
+      }
+      .avatar {
+            border-radius: 50%; 
+            width: 100px; 
+            height: 100px; 
+      }
+      .dropdown-menu {
+          background-color: #36393f;
+      }
+      .dropdown-item {
+          color: #ffffff;
+      }
+      .dropdown-item:hover {
+          background-color: #2c2f33;
+      }
+      .editable {
+          cursor: pointer;
+          border: 1px solid #64686e; 
+          padding: 5px;
+          border-radius: 5px; 
+          display: inline-block; 
+          width: calc(100% - 10px); 
+          margin-top: 5px; 
+          margin-bottom: 5px; 
+          background-color: #2c2f33; 
+      }
+      .btn-online {
+          background-color: #28a745; 
+          color: white;
+      }
+
+      .btn-offline {
+          background-color: #ffc800; 
+          color: white;
+      }
+      .profile-section {
+          border: 1px solid #64686e; 
+          padding: 10px;
+          border-radius: 5px; 
+          margin-bottom: 15px; 
+      }
+    </style>
+
+<div class="container">
+  <div class="row align-items-center mb-3">
+    <div class="col-auto">
+      <img src="testAvatar.png" alt="User Avatar" class="avatar">
+    </div>
+    <div class="col">
+      <h2>Username</h2>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+        <div class="profile-section" style="background-color: black; color: white;" >
+          <div class="profile-section"><strong>Username#1234</strong></div>
+            <hr>
+            <div><strong>About Me:</strong></div> 
+            <div id="aboutMe" class="editable" contenteditable="true">Click to edit...<br><br><br><br></div>
+            <hr>
+            <!-- Status Dropdown -->
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="statusButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  Choose Status
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="statusButton">
+                  <li><a class="dropdown-item" href="#" data-status="online">Online</a></li>
+                  <li><a class="dropdown-item" href="#" data-status="do-not-disturb">Do Not Disturb</a></li>
+              </ul>
+            </div>
+            <hr>
+            <p><strong>Joined Date:</strong> January 1, 2020</p>
+            </div>
+      </div>
+  </div>
+</div>
+<hr>
+<div class="row mt-3">
+  <div class="col">
+    <button class="btn" style="background-color: blue; color: white;">Change Password</button>
+    <hr>
+    <br><button class="btn" style="background-color: red; color: white;">Logout</button>
+    <button class="btn" style="border: 2px solid red; color: red; background-color: transparent;">Delete Account</button>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+      $('.dropdown-item').click(function(e) {
+          e.preventDefault();
+          var statusText = $(this).text();
+          var status = $(this).data('status');
+          
+          $('#statusButton').text(statusText).removeClass('btn-online btn-offline btn-secondary');
+  
+          if(status === 'online') {
+              $('#statusButton').addClass('btn-online');
+          } else if(status === 'do-not-disturb') {
+              $('#statusButton').addClass('btn-offline');
+          } else {
+              $('#statusButton').addClass('btn-secondary'); 
+          }
+      });
+  });
+  </script>
+</body>
+</html>
 
 {% endblock %}
