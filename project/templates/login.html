@@ -3,8 +3,8 @@
 {% block content %}
 <div class="container">
     <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
-    <h2>Login</h2>
-    <form action="" method="POST" novalidate>
+    <h2>Login Page</h2>
+    <form action="/login" method="POST" novalidate>
         <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required>
@@ -12,6 +12,9 @@
         <div class="form-group">
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
+        </div>
+        <div>
+            {{ error }}
         </div>
         <button type="submit" class="btn">Login</button>
     </form>
