@@ -31,14 +31,16 @@
 </div>
 
 <body>
-
+ <!-- Side menu-->
     <div class = "container-fluid">
       <div class="overflow-auto">
         <div class = "row flex-nowrap">
+          <!-- automatic scaling of colum for the side bar as well as spacing-->
             <div class= "bg-dark col-auto col-md-2 min-vh-100">
                 <a class = "d-flex mt-1 align-items-center text-white">
                     <span class = "fs-4 d-sm-inline"> SideMenu</span>
                 </a>
+                <!-- Side bar buttons-->
                 <ul class = "nav nav-pills flex-column mt-4">
                     <li class = "nav-item">
                         <a href = "#" class = "nav-link text-white"> 
@@ -72,7 +74,7 @@
                     </li>
                 </ul>
             </div>
-
+                <!--The Friend cards, anything inputted here will appear beside the side bar and is available to scroll 10 example cards are currently made-->
             <div class="row row-cols-5 rows-cols-md-2 g-2">
                 <div class="col">
                     <div class="card" style="width: 18rem;">
@@ -204,6 +206,7 @@
                     </div>
             </div>
 
+                <!-- Popup modals when buttons are clicked, at current it is a Remove friend and a search bar for adding friends to the page (non functional)-->
             <div class="modal fade" id="Confirmation" tabindex="-1" aria-labelledby="ConfirmationLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -221,7 +224,7 @@
                 </div>
               </div>
             </div>
-
+              <!-- add freind modal-->
             <div class="modal fade" id="AddFriend" tabindex="-1" aria-labelledby="FriendSearch" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -230,6 +233,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
+                    <!-- freind searchbar in the modal -->
                     <form action="" method="POST" novalidate>
                       <div class="form-group">
                           <label for="username">Search:</label>
