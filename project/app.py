@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from database_setup import db, User, Channel, UserChannel, Message, Friend, Block
+from database.database_setup import db, User, Channel, UserChannel, Message, Friend, Block
 
 app = Flask(__name__, static_url_path='/static')
 
