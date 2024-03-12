@@ -9,7 +9,8 @@ app = Flask(__name__, static_url_path='/static')
 # Make sure to change in future
 #
 # *****************************
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://your_username:your_password@localhost/mangochat'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://mango:COSC310=mcpw@127.0.0.1/mangochat'
+# app.config['MYSQL_UNIX_SOCKET'] = 'TCP'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
