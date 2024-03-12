@@ -42,6 +42,9 @@ def test_login_page(test_client):
     assert response.status_code == 200
     assert b'Invalid username or password' in response.data
     assert b'Welcome back, john!' not in response.data  # Make sure success message is not present
+    with app.app_context():
+        db.session.query(User).delete()
+        db.session.commit()
 
 
 def test_success_page(test_client):
