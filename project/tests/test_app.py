@@ -22,8 +22,9 @@ def test_index_page(test_client):
 def test_login_page(test_client):
     # Add a test user to the database
     user = User(username='john', password='password')
-    db.session.add(user)
-    db.session.commit()
+    with app.app_context():
+        db.session.add(user)
+        db.session.commit()
 
     # Test login page GET request
     response = test_client.get('/login')
