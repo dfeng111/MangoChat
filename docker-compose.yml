@@ -1,8 +1,8 @@
 version: '3.8'
 services:             
-    mangoChat-mysql:
+    mangochat-mysql:
         image: mysql:8.0
-        container_name: mangoChat-mysql   #changed container name
+        container_name: mangochat-mysql   #changed container name
         restart: always
         environment:
             MYSQL_DATABASE: 'mango'   #changed database name
@@ -19,10 +19,10 @@ services:
         networks:
             networkmangoChat: #changed network configuration
                 aliases:
-                    - mangoChat_mysql
-    cosc304-sqlserver:
+                    - mangochat_mysql
+    mangochat-sqlserver:
         image: mcr.microsoft.com/mssql/server:2019-latest
-        container_name: mangoChat-sqlserver #renamed the container
+        container_name: mangochat-sqlserver #renamed the container
         restart: always
         environment:
             ACCEPT_EULA: 'Y'
@@ -32,12 +32,12 @@ services:
         expose:
             - '1433'
         volumes:
-            - mangoChat-db:/var/lib/mssql # changed the db name           
+            - mangochat-db:/var/lib/mssql # changed the db name           
             - ./sql:/scripts  #changed the path to find the sql schema on local machine
         networks:
             networkmangoChat:
                 aliases:
-                    - mangoChat_sqlserver
+                    - mangochat_sqlserver
         command: # changed file type at line 56 to match with schema file type
             - /bin/bash
             - -c
@@ -63,23 +63,23 @@ services:
         build:
             context: ./
             dockerfile: Dockerfile
-        image: mangoChat-flask #change name of the image
+        image: mangochat-flask #change name of the image
         depends_on: #included both mysql & sqlserver
-            - mangoChat-mysql
-            - mangoChat-sqlserver
-        container_name: mangoChat-flask #rename container for the app
+            - mangochat-mysql
+            - mangochat-sqlserver
+        container_name: mangochat-flask #rename container for the app
         volumes:
             - ./project:/app #alow docker to access everything inside project and stores them in app folder within the container
         networks:
             networkmangoChat:
                 aliases:
-                    - mangoChat-flask
+                    - mangochat-flask
         ports:
             - 5000:5000 #default flask port
         command: # command to run the flask
             python /app/app.py #access app.py with the path to it inside the container
 volumes: 
-    mangoChat-db:
+    mangochat-db:
     mysql-db:
 networks:
     networkmangoChat:
