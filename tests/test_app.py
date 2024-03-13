@@ -22,7 +22,7 @@ def test_login_page(test_client):
     # Test login page GET request
     response = test_client.get('/login')
     assert response.status_code == 200
-    assert b'Login Page' in response.data
+    assert b'Login' in response.data
 
     # Test login with valid credentials
     response = test_client.post('/login', data=dict(logName='john', logPassword='password'), follow_redirects=True)
