@@ -5,9 +5,9 @@ services:
         container_name: mangochat-mysql   #changed container name
         restart: always
         environment:
-            MYSQL_DATABASE: 'mango'   #changed database name
+            MYSQL_DATABASE: 'mangochat'   #changed database name
             MYSQL_USER: 'mango'  #changed user name                           
-            MYSQL_PASSWORD: 'mangopw'  #changed password         
+            MYSQL_PASSWORD: 'COSC310=mcpw'  #changed password         
             MYSQL_ROOT_PASSWORD: 'mangorootpw'   #changed root password
         ports:
             - '3306:3306'
@@ -26,7 +26,7 @@ services:
         restart: always
         environment:
             ACCEPT_EULA: 'Y'
-            SA_PASSWORD: 'mangoChat!!!!!' #changed password
+            SA_PASSWORD: 'COSC310=mcpw' #changed password
         ports:
             - '1433:1433'
         expose:
