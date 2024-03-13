@@ -17,7 +17,7 @@ def hello_world():
 def index():
     return render_template("index.html", sample_text="Yo Country")
 
-@app.route("/Friendspage")
+@app.route("/friendspage")
 def Friendspage():
     return render_template("Friendspage.html")
 
