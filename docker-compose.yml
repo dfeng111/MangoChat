@@ -19,46 +19,7 @@ services:
         networks:
             networkmangoChat: #changed network configuration
                 aliases:
-                    - mangochat_mysql
-    mangochat-sqlserver:
-        image: mcr.microsoft.com/mssql/server:2019-latest
-        container_name: mangochat-sqlserver #renamed the container
-        restart: always
-        environment:
-            ACCEPT_EULA: 'Y'
-            SA_PASSWORD: 'COSC310=mcpw' #changed password
-        ports:
-            - '1433:1433'
-        expose:
-            - '1433'
-        volumes:
-            - mangochat-db:/var/lib/mssql # changed the db name           
-            - ./sql:/scripts  #changed the path to find the sql schema on local machine
-        networks:
-            networkmangoChat:
-                aliases:
-                    - mangochat_sqlserver
-        command: # changed file type at line 56 to match with schema file type
-            - /bin/bash
-            - -c
-            - |
-               /opt/mssql/bin/sqlservr &
-               pid=$$!
-               echo "Waiting for MS SQL to be available"
-               /opt/mssql-tools/bin/sqlcmd -l 30 -S localhost -h-1 -V1 -U sa -P $$SA_PASSWORD -Q "SET NOCOUNT ON SELECT \"YAY WE ARE UP\" , @@servername"
-               is_up=$$?
-               while [ $$is_up -ne 0 ] ; do 
-                 echo -e $$(date) 
-                 /opt/mssql-tools/bin/sqlcmd -l 30 -S localhost -h-1 -V1 -U sa -P $$SA_PASSWORD -Q "SET NOCOUNT ON SELECT \"YAY WE ARE UP\" , @@servername"
-                 is_up=$$?
-                 sleep 5 
-               done
-               for foo in /scripts/SQLServer*.sql
-                 do /opt/mssql-tools/bin/sqlcmd -U sa -P $$SA_PASSWORD -l 30 -e -i $$foo
-               done
-               trap "kill -15 $$pid" SIGTERM
-               wait $$pid
-               exit 0         
+                    - mangochat_mysql      
     app: #modfied app used
         build:
             context: ./
@@ -66,7 +27,7 @@ services:
         image: mangochat-flask #change name of the image
         depends_on: #included both mysql & sqlserver
             - mangochat-mysql
-            - mangochat-sqlserver
+            #- mangochat-sqlserver
         container_name: mangochat-flask #rename container for the app
         volumes:
             - ./project:/app #alow docker to access everything inside project and stores them in app folder within the container
@@ -79,7 +40,7 @@ services:
         command: # command to run the flask
             python /app/app.py #access app.py with the path to it inside the container
 volumes: 
-    mangochat-db:
+    #mangochat-db:
     mysql-db:
 networks:
     networkmangoChat:
