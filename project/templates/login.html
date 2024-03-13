@@ -12,8 +12,11 @@
         <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
         <header>Login</header>
         <form name="loginForm" onsubmit="return validateLoginForm()" method="post" action="/login">
-          Username: <input type="text" name="name" id="logName" placeholder="Enter your username">
-          Password: <input type="password" name="password" id="logPassword" placeholder="***********">
+          Username: <input type="text" name="logName" id="logName" placeholder="Enter your username">
+          Password: <input type="password" name="logPassword" id="logPassword" placeholder="***********">
+          <div class="logerror">
+            {{ error }}
+          </div>
           <input type="submit" class="button" value="Login">
         </form>
         <div class="signup">
@@ -29,6 +32,9 @@
           Username: <input type="text" name="name" id="registerName" placeholder="Enter your username">
           Password: <input type="password" name="password" id="registerPassword" placeholder="Create a password">
           Confirm Password: <input type="password" placeholder="Confirm your password">
+          <div class="logerror">
+            {{ error }}
+          </div>
           <input type="submit" class="button" value="Register">
         </form>
         <div class="signup">
@@ -36,9 +42,6 @@
             <label for="check">Login</label>
           </span>
         </div>
-      </div>
-      <div>
-        {{ error }}
       </div>
     </div>
   </div>
