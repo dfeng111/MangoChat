@@ -1,16 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register/Login</title>
-  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-</head>
-<body>
   <header>
     <h1>MangoChat</h1>
   </header>
@@ -20,7 +11,7 @@
       <div class="login form">
         <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
         <header>Login</header>
-        <form name="loginForm" onsubmit="return validateLoginForm()" method="post">
+        <form name="loginForm" onsubmit="return validateLoginForm()" method="post" action="/login">
           Username: <input type="text" name="name" id="logName" placeholder="Enter your username">
           Password: <input type="password" name="password" id="logPassword" placeholder="***********">
           <input type="submit" class="button" value="Login">
@@ -34,7 +25,7 @@
       <div class="registration form">
         <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
         <header>Register</header>
-        <form name="registerForm" onsubmit="return validateRegisterForm()" method="post">
+        <form name="registerForm" onsubmit="return validateRegisterForm()" method="post" action="/register">
           Username: <input type="text" name="name" id="registerName" placeholder="Enter your username">
           Password: <input type="password" name="password" id="registerPassword" placeholder="Create a password">
           Confirm Password: <input type="password" placeholder="Confirm your password">
@@ -46,9 +37,10 @@
           </span>
         </div>
       </div>
+      <div>
+        {{ error }}
+      </div>
     </div>
   </div>
   <script src="{{ url_for('static', filename='css/login.js') }}"></script>
-</body>
-</html>
 {% endblock %}
