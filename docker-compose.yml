@@ -1,0 +1,85 @@
+version: '3.8'
+services:             
+    mangoChat-mysql:
+        image: mysql:8.0
+        container_name: mangoChat-mysql   #changed container name
+        restart: always
+        environment:
+            MYSQL_DATABASE: 'mango'   #changed database name
+            MYSQL_USER: 'mango'  #changed user name                           
+            MYSQL_PASSWORD: 'mangopw'  #changed password         
+            MYSQL_ROOT_PASSWORD: 'mangorootpw'   #changed root password
+        ports:
+            - '3306:3306'
+        expose:
+            - '3306'   
+        volumes:
+            - mysql-db:/var/lib/mysql
+            - ./sql:/docker-entrypoint-initdb.d #changed the path to find the sql schema on local machine
+        networks:
+            networkmangoChat: #changed network configuration
+                aliases:
+                    - mangoChat_mysql
+    cosc304-sqlserver:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        container_name: mangoChat-sqlserver #renamed the container
+        restart: always
+        environment:
+            ACCEPT_EULA: 'Y'
+            SA_PASSWORD: 'mangoChat!!!!!' #changed password
+        ports:
+            - '1433:1433'
+        expose:
+            - '1433'
+        volumes:
+            - mangoChat-db:/var/lib/mssql # changed the db name           
+            - ./sql:/scripts  #changed the path to find the sql schema on local machine
+        networks:
+            networkmangoChat:
+                aliases:
+                    - mangoChat_sqlserver
+        command: # changed file type at line 56 to match with schema file type
+            - /bin/bash
+            - -c
+            - |
+               /opt/mssql/bin/sqlservr &
+               pid=$$!
+               echo "Waiting for MS SQL to be available"
+               /opt/mssql-tools/bin/sqlcmd -l 30 -S localhost -h-1 -V1 -U sa -P $$SA_PASSWORD -Q "SET NOCOUNT ON SELECT \"YAY WE ARE UP\" , @@servername"
+               is_up=$$?
+               while [ $$is_up -ne 0 ] ; do 
+                 echo -e $$(date) 
+                 /opt/mssql-tools/bin/sqlcmd -l 30 -S localhost -h-1 -V1 -U sa -P $$SA_PASSWORD -Q "SET NOCOUNT ON SELECT \"YAY WE ARE UP\" , @@servername"
+                 is_up=$$?
+                 sleep 5 
+               done
+               for foo in /scripts/SQLServer*.sql
+                 do /opt/mssql-tools/bin/sqlcmd -U sa -P $$SA_PASSWORD -l 30 -e -i $$foo
+               done
+               trap "kill -15 $$pid" SIGTERM
+               wait $$pid
+               exit 0         
+    app: #modfied app used
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        image: mangoChat-flask #change name of the image
+        depends_on: #included both mysql & sqlserver
+            - mangoChat-mysql
+            - mangoChat-sqlserver
+        container_name: mangoChat-flask #rename container for the app
+        volumes:
+            - ./project:/app #alow docker to access everything inside project and stores them in app folder within the container
+        networks:
+            networkmangoChat:
+                aliases:
+                    - mangoChat-flask
+        ports:
+            - 5000:5000 #default flask port
+        command: # command to run the flask
+            python /app/app.py #access app.py with the path to it inside the container
+volumes: 
+    mangoChat-db:
+    mysql-db:
+networks:
+    networkmangoChat:
