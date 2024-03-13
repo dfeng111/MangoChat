@@ -24,7 +24,7 @@ services:
         build:
             context: ./
             dockerfile: Dockerfile
-        image: mangochat-flask #change name of the image
+        # image: mangochat-flask #change name of the image
         depends_on: #included both mysql & sqlserver
             - mangochat-mysql
             #- mangochat-sqlserver
@@ -36,7 +36,7 @@ services:
                 aliases:
                     - mangochat-flask
         ports:
-            - 5000:5000 #default flask port
+            - 3000:3000 #default flask port
         command: # command to run the flask
             python /app/app.py #access app.py with the path to it inside the container
 volumes: 
