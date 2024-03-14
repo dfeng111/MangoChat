@@ -37,8 +37,8 @@ def index():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
+        username = request.form["logName"]
+        password = request.form["logPassword"]
 
         # Check if username and password are valid
         user = User.query.filter_by(username=username, password=password).first()
@@ -50,7 +50,11 @@ def login():
             return render_template("login.html", error="Invalid username or password")
 
     # For GET requests, just render the login page
-    return render_template("login.html")
+    return render_template("login.html", title="Login/Register")
+
+@app.route("/register", methods=["POST"])
+def register():
+    pass
 
 @app.route("/success/<username>")
 def success(username):

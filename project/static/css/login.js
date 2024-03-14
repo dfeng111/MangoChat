@@ -17,7 +17,7 @@ function validateLoginForm() {
       return false;
     }
     else {
-      alert("Successfully logged in");
+      // alert("Successfully logged in");
       return true;
     }
 }
@@ -37,7 +37,7 @@ function validateRegisterForm() {
     }
 
     if (password.length >= 8) {
-      alert("Successfully signed up");
+      // alert("Successfully signed up");
       document.getElementById('check').checked = false; // Redirect to the login form
       return true;
     }

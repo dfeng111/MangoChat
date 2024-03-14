@@ -1,22 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
-    <h2>Login Page</h2>
-    <form action="/login" method="POST" novalidate>
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-        </div>
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+  <header>
+    <h1>MangoChat</h1>
+  </header>
+  <div class="background-wrapper">
+    <div class="container">
+      <input type="checkbox" id="check">
+      <div class="login form">
+        <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
+        <header>Login</header>
+        <form name="loginForm" onsubmit="return validateLoginForm()" method="post" action="/login">
+          Username: <input type="text" name="logName" id="logName" placeholder="Enter your username">
+          Password: <input type="password" name="logPassword" id="logPassword" placeholder="***********">
+          <div class="logerror">
             {{ error }}
+          </div>
+          <input type="submit" class="button" value="Login">
+        </form>
+        <div class="signup">
+          <span class="signup">Don't have an account?
+            <label for="check">Register</label>
+          </span>
         </div>
-        <button type="submit" class="btn">Login</button>
-    </form>
-</div>
+      </div>
+      <div class="registration form">
+        <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
+        <header>Register</header>
+        <form name="registerForm" onsubmit="return validateRegisterForm()" method="post" action="/register">
+          Username: <input type="text" name="name" id="registerName" placeholder="Enter your username">
+          Password: <input type="password" name="password" id="registerPassword" placeholder="Create a password">
+          Confirm Password: <input type="password" placeholder="Confirm your password">
+          <div class="logerror">
+            {{ error }}
+          </div>
+          <input type="submit" class="button" value="Register">
+        </form>
+        <div class="signup">
+          <span class="signup">Already have an account?
+            <label for="check">Login</label>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="{{ url_for('static', filename='css/login.js') }}"></script>
 {% endblock %}

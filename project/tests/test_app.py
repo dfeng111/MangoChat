@@ -29,16 +29,15 @@ def test_login_page(test_client):
     # Test login page GET request
     response = test_client.get('/login')
     assert response.status_code == 200
-    assert b'Login Page' in response.data
-    
+    assert b'Login' in response.data
     # Test login with valid credentials
-    response = test_client.post('/login', data=dict(username='john', password='password'), follow_redirects=True)
+    response = test_client.post('/login', data=dict(logName='john', logPassword='password'), follow_redirects=True)
     assert response.status_code == 200
     assert b'Welcome back, john!' in response.data
     assert b'Login Page' not in response.data  # Make sure login page content is not present
 
     # Test login with invalid credentials
-    response = test_client.post('/login', data=dict(username='john', password='wrongpassword'), follow_redirects=True)
+    response = test_client.post('/login', data=dict(logName='john', logPassword='wrongpassword'), follow_redirects=True)
     assert response.status_code == 200
     assert b'Invalid username or password' in response.data
     assert b'Welcome back, john!' not in response.data  # Make sure success message is not present

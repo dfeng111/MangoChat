@@ -82,3 +82,8 @@
   .signup label:hover{
     text-decoration: underline;
   }
+  
+  .logerror {
+    color: red;
+    text-align: center;
+}
