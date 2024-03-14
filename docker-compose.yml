@@ -1,0 +1,46 @@
+version: '3.8'
+services:             
+    mangochat-mysql:
+        image: mysql:8.0
+        container_name: mangochat-mysql   #changed container name
+        restart: always
+        environment:
+            MYSQL_DATABASE: 'mangochat'   #changed database name
+            MYSQL_USER: 'mango'  #changed user name                           
+            MYSQL_PASSWORD: 'COSC310=mcpw'  #changed password         
+            MYSQL_ROOT_PASSWORD: 'mangorootpw'   #changed root password
+        ports:
+            - '3306:3306'
+        expose:
+            - '3306'   
+        volumes:
+            - mysql-db:/var/lib/mysql
+            - ./sql:/docker-entrypoint-initdb.d #changed the path to find the sql schema on local machine
+        networks:
+            networkmangoChat: #changed network configuration
+                aliases:
+                    - mangochat_mysql      
+    app: #modfied app used
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        # image: mangochat-flask #change name of the image
+        depends_on: #included both mysql & sqlserver
+            - mangochat-mysql
+            #- mangochat-sqlserver
+        container_name: mangochat-flask #rename container for the app
+        volumes:
+            - ./project:/app #alow docker to access everything inside project and stores them in app folder within the container
+        networks:
+            networkmangoChat:
+                aliases:
+                    - mangochat-flask
+        ports:
+            - 3000:3000 #default flask port
+        command: # command to run the flask
+            python /app/app.py #access app.py with the path to it inside the container
+volumes: 
+    #mangochat-db:
+    mysql-db:
+networks:
+    networkmangoChat:
