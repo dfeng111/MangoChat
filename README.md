@@ -45,5 +45,5 @@ System should not disclose login information with other users
 
 
 
-## Class Diagram
-![Mango Chat Class Diagram](Requirements/MangoClassDiag.png)
+## Use Case Diagram
+![Mango Chat Class Diagram](Requirements/MangoUseCase.png)
