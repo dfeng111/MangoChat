@@ -34,6 +34,10 @@ def hello_world():
 def index():
     return render_template("index.html", sample_text="Yo Country")
 
+@app.route("/friendspage")
+def Friendspage():
+    return render_template("Friendspage.html")
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
