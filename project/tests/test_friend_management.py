@@ -1,6 +1,10 @@
 import pytest
-from friend_management import add_friend, remove_friend
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from Database.database_setup import db, User, Friend
+
+# Import functions to test
+from friend_management import add_friend, remove_friend
 
 # Creating the Flask app and setting up the database
 @pytest.fixture
