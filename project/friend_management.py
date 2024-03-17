@@ -10,23 +10,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 def add_friend(user_id, friend_id):
-    """
-    Add a friend to the user's friend list.
-    """
-    user = User.query.get(user_id)
-    friend = User.query.get(friend_id)
-
-    if not user or not friend:
-        return "User or friend not found."
-
-    # Check if they are already friends
     if Friend.query.filter_by(user_id=user_id, friend_id=friend_id).first():
-        return "Already friends."
-
-    new_friendship = Friend(user_id=user_id, friend_id=friend_id)
-    db.session.add(new_friendship)
+        # Already friends
+        return False, 'Already friends.'
+    
+    friendship = Friend(user_id=user_id, friend_id=friend_id)
+    db.session.add(friendship)
     db.session.commit()
-    return "Friend added successfully."
+    return True, 'Friend added successfully.'
 
 def remove_friend(user_id, friend_id):
     """

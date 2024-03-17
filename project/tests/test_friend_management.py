@@ -19,25 +19,25 @@ def app():
     with app.app_context():
         db.drop_all()
 
-# Test cases for adding and removing friends
 def test_add_friend(app):
     with app.app_context():
         # Creating two users
-        user1 = User(username="user1", password="password")
-        user2 = User(username="user2", password="password")
+        user1 = User(username="user1", password="password1")
+        user2 = User(username="user2", password="password2")
         db.session.add(user1)
         db.session.add(user2)
         db.session.commit()
 
         # Adding user2 as a friend of user1
-        result = add_friend(user1.id, user2.id)
+        result, message = add_friend(user1.id, user2.id)
         assert result is True
+        assert message == 'Friend added successfully.'
 
 def test_add_friend_already_friends(app):
     with app.app_context():
         # Creating two users
-        user1 = User(username="user1", password="password")
-        user2 = User(username="user2", password="password")
+        user1 = User(username="user1", password="password1")
+        user2 = User(username="user2", password="password2")
         db.session.add(user1)
         db.session.add(user2)
         db.session.commit()
@@ -46,14 +46,15 @@ def test_add_friend_already_friends(app):
         add_friend(user1.id, user2.id)
 
         # Attempting to add user2 again, they should already be friends
-        result = add_friend(user1.id, user2.id)
+        result, message = add_friend(user1.id, user2.id)
         assert result is False
+        assert message == 'Already friends.'
 
 def test_remove_friend(app):
     with app.app_context():
         # Creating two users
-        user1 = User(username="user1", password="password")
-        user2 = User(username="user2", password="password")
+        user1 = User(username="user1", password="password1")
+        user2 = User(username="user2", password="password2")
         db.session.add(user1)
         db.session.add(user2)
         db.session.commit()
@@ -62,18 +63,20 @@ def test_remove_friend(app):
         add_friend(user1.id, user2.id)
 
         # Removing user2 as a friend of user1
-        result = remove_friend(user1.id, user2.id)
+        result, message = remove_friend(user1.id, user2.id)
         assert result is True
+        assert message == 'Friend removed successfully.'
 
 def test_remove_friend_not_found(app):
     with app.app_context():
         # Creating two users
-        user1 = User(username="user1", password="password")
-        user2 = User(username="user2", password="password")
+        user1 = User(username="user1", password="password1")
+        user2 = User(username="user2", password="password2")
         db.session.add(user1)
         db.session.add(user2)
         db.session.commit()
 
         # Removing user2 as a friend of user1 without adding first
-        result = remove_friend(user1.id, user2.id)
+        result, message = remove_friend(user1.id, user2.id)
         assert result is False
+        assert message == 'Friendship not found.'
