@@ -1,7 +1,6 @@
 from flask import Flask
 from Database.database_setup import db, User, Friend, Block
 from project.block_user import block_user, unblock_user
-from project.block_user import Block
 
 def test_block_user(app):
     with app.app_context():
