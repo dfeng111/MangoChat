@@ -20,17 +20,17 @@ def add_friend(user_id, friend_id):
     return True, 'Friend added successfully.'
 
 def remove_friend(user_id, friend_id):
-    """
-    Remove a friend from the user's friend list.
-    """
-    friendship = Friend.query.filter_by(user_id=user_id, friend_id=friend_id).first()
+    friendship = Friend.query.filter(
+        (Friend.user_id == user_id and Friend.friend_id == friend_id) |
+        (Friend.user_id == friend_id and Friend.friend_id == user_id)
+    ).first()
 
     if not friendship:
-        return "Friendship not found."
+        return False, 'Friendship not found.'
 
     db.session.delete(friendship)
     db.session.commit()
-    return "Friend removed successfully."
+    return True, 'Friend removed successfully.'
 
 if __name__ == "__main__":
     with app.app_context():
