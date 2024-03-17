@@ -32,12 +32,12 @@ class Message(db.Model):
 
 class Friend(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id1 = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    user_id2 = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    friend_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     status = db.Column(db.Enum('Pending', 'Accepted', 'Blocked'), nullable=False, default='Pending')
-    user1 = db.relationship('User', foreign_keys=[user_id1])
-    user2 = db.relationship('User', foreign_keys=[user_id2])
-    db.UniqueConstraint('user_id1', 'user_id2', name='unique_friendship')
+    user1 = db.relationship('User', foreign_keys=[user_id])
+    user2 = db.relationship('User', foreign_keys=[friend_id])
+    db.UniqueConstraint('user_id', 'friend_id', name='unique_friendship')
 
 class Block(db.Model):
     id = db.Column(db.Integer, primary_key=True)
