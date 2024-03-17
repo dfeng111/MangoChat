@@ -20,7 +20,7 @@ def app():
         db.drop_all()
 
 # Creating a test user
-def create_test_user():
+def create_test_user(app):
     with app.app_context():
         test_user = User(username="test_user", password="test_password")
         db.session.add(test_user)
@@ -28,7 +28,7 @@ def create_test_user():
         return test_user
 
 # Creating a test channel
-def create_test_channel():
+def create_test_channel(app):
     with app.app_context():
         test_channel = Channel(channel_name="test_channel")
         db.session.add(test_channel)
@@ -37,16 +37,16 @@ def create_test_channel():
 
 # Test cases for database models
 def test_user_creation(app):
-    test_user = create_test_user()
+    test_user = create_test_user(app)
     assert test_user.id is not None
 
 def test_channel_creation(app):
-    test_channel = create_test_channel()
+    test_channel = create_test_channel(app)
     assert test_channel.id is not None
 
 def test_user_channel_relationship(app):
-    test_user = create_test_user()
-    test_channel = create_test_channel()
+    test_user = create_test_user(app)
+    test_channel = create_test_channel(app)
 
     with app.app_context():
         user_channel = UserChannel(user_id=test_user.id, channel_id=test_channel.id, is_moderator=True, is_banned=False)
@@ -56,8 +56,8 @@ def test_user_channel_relationship(app):
         assert user_channel.id is not None
 
 def test_message_creation(app):
-    test_user = create_test_user()
-    test_channel = create_test_channel()
+    test_user = create_test_user(app)
+    test_channel = create_test_channel(app)
 
     with app.app_context():
         message = Message(sender_id=test_user.id, channel_id=test_channel.id, content="Test Message")
@@ -67,8 +67,8 @@ def test_message_creation(app):
         assert message.id is not None
 
 def test_friendship_creation(app):
-    test_user1 = create_test_user()
-    test_user2 = create_test_user()
+    test_user1 = create_test_user(app)
+    test_user2 = create_test_user(app)
 
     with app.app_context():
         friendship = Friend(user_id1=test_user1.id, user_id2=test_user2.id, status="Accepted")
@@ -78,8 +78,8 @@ def test_friendship_creation(app):
         assert friendship.id is not None
 
 def test_block_creation(app):
-    test_user1 = create_test_user()
-    test_user2 = create_test_user()
+    test_user1 = create_test_user(app)
+    test_user2 = create_test_user(app)
 
     with app.app_context():
         block = Block(blocker_id=test_user1.id, blocked_id=test_user2.id)
@@ -89,7 +89,7 @@ def test_block_creation(app):
         assert block.id is not None
 
 # Cleaning up test data after tests
-def delete_test_data():
+def delete_test_data(app):
     with app.app_context():
         db.session.query(User).filter_by(username="test_user").delete()
         db.session.query(Channel).filter_by(channel_name="test_channel").delete()
@@ -97,6 +97,6 @@ def delete_test_data():
 
 # Register the function to be run after each test
 @pytest.fixture(autouse=True)
-def run_after_test():
+def run_after_test(app):
     yield
-    delete_test_data()
+    delete_test_data(app)
