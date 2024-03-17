@@ -1,15 +1,6 @@
 from flask import Flask
 from Database.database_setup import db, User, Friend, Block
 
-class Block(db.Model):
-    __tablename__ = 'block'
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    blocked_user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
-    def __repr__(self):
-        return f"<Block {self.id}>"
-
 def block_user(user_id, blocked_user_id):
     """
     Block a user by adding an entry to the Block table.
