@@ -10,10 +10,28 @@
 
 
 </head>
-
 <!-- Header Page-->
+<div class = "container-fluid bg-success text-white text-center overflow-hidden">
+  <h1> Channels</h1>
+  <div class="row">
+      <div class="col-sm-6">
+        <!-- Add channel button connects to modal-->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#AddChannel">Add Channels</button>
+  </div>
+  <div class="col-sm-6">
+  <form action="" method="POST" novalidate>
+      <div class="form-group">
+        <!-- channel search bar-->
+          <label for="ChannelName">Search:</label>
+          <input type="text" id="ChannelName" name="ChannelName" required>
+      </div>
+          </form>
+      </div>
+  </div>
+</div>
 
 <body>
+
   <!-- color wanted  style = "color: FF8700"-->
  <!-- Side menu-->
 <div class = "sidebar">
@@ -70,11 +88,28 @@
 </div>
 
 <div class= "main-content">
-    <div class=" container">
-      <h1> Channels list</h1>
+
+    <div class="grid-container">
+      <div>Channel 1</div>
+      <div>Channel 2</div>
+      <div>Channel 3</div>
+      <div>Channel 4</div>
+      <div>Channel 5</div>
+      <div>Channel 6</div>
+
     </div>
 </div>
 
+
+
+<!-- add freind modal-->
+<div class="modal fade" id="AddChannels" tabindex="-1" aria-labelledby="ChannelSearch" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="ChannelSearch">Add Channels</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
               
 </body>
 
