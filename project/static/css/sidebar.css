@@ -13,7 +13,7 @@
     height: 100vh;
     width: 80px;
     background-color: #F4BB44;
-    padding: .4ren .8rem;
+    padding: .8rem;
     transition: all 0.5s ease;
 }
 
@@ -30,17 +30,18 @@
 .sidebar #btn{
     position: absolute;
     color: black;
-    top: 0.4rem;
-    left: 50%;
+    top: 0.8rem;
+    left: 35%;
     font-size: 1.2rem;
     line-height: 50px;
-    transform: translateX();
     cursor: pointer;
+    transition: all 0.5s ease;
 
 }
 
 .sidebar.active #btn{
-    left: 90%;
+    left: 80%;
+    /* transform: translate(50%); */
 }
 
 .sidebar .top .title{
@@ -62,6 +63,10 @@ opacity: 0;
  font-size: 2rem;
  margin-right: 5px;
 
+}
+
+.sidebar ul {
+    padding-left: 0;
 }
 
 .sidebar ul li {
