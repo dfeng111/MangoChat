@@ -43,6 +43,10 @@ def Channelspage():
     return render_template("Channelspage.html")
 
 
+@app.route("/channels")
+def channels():
+    return render_template("Channels-Page.html")
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
