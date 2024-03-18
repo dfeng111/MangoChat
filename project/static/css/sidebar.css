@@ -114,6 +114,7 @@ opacity: 0;
 
 .sidebar ul li:hover .collapsed{
     opacity: 1;
+    background-color: lightgray;
 
 }
 
