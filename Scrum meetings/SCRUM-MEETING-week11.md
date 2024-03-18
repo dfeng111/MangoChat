@@ -8,9 +8,9 @@
         <th>Follow up</th>
     <tr>
     <tr >
-        <th></th>
-        <th></th>
-        <th></th>
+        <th>Review M4 Requirements</th>
+        <th>Start M4</th>
+        <th>Finalize M4 / Continue Coding</th>
     </tr>
 </table>
 <h3>Sprint team members</h3>
@@ -20,24 +20,24 @@
         <th>Role</th>
     <tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Dichen Feng</th>
+        <th>Web Surfer</th>
     </tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Cameron Gillespie</th>
+        <th>Web Surfer</th>
     </tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Chris Hill</th>
+        <th>Python Wrangler</th>
     </tr>
     <tr >
-        <th></th>
-        <th></th>
+        <th>Sawneet Sood</th>
+        <th>SQL Destroyer</th>
     </tr>
     <tr>
-        <th></th>
-        <th></th>
+        <th>Jacob Tizel</th>
+        <th>Git Master</th>
     </tr>
 </table>
 
@@ -48,23 +48,23 @@
 <table border = "2">
     <tr>
         <th>Sprint theme</th>
-        <th>e.g., Bugs</th>
+        <th>Coding / MySQL Integration</th>
     <tr>
     <tr >
         <th>Issues completed</th>
-        <th></th>
+        <th>10</th>
     </tr>
     <tr >
         <th>Issues left</th>
-        <th></th>
+        <th>0</th>
     </tr>
     <tr >
         <th>Team Capacity</th>
-        <th></th>
+        <th>6-8 hrs each</th>
     </tr>
     <tr >
         <th>Summary</th>
-        <th></th>
+        <th>Completed most app functionalities, and integreated MySQL databases with Python code.</th>
     </tr>
 </table>
 
@@ -73,38 +73,38 @@
 <table border = "2">
     <tr>
         <th>Start date</th>
-        <th></th>  
+        <th>18 Mar 2024</th>  
     <tr>
     <tr >
         <th>End date</th>
-        <th></th>
+        <th>25 Mar 2024</th>
     </tr>
     <tr >
         <th>Sprint theme</th>
-        <th></th>
+        <th>Start M4</th>
     </tr>
     <tr >
         <th>Team Capacity</th>
-        <th></th>
+        <th>6-8 hrs each</th>
     </tr>
     <tr >
         <th>Issues capacity</th>
-        <th>Member 1
-            <br>Member 2
-            <br>Member 3
-            <br>Member 4
-            <br>Member 5
+        <th>Member 1 - 2
+            <br>Member 2 - 2
+            <br>Member 3 - 2
+            <br>Member 4 - 2
+            <br>Member 5 - 2
         </th>
     </tr>
     <tr >
         <th>Potential risks</th>
-        <th></th>
+        <th>Issues with tests passing could make it difficult to complete Testing Update Report</th>
     </tr>
     <tr >
         <th>Mitigations</th>
-        <th></th>
+        <th>Ensure most tests pass early in the week before starting Testing Update Report</th>
     </tr>
 </table>
 <h3>Sprint planning resources</h3>
-<br>•
+<br>• Lecture Slides
 <br>•
