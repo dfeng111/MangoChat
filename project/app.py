@@ -4,11 +4,6 @@ from Database.database_setup import db, User, Channel, UserChannel, Message, Fri
 app = Flask(__name__, static_url_path='/static')
 
 # Configuration for SQLAlchemy
-# *****************************
-# PLACEHOLDER URI
-# Make sure to change in future
-#
-# *****************************
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://mango:COSC310=mcpw@127.0.0.1/mangochat'
 # app.config['MYSQL_UNIX_SOCKET'] = 'TCP'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
