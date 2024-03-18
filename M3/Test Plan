@@ -1,0 +1,7 @@
+Our test plan will be to unit test, integration test, system test and acceptance test.
+In our pull requests unit testing will be included. We will run regression testing.
+For unit testing we will test the smallest piece of code(function or method) in the application.
+For integration testing individual software modules will be combined then tested as a group.
+For system testing it will be tested when our system is complete in order to evaluate it.
+For acceptance testing we will check for flaws and confirm that our system meets its requirements.
+We will run regression testing to ensure that after every change there are no unintended breaks.

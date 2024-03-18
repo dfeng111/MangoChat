@@ -1,0 +1,121 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+<html>
+    <style>
+      body {
+          background-color: #36393f; 
+          color: #ffffff; 
+      }
+      .avatar {
+            border-radius: 50%; 
+            width: 100px; 
+            height: 100px; 
+      }
+      .dropdown-menu {
+          background-color: #36393f;
+      }
+      .dropdown-item {
+          color: #ffffff;
+      }
+      .dropdown-item:hover {
+          background-color: #2c2f33;
+      }
+      .editable {
+          cursor: pointer;
+          border: 1px solid #64686e; 
+          padding: 5px;
+          border-radius: 5px; 
+          display: inline-block; 
+          width: calc(100% - 10px); 
+          margin-top: 5px; 
+          margin-bottom: 5px; 
+          background-color: #2c2f33; 
+      }
+      .btn-online {
+          background-color: #28a745; 
+          color: white;
+      }
+
+      .btn-donotdisturb {
+          background-color: #ffc802; 
+          color: white;
+      }
+      .profile-section {
+          border: 1px solid #64686e; 
+          padding: 10px;
+          border-radius: 5px; 
+          margin-bottom: 15px; 
+      }
+    </style>
+
+<div class="container">
+  <div class="row align-items-center mb-3">
+    <div class="col-auto">
+      <img src="..\static\images\testAvatar.png" alt="User Avatar" class="avatar">
+    </div>
+    <div class="col">
+      <h2>Username</h2>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+        <div class="profile-section" style="background-color: rgb(31, 27, 27); color: white;" >
+          <div class="profile-section"><strong>Username#1234</strong></div>
+            <hr>
+            <div><strong>About Me:</strong></div> 
+            <div id="aboutMe" class="editable" contenteditable="true">Click to edit...<br><br><br><br></div>
+            <hr>
+            <!-- Status Dropdown -->
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="statusButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  Choose Status
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="statusButton">
+                  <li><a class="dropdown-item" href="#" data-status="online">Online</a></li>
+                  <li><a class="dropdown-item" href="#" data-status="do-not-disturb">Do Not Disturb</a></li>
+              </ul>
+            </div>
+            <hr>
+            <p><strong>Joined Date:</strong> Nobember 12, 2019</p>
+            </div>
+      </div>
+  </div>
+</div>
+<hr>
+<div class="row mt-3">
+  <div class="col">
+    <button class="btn" style="background-color: blue; color: white;">Change Password</button>
+    <hr>
+    <br><button class="btn" style="background-color: red; color: white;">Logout</button>
+    <button class="btn" style="border: 2px solid red; color: red; background-color: transparent;">Delete Account</button>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+      $('.dropdown-item').click(function(e) {
+          e.preventDefault();
+          var statusText = $(this).text();
+          var status = $(this).data('status');
+          
+          $('#statusButton').text(statusText).removeClass('btn-online btn-offline btn-secondary');
+  
+          if(status === 'online') {
+              $('#statusButton').addClass('btn-online');
+          } else if(status === 'do-not-disturb') {
+              $('#statusButton').addClass('btn-donotdisturb');
+          } else {
+              $('#statusButton').addClass('btn-secondary'); 
+          }
+      });
+  });
+  </script>
+</body>
+</html>
+
+{% endblock %}
