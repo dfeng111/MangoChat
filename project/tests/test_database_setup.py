@@ -1,13 +1,19 @@
 import pytest
-from project.app import app
+from flask import Flask
 from Database.database_setup import db, User, Channel, UserChannel, Message, Friend, Block
 
-# Register the function to be run after each test
+# Creating the Flask app and setting up the database
 @pytest.fixture(autouse=True)
-def setup():
+def app():
+    app = Flask(__name__)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.init_app(app)
+
     with app.app_context():
-        yield
-    # pass
+        db.create_all()
+        yield app
+        db.drop_all()
 
 # Creating a test user
 @pytest.fixture
