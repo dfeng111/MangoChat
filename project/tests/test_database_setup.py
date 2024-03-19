@@ -41,6 +41,7 @@ def create_test_channel():
 # Test cases for database models
 def test_user_creation(create_test_user):
     assert create_test_user.id is not None
+    assert create_test_user.check_password("test_password")
 
 def test_channel_creation(create_test_channel):
     assert create_test_channel.id is not None
