@@ -38,7 +38,7 @@ def test_login_page(test_client, make_test_user):
     assert response.status_code == 200
     assert b'Login' in response.data
     # Test login with valid credentials
-    response = test_client.post('/login', data=dict(logName='john', logPassword='password'), follow_redirects=True)
+    response = test_client.post('/login', data=dict(logName=user.username, logPassword=user.password), follow_redirects=True)
     assert response.status_code == 200
     assert b'Welcome back, john!' in response.data
     assert b'Login Page' not in response.data  # Make sure login page content is not present
