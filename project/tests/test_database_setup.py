@@ -19,7 +19,8 @@ def app():
 @pytest.fixture
 def create_test_user():
     uname = "test_user"
-    test_user = User(username=uname, password="test_password")
+    test_user = User(username=uname)
+    test_user.set_password("test_password")
     db.session.add(test_user)
     db.session.commit()
     yield test_user
