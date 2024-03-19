@@ -19,14 +19,20 @@ def test_index_page(test_client):
     assert response.status_code == 200
     assert b'Yo Country' in response.data
 
-def test_login_page(test_client):
-    # Add a test user to the database
-    user = User(username='john')
-    user.set_password('password')
+@pytest.fixture
+def make_test_user():
+    test_user = User(username='john')
+    test_user.set_password("password")
     with app.app_context():
-        db.session.add(user)
+        db.session.add(test_user)
+        db.session.commit()
+        yield test_user
+        db.session.delete(test_user)
         db.session.commit()
 
+def test_login_page(test_client, make_test_user):
+    # Add a test user to the database
+    user = make_test_user
     # Test login page GET request
     response = test_client.get('/login')
     assert response.status_code == 200
@@ -42,9 +48,6 @@ def test_login_page(test_client):
     assert response.status_code == 200
     assert b'Invalid username or password' in response.data
     assert b'Welcome back, john!' not in response.data  # Make sure success message is not present
-    with app.app_context():
-        db.session.query(User).delete()
-        db.session.commit()
 
 
 def test_success_page(test_client):
