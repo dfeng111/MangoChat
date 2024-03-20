@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% include navbar.html %}
 
 {% block content %}
 <link href="{{ url_for('static', filename='css/sidebar.css') }}" rel="stylesheet">
@@ -26,59 +27,6 @@
 <body>
 
   <!-- color wanted  style = "color: FF8700"-->
-  <!-- Side menu-->
-  <div class="sidebar">
-    <div class="top">
-      <div class="title">
-        <i class="fa-solid fa-leaf fs-5"></i>
-        <span> Mango Chat </span>
-      </div>
-      <i class="fa-solid fa-leaf " id="btn"></i>
-
-      <ul>
-        <li>
-          <a href="#">
-            <i class="fa-solid fa-user fs-5"></i>
-            <span class="nav-item">Profile</span>
-          </a>
-          <span class="collapsed"> Profile</span>
-        </li>
-
-        <li>
-          <a href="#">
-            <i class="fa-solid fa-user-group fs-5"></i>
-            <span class="nav-item">Friends</span>
-          </a>
-          <span class="collapsed"> Friends</span>
-        </li>
-
-        <li>
-          <a href="#">
-            <i class="fa-solid fa-comments fs-5"></i>
-            <span class="nav-item">Channels</span>
-          </a>
-          <span class="collapsed"> Channels</span>
-        </li>
-
-        <li>
-          <a href="#">
-            <i class="fa-solid fa-gears fs-5"></i>
-            <span class="nav-item">Settings</span>
-          </a>
-          <span class="collapsed">Settings</span>
-        </li>
-
-        <li>
-          <a href="#">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <span class="nav-item">Logout</span>
-          </a>
-          <span class="collapsed"> Logout</span>
-        </li>
-      </ul>
-
-    </div>
-  </div>
 
   <div class="main-content">
 
