@@ -14,17 +14,18 @@ class MockUserChannel:
         self.channel_id = channel_id
         self.is_moderator = is_moderator
 
-def test_get_current_user_id():
+def test_get_current_user_id(app):
     # Simulate a logged-in user by setting the session
-    with session(app.test_client()) as client:
-        with client.session_transaction() as sess:
-            sess['user_id'] = 123
+    with app.test_request_context('/'):
+        with app.test_client() as client:
+            with client.session_transaction() as sess:
+                sess['user_id'] = 123
 
-        # Call the function to get user ID
-        user_id = get_current_user_id()
+            # Call the function to get user ID
+            user_id = get_current_user_id()
 
-        # Assert the user ID is as expected
-        assert user_id == 123
+            # Assert the user ID is as expected
+            assert user_id == 123
 
 def test_is_user_channel_admin():
     # Mock UserChannel data - User is an admin
