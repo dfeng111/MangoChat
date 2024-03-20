@@ -7,6 +7,7 @@ from Database.database_setup import UserChannel
 @pytest.fixture
 def app_with_session():
     app.config['TESTING'] = True
+    app.config['SECRET_KEY'] = 'test_secret_key'  # Set a secret key for testing
     with app.test_request_context('/'):
         with app.test_client() as client:
             yield app
