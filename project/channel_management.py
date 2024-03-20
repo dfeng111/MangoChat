@@ -33,7 +33,6 @@ def create_channel(user_id, channel_name):
 
     return channel
 
-
 def delete_channel(channel_id):
     """
     Delete a channel.
