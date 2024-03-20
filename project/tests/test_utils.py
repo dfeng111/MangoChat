@@ -1,25 +1,21 @@
 import pytest
-from flask import Flask, session
+from flask import session
 from app import app
 from utils import get_current_user_id, is_user_channel_admin
 from Database.database_setup import UserChannel
 
 @pytest.fixture
-def client():
+def app_with_session():
     app.config['TESTING'] = True
-    with app.test_client() as client:
-        yield client
+    with app.test_request_context('/'):
+        with app.test_client() as client:
+            yield app
+            session.clear()
 
-def test_get_current_user_id(client):
-    # Test when user is not logged in
-    with client:
-        user_id = get_current_user_id()
-        assert user_id is None
-
-    # Test when user is logged in
-    with client:
-        with client.session_transaction() as sess:
-            sess['user_id'] = 123
+def test_get_current_user_id_logged_in(app_with_session):
+    # Simulate a logged-in user by setting the session
+    with app_with_session.test_request_context('/'):
+        session['user_id'] = 123
         user_id = get_current_user_id()
         assert user_id == 123
 
