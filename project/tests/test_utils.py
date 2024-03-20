@@ -5,15 +5,9 @@ from utils import get_current_user_id
 
 @pytest.fixture
 def client():
+    app.config['TESTING'] = True
     with app.test_client() as client:
         yield client
-
-@pytest.fixture
-def logged_in_client(client):
-    # Simulate a logged-in user by setting the session
-    with client.session_transaction() as sess:
-        sess['user_id'] = 123  # Simulate a user ID in the session
-    yield client
 
 def test_get_current_user_id(client):
     with client:
@@ -23,8 +17,12 @@ def test_get_current_user_id(client):
         # Assert the user ID is None since not logged in
         assert user_id is None
 
-def test_get_current_user_id_logged_in(logged_in_client):
-    with logged_in_client:
+def test_get_current_user_id_logged_in(client):
+    with client:
+        # Simulate a logged-in user by setting the session
+        with client.session_transaction() as sess:
+            sess['user_id'] = 123  # Simulate a user ID in the session
+        
         # Call the function to get user ID
         user_id = get_current_user_id()
 
