@@ -28,6 +28,9 @@ def create_test_user():
     db.session.commit()
 
 def test_create_channel(app, create_test_user):
+    # Create a test user
+    test_user = create_test_user
+    
     # Create a channel
     channel_name = "Test Channel"
     channel = create_channel(create_test_user.id, channel_name)
