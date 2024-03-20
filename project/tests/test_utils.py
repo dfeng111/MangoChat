@@ -1,6 +1,6 @@
 from flask import session
 from project.utils import get_current_user_id, is_user_channel_admin
-from project.database_setup import UserChannel
+from Database.database_setup import UserChannel
 
 # Mocking the session for testing purposes
 class MockSession(dict):
