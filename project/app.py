@@ -1,7 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for
 from Database.database_setup import db, User, Channel, UserChannel, Message, Friend, Block
+from config import Config
 
 app = Flask(__name__, static_url_path='/static')
+app.config.from_object(Config)
 
 # Configuration for SQLAlchemy
 # *****************************
