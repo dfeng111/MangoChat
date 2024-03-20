@@ -42,24 +42,25 @@ def test_create_channel(app, create_test_user):
     assert user_channel is not None
     assert user_channel.is_moderator == True
 
-def test_delete_channel(app, create_test_user, create_test_channel):
+def test_delete_channel(app, create_test_user):
     # Create a test user
     test_user = create_test_user
 
-    # Create a test channel
-    test_channel = create_test_channel
+    # Create a channel
+    channel_name = "Test Channel"
+    channel = create_channel(test_user.id, channel_name)
 
     # Assign the user as admin of the test channel
-    user_channel = UserChannel(user_id=test_user.id, channel_id=test_channel.id, is_moderator=True)
+    user_channel = UserChannel(user_id=test_user.id, channel_id=channel.id, is_moderator=True)
     db.session.add(user_channel)
     db.session.commit()
 
     # Delete the test channel
-    result = delete_channel(test_channel.id)
+    result = delete_channel(channel.id)
 
     # Check if channel is deleted
     assert result == True
-    assert Channel.query.get(test_channel.id) is None
+    assert Channel.query.get(channel.id) is None
 
     # Check if user-channel association is deleted
-    assert UserChannel.query.filter_by(user_id=test_user.id, channel_id=test_channel.id).first() is None
+    assert UserChannel.query.filter_by(user_id=test_user.id, channel_id=channel.id).first() is None
