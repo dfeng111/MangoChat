@@ -1,6 +1,6 @@
 import pytest
 from flask import Flask
-from Database.database_setup import db, User, Channel, UserChannel, Message, Friend, Block
+from Database.database_setup import db, User, Channel, UserChannel
 from project.channel_management import create_channel, delete_channel
 
 # Creating the Flask app and setting up the database
@@ -24,7 +24,6 @@ def create_test_user():
     db.session.add(test_user)
     db.session.commit()
     yield test_user
-    # db.session.query(User).filter_by(username="test_user").delete()
     db.session.delete(test_user)
     db.session.commit()
 
@@ -60,7 +59,7 @@ def test_delete_channel(app, create_test_user):
 
     # Check if channel is deleted
     assert result == True
-    assert Channel.query.get(channel.id) is None
+    assert db.session.get(Channel, channel.id) is None
 
     # Check if user-channel association is deleted
-    assert UserChannel.query.filter_by(user_id=test_user.id, channel_id=channel.id).first() is None
+    assert db.session.query(UserChannel).filter_by(user_id=test_user.id, channel_id=channel.id).first() is None
