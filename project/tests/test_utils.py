@@ -13,7 +13,7 @@ class MockUserChannel:
         self.channel_id = channel_id
         self.is_moderator = is_moderator
 
-def test_get_current_user_id(mocker):
+def test_get_current_user_id():
     # Mock a logged-in user session
     with session_scope({'user_id': 123}):
         # Call the function to get user ID
