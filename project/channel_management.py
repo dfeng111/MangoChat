@@ -21,6 +21,7 @@ def create_channel(user_id, channel_name):
         channel_id=channel.id,
         is_moderator=True  # Set as moderator/admin
     )
+    channel.user_channel = user_channel # Associate user_channel with channel
     db.session.add(user_channel)
     db.session.commit()
 
