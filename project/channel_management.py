@@ -11,9 +11,16 @@ def create_channel(user_id, channel_name):
     Returns:
         The created Channel object.
     """
+    # Create the channel
     channel = Channel(channel_name=channel_name)
     db.session.add(channel)
     db.session.commit()
+
+    # Retrieve the newly created channel to get its ID
+    channel = Channel.query.filter_by(channel_name=channel_name).first()
+
+    if channel is None:
+        raise ValueError("Channel creation failed.")
 
     # Assign the user as admin of the channel
     user_channel = UserChannel(
@@ -21,13 +28,11 @@ def create_channel(user_id, channel_name):
         channel_id=channel.id,
         is_moderator=True  # Set as moderator/admin
     )
-
-    # Set user_channel user_id explicitly
-    user_channel.user_id = user_id
     db.session.add(user_channel)
     db.session.commit()
 
     return channel
+
 
 def delete_channel(channel_id):
     """

@@ -28,30 +28,17 @@ def create_test_user():
     db.session.delete(test_user)
     db.session.commit()
 
-# Creating a test channel
-@pytest.fixture
-def create_test_channel():
-    test_channel = Channel(channel_name="test_channel")
-    db.session.add(test_channel)
-    db.session.commit()
-    yield test_channel
-    db.session.delete(test_channel)
-    db.session.commit()
-
 def test_create_channel(app, create_test_user):
-    # Create a test user
-    test_user = create_test_user
-
     # Create a channel
     channel_name = "Test Channel"
-    channel = create_channel(test_user.id, channel_name)
+    channel = create_channel(create_test_user.id, channel_name)
 
     # Check if channel is created
     assert channel is not None
     assert channel.channel_name == channel_name
 
     # Check if user is the admin of the channel
-    user_channel = UserChannel.query.filter_by(user_id=test_user.id, channel_id=channel.id).first()
+    user_channel = UserChannel.query.filter_by(user_id=create_test_user.id, channel_id=channel.id).first()
     assert user_channel is not None
     assert user_channel.is_moderator == True
 
