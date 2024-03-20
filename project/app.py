@@ -37,10 +37,6 @@ def index():
 @app.route("/friendspage")
 def Friendspage():
     return render_template("Friendspage.html")
-    
-@app.route("/Channels")
-def Channelspage():
-    return render_template("Channelspage.html")
 
 
 @app.route("/channels")
