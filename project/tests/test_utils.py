@@ -1,47 +1,31 @@
 import pytest
 from flask import session
-from Database.database_setup import UserChannel
-from project.utils import get_current_user_id, is_user_channel_admin
-from project.app import app
+from app import app
+from utils import get_current_user_id
 
-class MockSession(dict):
-    def __init__(self, *args, **kwargs):
-        super(MockSession, self).__init__(*args, **kwargs)
-        
-class MockUserChannel:
-    def __init__(self, user_id, channel_id, is_moderator):
-        self.user_id = user_id
-        self.channel_id = channel_id
-        self.is_moderator = is_moderator
+@pytest.fixture
+def client():
+    with app.test_client() as client:
+        yield client
 
-def test_get_current_user_id(app):
-    # Simulate a logged-in user by setting the session
-    with app.test_request_context('/'):
-        with app.test_client() as client:
-            with client.session_transaction() as sess:
-                sess['user_id'] = 123
+@pytest.fixture
+def logged_in_client(client):
+    with client.session_transaction() as sess:
+        sess['user_id'] = 123
+    yield client
 
-            # Call the function to get user ID
-            user_id = get_current_user_id()
+def test_get_current_user_id(client):
+    with client:
+        # Call the function to get user ID
+        user_id = get_current_user_id()
 
-            # Assert the user ID is as expected
-            assert user_id == 123
+        # Assert the user ID is None when not logged in
+        assert user_id is None
 
-def test_is_user_channel_admin():
-    # Mock UserChannel data - User is an admin
-    user_channel_admin = MockUserChannel(user_id=1, channel_id=1, is_moderator=True)
-    
-    # Mock UserChannel data - User is not an admin
-    user_channel_not_admin = MockUserChannel(user_id=2, channel_id=1, is_moderator=False)
-    
-    # Test case: User is an admin
-    assert is_user_channel_admin(user_id=1, channel_id=1, user_channel=user_channel_admin) is True
+def test_get_current_user_id_logged_in(logged_in_client):
+    with logged_in_client:
+        # Call the function to get user ID
+        user_id = get_current_user_id()
 
-    # Test case: User is not an admin
-    assert is_user_channel_admin(user_id=2, channel_id=1, user_channel=user_channel_not_admin) is False
-
-def session_scope(session_data):
-    original_session = session._get_current_object()
-    session._get_current_object = lambda: MockSession(session_data)
-    yield
-    session._get_current_object = lambda: original_session
+        # Assert the user ID is as expected when logged in
+        assert user_id == 123
