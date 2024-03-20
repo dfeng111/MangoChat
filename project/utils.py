@@ -1,4 +1,5 @@
 from flask import session
+from Database.database_setup import UserChannel
 
 def get_current_user_id():
     """
