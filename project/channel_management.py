@@ -44,7 +44,7 @@ def delete_channel(channel_id):
     Returns:
         True if deletion is successful, False otherwise.
     """
-    channel = db.session.get(channel_id)
+    channel = Channel.query.get(channel_id)
     if channel:
         # Delete the channel and related user-channel associations
         UserChannel.query.filter_by(channel_id=channel_id).delete()
