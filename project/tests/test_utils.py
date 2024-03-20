@@ -2,6 +2,7 @@ import pytest
 from flask import session
 from Database.database_setup import UserChannel
 from project.utils import get_current_user_id, is_user_channel_admin
+from project.app import app
 
 class MockSession(dict):
     def __init__(self, *args, **kwargs):
@@ -14,8 +15,11 @@ class MockUserChannel:
         self.is_moderator = is_moderator
 
 def test_get_current_user_id():
-    # Mock a logged-in user session
-    with session_scope({'user_id': 123}):
+    # Simulate a logged-in user by setting the session
+    with session(app.test_client()) as client:
+        with client.session_transaction() as sess:
+            sess['user_id'] = 123
+
         # Call the function to get user ID
         user_id = get_current_user_id()
 
