@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from Database.database_setup import db, User, Channel, UserChannel
 from project.channel_management import create_channel, delete_channel
-from project.utils.py import get_current_user_id, is_user_channel_admin
+from project.utils import get_current_user_id, is_user_channel_admin
 
 app = Flask(__name__, static_url_path='/static')
 
@@ -84,7 +84,7 @@ def create_channel_route():
 def delete_channel_route(channel_id):
     if request.method == "POST":
         # Ensure the current user is an admin of the channel or handle permissions as needed
-        if is_user_channel_admin(current_user_id, channel_id):
+        if is_user_channel_admin(get_current_user_id, channel_id):
             # Delete the channel
             if delete_channel(channel_id):
                 return redirect(url_for("index"))  # Redirect after successful deletion
