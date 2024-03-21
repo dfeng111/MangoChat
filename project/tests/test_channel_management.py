@@ -27,6 +27,7 @@ def create_test_user():
     db.session.delete(test_user)
     db.session.commit()
 
+@pytest.fixture
 def test_create_channel(app, create_test_user):
     # Create a test user
     test_user = create_test_user
