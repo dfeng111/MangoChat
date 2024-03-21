@@ -16,8 +16,8 @@ def create_channel(user_id, channel_name):
     db.session.add(channel)
     db.session.commit()
 
-    # Retrieve the newly created channel to get its ID
-    channel = Channel.query.filter_by(channel_name=channel_name).first()
+    # Ensure the channel is properly committed before fetching its ID
+    db.session.refresh(channel)
 
     if channel is None:
         raise ValueError("Channel creation failed.")
