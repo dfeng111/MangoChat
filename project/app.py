@@ -67,6 +67,7 @@ def user():
 
 # *********************************
 # TODO: Needs HTML page and testing
+#           or refactoring
 # *********************************
 @app.route("/create_channel", methods=["POST"])
 def create_channel_route():
@@ -85,6 +86,7 @@ def create_channel_route():
 
 # *********************************
 # TODO: Needs HTML page and testing
+#           or refactoring
 # *********************************
 @app.route("/delete_channel/<int:channel_id>", methods=["POST"])
 def delete_channel_route(channel_id):
