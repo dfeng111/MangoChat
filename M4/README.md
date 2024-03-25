@@ -1,3 +1,3 @@
 ## Summary
 
-At current the project has almost all the webpages and required to create a functional discord clone as well as alot of the back-end functionality, At this point we are attempting to give functionality to the front-end webpages as well as refine our backend. So far splitting the team into front-end and backend work has been working to our favor, the individuals who are more comfortable with the databasing have created most of the functionality in good time and those who have a proficiency with front end have created most of the front end pages with out major issue. I believe we can confortable get complete functionality on time for the final presentation given the current state of our progress. A vast majority of the remaining work is figuring out how to give the front end functionality and Finalizing channel & Friends pages. 
+
