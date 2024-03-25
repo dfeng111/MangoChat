@@ -3,6 +3,7 @@ from config import Config
 from Database.database_setup import db, User, Channel, UserChannel
 from channel_management import create_channel, delete_channel
 from utils import get_current_user_id, is_user_channel_admin
+from flask_login import LoginManager
 
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object(Config)
