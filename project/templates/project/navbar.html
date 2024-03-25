@@ -1,6 +1,8 @@
-<head>
-  <link rel = "stylesheet" type = "text/css" href = "project\static\css\navbar.css">
-</head>
+{% extends "base.html" %}
+
+{% block content %}
+<link rel = "stylesheet" type = "text/css" href = "project\static\css\navbar.css">
+
 
 
   <!-- Side menu-->
@@ -59,8 +61,6 @@
 
   <div class="main-content">
 
-    <div class="grid-container">
-
     </div>
   </div>
 
@@ -74,3 +74,4 @@
     sidebar.classList.toggle('active');
   }
 </script>
+{% endblock %}

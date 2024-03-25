@@ -2,11 +2,8 @@
 
 {% block content %}
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <link href="{{ url_for('static', filename='css/sidebar.css') }}" rel="stylesheet">
 <link rel = "stylesheet" type = "text/css" href = "../css/header.css">
-<link rel = "stylesheet" type = "text/css" href = "project\static\css\navbar.css">
 
 
 
@@ -61,7 +58,6 @@
   /* sidebar settings */
 .sidebar{
     position: absolute;
-    top: 10%;
     left: 0;
     height: 100%;
     width: 80px;
@@ -169,7 +165,6 @@ opacity: 0;
 .sidebar ul li:hover .collapsed{
     opacity: 1;
     background-color: lightgray;
-
 }
 
 .sidebar.active ul li .collapsed{
@@ -179,10 +174,10 @@ opacity: 0;
 /* container for content */
 .main-content {
     top: 0;
-    left: 80px;
+    left: 100px;
     transition: all 0.5s ease;
     width: calc(100% - 80px);
-    padding: 1rem;
+    margin-left: 5.3%;
     
     }
     /* channel boxxes */
@@ -208,6 +203,7 @@ opacity: 0;
     background-color: #F4BB44;
     text-align: center;
     font-size: 150%;
+    
   }
 
   /* channel tabs */
@@ -216,7 +212,7 @@ opacity: 0;
     background-color: lightgray;
     display: flex;
     padding: 20px;
-    margin-left: 4.5%;
+    margin-left: 50%;
     max-width: 120%;
     max-height: 100%;
   }
@@ -224,18 +220,7 @@ opacity: 0;
   </style>
   </head>
   <body>
-  
-  <div class="header">
-    <h1>Channels</h1>
-   <form action="" novalidate>
-          <div class="form-group">
-            <!-- Friend search bar-->
-              <label for="Channel">Search:</label>
-              <input type="text" id="Channel" name="Channels">
-          </div>
-              </form>
-    <button class = "ChannelModalOpen">Add Channel</button>
-    </div>
+
 
     <div class = "modalcontainer" id = "modal-Conainer">
       <div class = modal>
@@ -274,7 +259,7 @@ opacity: 0;
         </li>
 
         <li>
-          <a href="{{ url_for('Channels-Page') }}">
+          <a href="{{ url_for('channels') }}">
             <i class="fa-solid fa-comments fs-5"></i>
             <span class="nav-item">Channels</span>
           </a>
@@ -302,9 +287,22 @@ opacity: 0;
   </div>
 
   <div class="main-content">
+      <!-- CREATE CUSTOM BUTTON OUT OUT OF CHANNEL BOX CLASS-->
+
+      <div class="header">
+        <h1>Channels</h1>
+       <form action="" novalidate>
+              <div class="form-group">
+                <!-- Friend search bar-->
+                  <label for="Channel">Search:</label>
+                  <input type="text" id="Channel" name="Channels">
+              </div>
+                  </form>
+        <button class = "ChannelModalOpen">Add Channel</button>
+        </div>
 
 
-      <ul>
+      <ul  style="list-style-type:none;">
         <li>
           <div class = "Channelbox">Channel 1
           <div class="btn-group">
@@ -318,7 +316,7 @@ opacity: 0;
           </div>
         </div>
     </li>
-        <li></li>
+        <li>space</li>
         <li><div class = "Channelbox">Channel 2
           <div class="btn-group">
             <button type="button" class="btn btn-danger dropdown-toggle align-items-center" data-bs-toggle="dropdown" aria-expanded="false" >
