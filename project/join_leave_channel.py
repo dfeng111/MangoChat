@@ -12,11 +12,12 @@ class User:
 
 class Channel:
     def __init__(self):
-        self.users = []  
+          self.users = []  
 
     def register(self, user):
+        message = f"{user.name} has joined the channel."
+        self.notify_all(message)
         self.users.append(user)
-        self.notify_all(f"{user.name} has joined the channel.")
 
     def unregister(self, user):
         self.users.remove(user)
@@ -27,21 +28,22 @@ class Channel:
             user.update(message)
 
 if __name__ == "__main__":
-    # Channel is created
+    # Create a channel
     channel = Channel()
 
-    # Users are created
-    user1 = User("Alice")
+    # Create users
+    user1 = User("Alice")  
     user2 = User("Bob")
 
-    # User1 joins the channel
-    channel.register(user1)
-
-    # User2 joins the channel
+    # Register users to the channel
+    channel.register(user1)  
     channel.register(user2)
 
-    # Message is sent to all users
+    # Send a message to all users
     channel.notify_all("Hello everyone!")
 
-    # User2 leaves the channel
+    # Send another message
+    channel.notify_all("User2 has left the channel.")
+    
+    # Unregister user2
     channel.unregister(user2)
