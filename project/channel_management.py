@@ -17,7 +17,7 @@ def create_channel(user_id, channel_name):
     db.session.commit()
 
     # Retrieve the newly created channel to get its ID
-    channel = Channel.query.filter_by(channel_name=channel_name).first()
+    # channel = Channel.query.filter_by(channel_name=channel_name).first()
 
     if channel is None:
         raise ValueError("Channel creation failed.")
@@ -43,7 +43,8 @@ def delete_channel(channel_id):
     Returns:
         True if deletion is successful, False otherwise.
     """
-    channel = Channel.query.get(channel_id)
+    # channel = Channel.query.get(channel_id)
+    channel = db.session.query(Channel).get(channel_id)
     if channel:
         # Delete the channel and related user-channel associations
         UserChannel.query.filter_by(channel_id=channel_id).delete()

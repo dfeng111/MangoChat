@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from Database.database_setup import db, User, Channel, UserChannel
-from project.channel_management import create_channel, delete_channel
-from project.utils import get_current_user_id, is_user_channel_admin
+from channel_management import create_channel, delete_channel
+from utils import get_current_user_id, is_user_channel_admin
 
 app = Flask(__name__, static_url_path='/static')
 
