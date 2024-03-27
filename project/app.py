@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, flash, render_template, request, redirect, url_for
 from config import Config
 from Database.database_setup import db, User, Channel, UserChannel
 from channel_management import create_channel, delete_channel
@@ -69,10 +69,14 @@ def login():
 
 @app.route("/register", methods=["POST"])
 def register():
-    pass
+    regForm = RegisterForm()
+    logForm = LoginForm()
+    flash("chihuahua")
+    return render_template("login.html", title="Login/Register", regform=regForm, logform=logForm)
 
 @app.route("/success/<username>")
 def success(username):
+    flash("Login Success")
     return f"Welcome back, {username}!"
 
 @app.route("/user")
