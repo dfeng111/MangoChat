@@ -4,14 +4,19 @@ from Database.database_setup import db, User, Channel, UserChannel
 from channel_management import create_channel, delete_channel
 from utils import get_current_user_id, is_user_channel_admin
 from flask_login import LoginManager
+from forms import RegisterForm, LoginForm
 
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object(Config)
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
 # Configuration for SQLAlchemy
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://mango:COSC310=mcpw@127.0.0.1/mangochat'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://mango:COSC310=mcpw@127.0.0.1/mangochat'
 # app.config['MYSQL_UNIX_SOCKET'] = 'TCP'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
 
@@ -25,6 +30,10 @@ users = {
     "alice": "123456",
     "bob": "qwerty"
 }
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.get_or_404(User, user_id)
 
 @app.route("/")
 def hello_world():
@@ -40,9 +49,11 @@ def Friendspage():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    regForm = RegisterForm()
+    logForm = LoginForm()
     if request.method == "POST":
-        username = request.form["logName"]
-        password = request.form["logPassword"]
+        username = request.form["username"]
+        password = request.form["password"]
 
         # Check if username and password are valid
         user = User.query.filter_by(username=username, password=password).first()
@@ -51,10 +62,10 @@ def login():
             return redirect(url_for("success", username=username))
         else:
             # Redirect back to login page with an error message
-            return render_template("login.html", error="Invalid username or password")
+            return render_template("login.html", title="Login/Register", regform=regForm, logform=logForm, error="Invalid username or password")
 
     # For GET requests, just render the login page
-    return render_template("login.html", title="Login/Register")
+    return render_template("login.html", title="Login/Register", regform=regForm, logform=logForm)
 
 @app.route("/register", methods=["POST"])
 def register():
