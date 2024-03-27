@@ -17,7 +17,7 @@
         <div class="logerror">
           {{ error }}
         </div>
-        <input type="submit" class="button" value="Login">
+          {{ regform.regsubmit(size=20) }}
       </form>
       <div class="signup">
         <span class="signup">Don't have an account?
@@ -35,7 +35,7 @@
           <div class="logerror">
             {{ error }}
           </div>
-          <input type="submit" class="button" value="Register">
+          {{ regform.regsubmit(size=20) }}
         </form>
         <div class="signup">
           <span class="signup">Already have an account?
