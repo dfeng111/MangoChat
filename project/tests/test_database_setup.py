@@ -24,7 +24,6 @@ def create_test_user():
     db.session.add(test_user)
     db.session.commit()
     yield test_user
-    # db.session.query(User).filter_by(username="test_user").delete()
     db.session.delete(test_user)
     db.session.commit()
 
@@ -42,6 +41,7 @@ def create_test_channel():
 def test_user_creation(create_test_user):
     assert create_test_user.id is not None
     assert create_test_user.check_password("test_password")
+    assert create_test_user.get_id() == create_test_user.username
 
 def test_channel_creation(create_test_channel):
     assert create_test_channel.id is not None
