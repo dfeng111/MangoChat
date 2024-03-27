@@ -1,4 +1,4 @@
-from flask import Flask, flash, render_template, request, redirect, url_for
+from flask import Flask, abort, flash, render_template, request, redirect, url_for
 from config import Config
 from Database.database_setup import db, User, Channel, UserChannel
 from channel_management import create_channel, delete_channel
@@ -11,6 +11,7 @@ app.config.from_object(Config)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
+login_manager.login_view = "login"
 
 
 # Configuration for SQLAlchemy
@@ -33,6 +34,9 @@ users = {
 
 @login_manager.user_loader
 def load_user(user_id):
+    # user can be accessed anywhere with current_user
+    # for example the username can be accessed with {{ current_user.username }}
+    # {% if current_user.is_authenticated %} ... {% endif %} can be used to run only if logged in
     return db.get_or_404(User, user_id)
 
 @app.route("/")
@@ -59,6 +63,14 @@ def login():
         if user and user.check_password(logForm.password.data):
             login_user(user)
             flash("Logged In!")
+            # next = request.args.get('next')
+            # url_has_allowed_host_and_scheme should check if the url is safe
+            # for redirects, meaning it matches the request host.
+            # See Django's url_has_allowed_host_and_scheme for an example.
+            # TODO: Implement this to validate the URL
+            # if not url_has_allowed_host_and_scheme(next, request.host):
+            #     return abort(400)
+
             return redirect(url_for("success", username=username))
         else:
             # Redirect back to login page with an error message
@@ -100,6 +112,7 @@ def logout():
     return redirect(url_for("index"))
 
 @app.route("/user")
+# @login_required
 def user():
     return render_template("user.html")
 
