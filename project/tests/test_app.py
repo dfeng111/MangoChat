@@ -1,10 +1,12 @@
 import pytest
-from project.app import app
+from app import app
 from Database.database_setup import db, User
+from forms import RegisterForm, LoginForm
 
 @pytest.fixture
 def test_client():
     app.testing = True
+    app.config['WTF_CSRF_ENABLED'] = False
     return app.test_client()
 
 def test_home_page(test_client):
@@ -38,7 +40,10 @@ def test_login_page(test_client, make_test_user):
     assert response.status_code == 200
     assert b'Login' in response.data
     # Test login with valid credentials
-    response = test_client.post('/login', data=dict(username=user.username, password=user.password), follow_redirects=True)
+    loginform = LoginForm(formdata=None, obj=user)
+    loginform.username.data = 'john'
+    loginform.password.data = 'password'
+    response = test_client.post('/login', data=loginform.data, follow_redirects=True)
     assert response.status_code == 200
     assert b'Welcome back, john!' in response.data
     assert b'Login Page' not in response.data  # Make sure login page content is not present

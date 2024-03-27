@@ -3,7 +3,7 @@ from config import Config
 from Database.database_setup import db, User, Channel, UserChannel
 from channel_management import create_channel, delete_channel
 from utils import get_current_user_id, is_user_channel_admin
-from flask_login import LoginManager
+from flask_login import LoginManager, login_required, login_user, logout_user
 from forms import RegisterForm, LoginForm
 
 app = Flask(__name__, static_url_path='/static')
@@ -51,17 +51,18 @@ def Friendspage():
 def login():
     regForm = RegisterForm()
     logForm = LoginForm()
-    if request.method == "POST":
-        username = request.form["username"]
-        password = request.form["password"]
 
-        # Check if username and password are valid
-        user = User.query.filter_by(username=username, password=password).first()
-        if user:
-            # Redirect to a success page
+    if logForm.validate_on_submit:
+        # user = db.session.execute(db.select(User).filter_by(username=logForm.username.data).first())
+        username=logForm.username.data
+        user = db.session.query(User).filter_by(username=username).first()
+        if user and user.check_password(logForm.password.data):
+            login_user(user)
+            flash("Logged In!")
             return redirect(url_for("success", username=username))
         else:
             # Redirect back to login page with an error message
+            flash("Incorrect username or password")
             return render_template("login.html", title="Login/Register", regform=regForm, logform=logForm, error="Invalid username or password")
 
     # For GET requests, just render the login page
@@ -71,13 +72,19 @@ def login():
 def register():
     regForm = RegisterForm()
     logForm = LoginForm()
-    flash("chihuahua")
+    # flash("chihuahua")
     return render_template("login.html", title="Login/Register", regform=regForm, logform=logForm)
 
 @app.route("/success/<username>")
 def success(username):
-    flash("Login Success")
+    # flash("Login Success")
     return f"Welcome back, {username}!"
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for("index"))
 
 @app.route("/user")
 def user():
