@@ -6,6 +6,8 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     password = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.String(150), nullable=True)
+    profile_pic = db.Column(db.LargeBinary(), nullable=True)
     def __repr__(self) -> str:
         return '<User: {}, Id: {}>'.format(self.username, self.id)
 
