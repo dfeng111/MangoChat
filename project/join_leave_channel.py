@@ -41,9 +41,11 @@ if __name__ == "__main__":
 
     # Send a message to all users
     channel.notify_all("Hello everyone!")
+    
+    # Unregister user2
+    channel.unregister(user2)
 
     # Send another message
     channel.notify_all("User2 has left the channel.")
     
-    # Unregister user2
-    channel.unregister(user2)
+    

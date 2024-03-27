@@ -21,11 +21,12 @@ def test_join_leave_channel():
     except AssertionError:
         print("Failed: Bob's join message was not received by Alice")
 
+    # User2 leaves the channel
+    channel.unregister(user2)
+
     # Check that the leave message for user2 was received by user1
     try:
         assert any("Bob has left the channel." in message for message in user1.received_messages)
     except AssertionError:
         print("Failed: Bob's leave message was not received by Alice")
         
-    # User2 leaves the channel
-    channel.unregister(user2)
