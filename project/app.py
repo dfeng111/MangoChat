@@ -52,7 +52,7 @@ def login():
     regForm = RegisterForm()
     logForm = LoginForm()
 
-    if logForm.validate_on_submit:
+    if request.method == "POST" and logForm.validate_on_submit:
         # user = db.session.execute(db.select(User).filter_by(username=logForm.username.data).first())
         username=logForm.username.data
         user = db.session.query(User).filter_by(username=username).first()
@@ -68,12 +68,24 @@ def login():
     # For GET requests, just render the login page
     return render_template("login.html", title="Login/Register", regform=regForm, logform=logForm)
 
-@app.route("/register", methods=["POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
     regForm = RegisterForm()
-    logForm = LoginForm()
-    # flash("chihuahua")
-    return render_template("login.html", title="Login/Register", regform=regForm, logform=logForm)
+    if request.method == "POST" and regForm.validate_on_submit:
+        username = regForm.username.data
+        user = User(username=username)
+        user.set_password(regForm.password.data)
+        if not db.session.query(User).filter_by(username=username).first():
+            db.session.add(user)
+            db.session.commit()
+            flash("Registered Successfully!")
+            return redirect(url_for("login"))
+        else:
+            flash("Incorrect username or password")
+            return redirect(url_for("login"))
+
+    # For GET requests, redirect to login page
+    return redirect(url_for("login"))
 
 @app.route("/success/<username>")
 def success(username):
@@ -84,6 +96,7 @@ def success(username):
 @login_required
 def logout():
     logout_user()
+    flash("Successfully logged out.")
     return redirect(url_for("index"))
 
 @app.route("/user")
