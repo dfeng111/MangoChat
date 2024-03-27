@@ -1,6 +1,6 @@
-from flask import Flask, abort, flash, render_template, request, redirect, url_for
+from flask import Flask, flash, render_template, request, redirect, url_for
 from config import Config
-from Database.database_setup import db, User, Channel, UserChannel
+from Database.database_setup import db, User, Channel
 from channel_management import create_channel, delete_channel
 from utils import get_current_user_id, is_user_channel_admin
 from flask_login import LoginManager, login_required, login_user, logout_user
@@ -13,24 +13,11 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
-
-# Configuration for SQLAlchemy
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://mango:COSC310=mcpw@127.0.0.1/mangochat'
-# app.config['MYSQL_UNIX_SOCKET'] = 'TCP'
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
 db.init_app(app)
 
 # Create all tables
 with app.app_context():
     db.create_all()
-
-# Test users
-users = {
-    "john": "password",
-    "alice": "123456",
-    "bob": "qwerty"
-}
 
 @login_manager.user_loader
 def load_user(user_id):
