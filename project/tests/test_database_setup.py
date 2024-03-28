@@ -8,6 +8,7 @@ def app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['WTF_CSRF_ENABLED'] = False
     db.init_app(app)
 
     with app.app_context():
@@ -19,11 +20,11 @@ def app():
 @pytest.fixture
 def create_test_user():
     uname = "test_user"
-    test_user = User(username=uname, password="test_password")
+    test_user = User(username=uname)
+    test_user.set_password("test_password")
     db.session.add(test_user)
     db.session.commit()
     yield test_user
-    # db.session.query(User).filter_by(username="test_user").delete()
     db.session.delete(test_user)
     db.session.commit()
 
@@ -40,6 +41,7 @@ def create_test_channel():
 # Test cases for database models
 def test_user_creation(create_test_user):
     assert create_test_user.id is not None
+    assert create_test_user.check_password("test_password")
 
 def test_channel_creation(create_test_channel):
     assert create_test_channel.id is not None

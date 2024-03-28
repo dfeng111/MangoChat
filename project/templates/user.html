@@ -48,6 +48,9 @@
           border-radius: 5px; 
           margin-bottom: 15px; 
       }
+      #username {
+          color: black;
+      }
     </style>
 
 <div class="container">
@@ -56,7 +59,9 @@
       <img src="..\static\images\testAvatar.png" alt="User Avatar" class="avatar">
     </div>
     <div class="col">
-      <h2>Username</h2>
+        {% if current_user.is_authenticated %}
+        <h2 id="username">{{ current_user.username }}</h2>
+        {% endif %}
     </div>
   </div>
 </div>
@@ -65,7 +70,7 @@
   <div class="row">
     <div class="col-md-12">
         <div class="profile-section" style="background-color: rgb(31, 27, 27); color: white;" >
-          <div class="profile-section"><strong>Username#1234</strong></div>
+            <div class="profile-section"><strong>{{ current_user.username }}</strong></div>
             <hr>
             <div><strong>About Me:</strong></div> 
             <div id="aboutMe" class="editable" contenteditable="true">Click to edit...<br><br><br><br></div>

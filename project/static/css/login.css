@@ -63,7 +63,7 @@
   .form a:hover{
     text-decoration: underline;
   }
-  .form input.button{
+  #regsubmit, #logsubmit{
     color: black;
     background: orange;
     font-size: 1.2rem;

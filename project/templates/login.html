@@ -1,49 +1,58 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
-  <header>
-    <h1>MangoChat</h1>
-  </header>
-  <div class="background-wrapper">
-    <div class="container">
-      <input type="checkbox" id="check">
-      <div class="login form">
-        <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
-        <header>Login</header>
-        <form name="loginForm" onsubmit="return validateLoginForm()" method="post" action="/login">
-          Username: <input type="text" name="logName" id="logName" placeholder="Enter your username">
-          Password: <input type="password" name="logPassword" id="logPassword" placeholder="***********">
-          <div class="logerror">
-            {{ error }}
-          </div>
-          <input type="submit" class="button" value="Login">
-        </form>
-        <div class="signup">
-          <span class="signup">Don't have an account?
-            <label for="check">Register</label>
-          </span>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+<header>
+  <h1>MangoChat</h1>
+</header>
+<div class="background-wrapper">
+  <div class="container">
+    <input type="checkbox" id="check">
+    <div class="login form">
+      <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
+      <header>Login</header>
+      <form action="/login" method="post" name="loginForm">
+        {{ logform.csrf_token }}
+        {{ logform.username.label }} {{ logform.username(size=20) }}
+        {{ logform.password.label }} {{ logform.password(size=20) }}
+        <div class="logerror">
+          {{ error }}
         </div>
+          {{ logform.logsubmit(size=20) }}
+      </form>
+      <div class="signup">
+        <span class="signup">Don't have an account?
+          <label for="check">Register</label>
+        </span>
       </div>
-      <div class="registration form">
-        <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
-        <header>Register</header>
-        <form name="registerForm" onsubmit="return validateRegisterForm()" method="post" action="/register">
-          Username: <input type="text" name="name" id="registerName" placeholder="Enter your username">
-          Password: <input type="password" name="password" id="registerPassword" placeholder="Create a password">
-          Confirm Password: <input type="password" placeholder="Confirm your password">
+    </div>
+    <div class="registration form">
+      <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
+      <header>Register</header>
+      <form action="{{ url_for('register') }}" method="post" name="registerForm">
+        {{ regform.csrf_token }}
+          {{ regform.username.label }} {{ regform.username(size=20) }}
+          {{ regform.password.label }} {{ regform.password(size=20) }}
+          {{ regform.confirm_password.label }} {{ regform.confirm_password(size=20) }}
           <div class="logerror">
             {{ error }}
           </div>
-          <input type="submit" class="button" value="Register">
+          {% if regform.password.errors %}
+            <ul class=errors>
+              {% for error2 in regform.password.errors %}
+                <li>{{ error2 }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          {{ regform.regsubmit(size=20) }}
         </form>
         <div class="signup">
           <span class="signup">Already have an account?
             <label for="check">Login</label>
           </span>
         </div>
-      </div>
     </div>
   </div>
-  <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+</div>
+<script src="{{ url_for('static', filename='js/login.js') }}"></script>
 {% endblock %}
