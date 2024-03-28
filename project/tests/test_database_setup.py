@@ -8,6 +8,7 @@ def app():
     app = Flask(__name__)
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['WTF_CSRF_ENABLED'] = False
     db.init_app(app)
 
     with app.app_context():
@@ -41,7 +42,6 @@ def create_test_channel():
 def test_user_creation(create_test_user):
     assert create_test_user.id is not None
     assert create_test_user.check_password("test_password")
-    assert create_test_user.get_id() == create_test_user.username
 
 def test_channel_creation(create_test_channel):
     assert create_test_channel.id is not None

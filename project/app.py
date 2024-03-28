@@ -43,7 +43,9 @@ def login():
     regForm = RegisterForm()
     logForm = LoginForm()
 
-    if request.method == "POST" and logForm.validate_on_submit:
+    if request.method == "POST" and logForm.validate_on_submit():
+        # flash(logForm.validate_on_submit().__repr__())
+        # flash(logForm.validate_on_submit.__repr__())
         # user = db.session.execute(db.select(User).filter_by(username=logForm.username.data).first())
         username=logForm.username.data
         user = db.session.query(User).filter_by(username=username).first()
@@ -69,8 +71,10 @@ def login():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    logForm = LoginForm()
     regForm = RegisterForm()
-    if request.method == "POST" and regForm.validate_on_submit:
+    if request.method == "POST" and regForm.validate_on_submit():
+        # flash(regForm.validate_on_submit().__repr__())
         username = regForm.username.data
         user = User(username=username)
         user.set_password(regForm.password.data)
@@ -80,11 +84,12 @@ def register():
             flash("Registered Successfully!")
             return redirect(url_for("login"))
         else:
-            flash("Incorrect username or password")
-            return redirect(url_for("login"))
+            flash("Username already in use")
+            return render_template("login.html", title="Login/Register", regform=regForm, logform=logForm)
 
     # For GET requests, redirect to login page
-    return redirect(url_for("login"))
+    # return redirect(url_for("login"))
+    return render_template("login.html", title="Login/Register", regform=regForm, logform=logForm)
 
 @app.route("/success/<username>")
 def success(username):

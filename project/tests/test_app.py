@@ -62,6 +62,7 @@ def test_register_page(test_client):
         registerform = RegisterForm()
         registerform.username.data = 'jim'
         registerform.password.data = 'Password123'
+        registerform.confirm_password.data = 'Password123'
         response = test_client.post('/register', data=registerform.data, follow_redirects=True)
         assert response.status_code == 200
         assert db.session.query(User).filter_by(username=registerform.username.data).first()

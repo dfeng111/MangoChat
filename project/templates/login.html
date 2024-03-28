@@ -12,6 +12,7 @@
       <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
       <header>Login</header>
       <form action="/login" method="post" name="loginForm">
+        {{ logform.csrf_token }}
         {{ logform.username.label }} {{ logform.username(size=20) }}
         {{ logform.password.label }} {{ logform.password(size=20) }}
         <div class="logerror">
@@ -28,13 +29,21 @@
     <div class="registration form">
       <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
       <header>Register</header>
-        <form action="/register" method="post" name="registerForm">
+      <form action="{{ url_for('register') }}" method="post" name="registerForm">
+        {{ regform.csrf_token }}
           {{ regform.username.label }} {{ regform.username(size=20) }}
           {{ regform.password.label }} {{ regform.password(size=20) }}
           {{ regform.confirm_password.label }} {{ regform.confirm_password(size=20) }}
           <div class="logerror">
             {{ error }}
           </div>
+          {% if regform.password.errors %}
+            <ul class=errors>
+              {% for error2 in regform.password.errors %}
+                <li>{{ error2 }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %}
           {{ regform.regsubmit(size=20) }}
         </form>
         <div class="signup">

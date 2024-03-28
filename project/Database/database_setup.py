@@ -14,9 +14,6 @@ class User(db.Model, UserMixin):
     def check_password(self, passwd):
         return check_password_hash(self.password, passwd)
 
-    def get_id(self):
-        return self.username
-
     def __repr__(self) -> str:
         return '<User: {}, Id: {}>'.format(self.username, self.id)
 
