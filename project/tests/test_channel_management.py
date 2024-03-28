@@ -70,7 +70,7 @@ def test_delete_channel(app, create_test_user):
 
 def test_appoint_channel_admin(app, create_test_user):
     # Create a test user
-    test_user = create_test_user()
+    test_user = create_test_user
 
     # Create a channel
     channel_name = "Test Channel"
