@@ -45,13 +45,13 @@ def test_create_channel(app, create_test_user):
     assert user_channel is not None
     assert user_channel.is_moderator == True
 
+@pytest.fixture
 def test_delete_channel(app, create_test_user):
     # Create a test user
     test_user = create_test_user
 
     # Create a channel
-    channel_name = "Test Channel"
-    channel = create_channel(test_user.id, channel_name)
+    channel = test_create_channel
 
     # Assign the user as admin of the test channel
     user_channel = UserChannel(user_id=test_user.id, channel_id=channel.id, is_moderator=True)
@@ -68,13 +68,13 @@ def test_delete_channel(app, create_test_user):
     # Check if user-channel association is deleted
     assert db.session.query(UserChannel).filter_by(user_id=test_user.id, channel_id=channel.id).first() is None
 
+@pytest.fixture
 def test_appoint_channel_admin(app, create_test_user):
     # Create a test user
     test_user = create_test_user
 
     # Create a channel
-    channel_name = "Test Channel"
-    channel = create_channel(test_user.id, channel_name)
+    channel = test_create_channel
 
     # Appoint the user as admin
     result = appoint_channel_admin(test_user.id, channel.id)
