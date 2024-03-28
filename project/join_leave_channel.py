@@ -1,5 +1,7 @@
-import pytest
-from messaging import User, Channel
+# Using the Observer Pattern to create Users (Observers)
+# and Subjects (Channels) in order to facilitate
+# the ability to join and leave channels as well as
+# send and receive messages.
 
 class User:
     def __init__(self, name):
