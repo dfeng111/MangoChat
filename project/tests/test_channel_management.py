@@ -76,13 +76,13 @@ def test_appoint_channel_admin(app, create_test_user):
     channel_name = "Test Channel"
     channel = create_channel(test_user.id, channel_name)
 
-    # Appoint the test user as admin
+    # Appoint the user as admin
     result = appoint_channel_admin(test_user.id, channel.id)
 
-    # Check if appointment was successful
-    assert result is True
+    # Check if admin appointment is successful
+    assert result == True
 
-    # Check if the user is now an admin
+    # Check if user is now admin of the channel
     user_channel = UserChannel.query.filter_by(user_id=test_user.id, channel_id=channel.id).first()
     assert user_channel is not None
-    assert user_channel.is_moderator is True
+    assert user_channel.is_moderator == True

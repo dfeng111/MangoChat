@@ -59,15 +59,11 @@ def appoint_channel_admin(user_id, channel_id):
         channel_id: ID of the channel.
 
     Returns:
-        True if appointment is successful, False otherwise.
+        True if successful, False otherwise.
     """
-    # Check if the user is already an admin of the channel
     user_channel = UserChannel.query.filter_by(user_id=user_id, channel_id=channel_id).first()
-    if user_channel is None:
-        # User is not a member of the channel, cannot appoint as admin
-        return False
-
-    # Update the user_channel to set as admin
-    user_channel.is_moderator = True
-    db.session.commit()
-    return True
+    if user_channel:
+        user_channel.is_moderator = True
+        db.session.commit()
+        return True
+    return False
