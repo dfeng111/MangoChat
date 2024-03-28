@@ -1,6 +1,3 @@
-import pytest
-from messaging import User, Channel
-
 class User:
     def __init__(self, name):
         self.name = name
