@@ -8,6 +8,7 @@ document.getElementById('check').addEventListener('change', function () {
     }
 });
 
+// TODO: Remove? Replacing the checker with WTForms
 function validateLoginForm() {
     var name = document.getElementById('logName').value;
     var password = document.getElementById('logPassword').value;
