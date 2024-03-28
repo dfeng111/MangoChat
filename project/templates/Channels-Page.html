@@ -184,14 +184,15 @@ opacity: 0;
     .grid-container {
         display: grid;
         height: 100%;
-        width: 104.5%;
+        width: 100%;
+        padding-top: 1%;
         align-content: center;
         grid-template-columns: 1;
-        background-color: #2196F3; 
+        background-color: white; 
       }
       /* channel boxxes */
       .grid-container > div {
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: lightgrey;
         text-align: center;
         font-size: 30px;
       }
@@ -209,15 +210,16 @@ opacity: 0;
   /* channel tabs */
 
   .channelbox{
-    background-color: lightgray;
-    display: flex;
+    background-color: black;
     padding: 20px;
     margin-left: 50%;
     max-width: 120%;
     max-height: 100%;
+    opacity: 1;
   }
   
   </style>
+
   </head>
   <body>
 
@@ -301,9 +303,8 @@ opacity: 0;
         <button class = "ChannelModalOpen">Add Channel</button>
         </div>
 
-
-      <ul  style="list-style-type:none;">
-        <li>
+        <div class= "grid-container">
+          
           <div class = "Channelbox">Channel 1
           <div class="btn-group">
             <button type="button" class="btn btn-danger dropdown-toggle align-items-center" data-bs-toggle="dropdown" aria-expanded="false" >
@@ -315,23 +316,8 @@ opacity: 0;
             </ul>
           </div>
         </div>
-    </li>
-        <li>space</li>
-        <li><div class = "Channelbox">Channel 2
-          <div class="btn-group">
-            <button type="button" class="btn btn-danger dropdown-toggle align-items-center" data-bs-toggle="dropdown" aria-expanded="false" >
-              Options
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">remove</a></li>
-              <li><a class="dropdown-item" href="#">Invite</a></li>
-            </ul>
-          </div>
-        </div>
->
-        </li>
-        <li></li>
-        <li><div class = "Channelbox">Channel 3
+
+        <div class = "Channelbox">Channel 2
           <div class="btn-group">
             <button type="button" class="btn btn-danger dropdown-toggle align-items-center" data-bs-toggle="dropdown" aria-expanded="false" >
               Options
@@ -343,9 +329,7 @@ opacity: 0;
           </div>
         </div>
 
-        </li>
-        <li></li>
-        <li><div class = "Channelbox">Channel 4
+        <div class = "Channelbox">Channel 3
           <div class="btn-group">
             <button type="button" class="btn btn-danger dropdown-toggle align-items-center" data-bs-toggle="dropdown" aria-expanded="false" >
               Options
@@ -355,11 +339,8 @@ opacity: 0;
               <li><a class="dropdown-item" href="#">Invite</a></li>
             </ul>
           </div>
-
         </div>
-        </li>
-        
-      </ul>
+        </div>
 
 
   </div>
