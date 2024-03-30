@@ -1,3 +1,8 @@
+# ************************************************
+# Legacy Code! Deleted if manage_channel.py
+# and manage_user.py are functional!
+# ************************************************
+
 import pytest
 from messaging import User, Channel
 
