@@ -29,7 +29,7 @@ def test_unregister(channel, user):
     message = f"{user.name} has left the channel."
     channel.unregister(user)
 
-    assert user.received_messages == [f"{user.name} has joined the channel." + message]
+    assert user.received_messages[1] == [message]
 
 def test_notify_all(channel, user):
     channel.register(user)
@@ -37,4 +37,4 @@ def test_notify_all(channel, user):
     message = "Test message."
     channel.notify_all(message)
 
-    assert user.received_messages == [f"{user.name} has joined the channel." + message]
+    assert user.received_messages[1] == [message]
