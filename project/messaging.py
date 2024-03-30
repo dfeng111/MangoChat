@@ -17,9 +17,11 @@ class Channel:
 
     def register(self, user):
         self.users.append(user)
+        self.notify_all(f"{user.name} has joined the channel.")
 
     def unregister(self, user):
         self.users.remove(user)
+        self.notify_all(f"{user.name} has left the channel.")
 
     def notify_all(self, message):
         for user in self.users:

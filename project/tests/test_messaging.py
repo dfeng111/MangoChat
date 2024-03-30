@@ -34,6 +34,3 @@ def test_unregister(channel, users):
 
     assert user1.received_messages == [message]
     assert user2.received_messages == []
-
-if __name__ == '__main__':
-    pytest.main()
