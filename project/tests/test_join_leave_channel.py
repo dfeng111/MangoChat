@@ -1,36 +1,36 @@
-# ************************************************
-# Legacy Code! Deleted if manage_channel.py
-# and manage_user.py are functional!
-# ************************************************
+# # ************************************************
+# # Legacy Code! Deleted if manage_channel.py
+# # and manage_user.py are functional!
+# # ************************************************
 
-import pytest
-from join_leave_channel import User, Channel
+# import pytest
+# from join_leave_channel import User, Channel
 
-def test_join_leave_channel():
-    # Create a channel
-    channel = Channel()
+# def test_join_leave_channel():
+#     # Create a channel
+#     channel = Channel()
 
-    # Create users
-    user1 = User("Alice")
-    user2 = User("Bob")
+#     # Create users
+#     user1 = User("Alice")
+#     user2 = User("Bob")
 
-    # Register user1 to the channel
-    channel.register(user1)
+#     # Register user1 to the channel
+#     channel.register(user1)
 
-    # Register user2 to the channel
-    channel.register(user2)
+#     # Register user2 to the channel
+#     channel.register(user2)
 
-    # Check that the join message for user2 was received by user1
-    try:
-        assert any("Bob has joined the channel." in message for message in user1.received_messages)
-    except AssertionError:
-        print("Failed: Bob's join message was not received by Alice")
+#     # Check that the join message for user2 was received by user1
+#     try:
+#         assert any("Bob has joined the channel." in message for message in user1.received_messages)
+#     except AssertionError:
+#         print("Failed: Bob's join message was not received by Alice")
 
-    # Check that the leave message for user2 was received by user1
-    try:
-        assert any("Bob has left the channel." in message for message in user1.received_messages)
-    except AssertionError:
-        print("Failed: Bob's leave message was not received by Alice")
+#     # Check that the leave message for user2 was received by user1
+#     try:
+#         assert any("Bob has left the channel." in message for message in user1.received_messages)
+#     except AssertionError:
+#         print("Failed: Bob's leave message was not received by Alice")
         
-    # User2 leaves the channel
-    channel.unregister(user2)
+#     # User2 leaves the channel
+#     channel.unregister(user2)
