@@ -1,5 +1,5 @@
 import pytest
-from user_channel_relationship import User, Channel, db, Message
+from project.user_channel_relationship import User, Channel, db, Message
 
 @pytest.fixture
 def user():
