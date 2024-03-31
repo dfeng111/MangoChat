@@ -1,4 +1,4 @@
-from join_leave_channel import User, Channel
+from user_channel_relationship import User, Channel
 
 class UserWithDelete(User):
     def delete_message(self, message):
