@@ -4,7 +4,7 @@
 # ************************************************
 
 import pytest
-from messaging import User, Channel
+from join_leave_channel import User, Channel
 
 def test_join_leave_channel():
     # Create a channel
