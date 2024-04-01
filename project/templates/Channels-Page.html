@@ -4,6 +4,8 @@
 
 <link href="{{ url_for('static', filename='css/sidebar.css') }}" rel="stylesheet">
 <link rel = "stylesheet" type = "text/css" href = "../css/header.css">
+<script src="https://kit.fontawesome.com/80c51aa779.js" crossorigin="anonymous"></script>
+
 
 
 
@@ -164,6 +166,7 @@ opacity: 0;
 
 .sidebar ul li:hover .collapsed{
     opacity: 1;
+    pointer-events: none;
     background-color: lightgray;
 }
 
@@ -177,7 +180,7 @@ opacity: 0;
     left: 100px;
     transition: all 0.5s ease;
     width: calc(100% - 80px);
-    margin-left: 5.3%;
+    margin-left: 4.3%;
     
     }
     /* channel boxxes */
@@ -204,6 +207,9 @@ opacity: 0;
     background-color: #F4BB44;
     text-align: center;
     font-size: 150%;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 10px;
     
   }
 
@@ -218,21 +224,72 @@ opacity: 0;
     opacity: 1;
   }
   
+  /* Modal */
+  .show-popup {
+  padding: 18px 40px;
+  background: lightgrey;
+  border: none;
+  outline: none;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+}
+.popup-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+}
+.popup-container.active {
+  opacity: 1;
+  pointer-events: auto;
+  transition: .4s ease;
+}
+.popup-container .popup-box {
+  width: 500px;
+  background: #f2f2f2;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  padding: 30px;
+  transform: scale(0);
+}
+.popup-container.active .popup-box {
+  transform: scale(1);
+  transition: .4s ease;
+  transition-delay: .25s;
+}
+.popup-box h1 {
+  color: #333;
+  line-height: 1;
+}
+.popup-box p {
+  color: #333;
+  margin: 12px 0 20px;
+}
+.popup-box .close-btn {
+  width: 100%;
+  height: 45px;
+  background: green;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+}
+  
   </style>
 
   </head>
   <body>
-
-
-    <div class = "modalcontainer" id = "modal-Conainer">
-      <div class = modal>
-      <h1> Test</h1>
-      <p> HELLO WORLD</p>
-      <button id = "confrirm"> 
-        add channel
-      </button>
-    </div>
-    </div>
     
       <!-- Side menu-->
   <div class="sidebar">
@@ -300,7 +357,26 @@ opacity: 0;
                   <input type="text" id="Channel" name="Channels">
               </div>
                   </form>
-        <button class = "ChannelModalOpen">Add Channel</button>
+                  <button class="show-popup">Add channel</button>
+                  <div class="popup-container">
+                      <div class="popup-box">
+                          <h1>Add Channel</h1>
+                          <p>
+                            Please Input Channel name:
+                            <form action="/channels" method="post" name="addchannelform">
+                              {{ logform.csrf_token }}
+                              {{ logform.channel_name.label }} {{ logform.channel_name(size=20) }}
+                              <div class="logerror">
+                                {{ error }}
+                              </div>
+                                {{ logform.chansubmit(size=20) }}
+                            </form>
+                        </p>
+                          <button class="close-btn">OK</button>
+                      </div>
+                  </div>
+                      </div>
+                  </div>
         </div>
 
         <div class= "grid-container">
@@ -343,19 +419,22 @@ opacity: 0;
         </div>
 
 
-  </div>
-  
-  
-  
+  </div>  
 
   
   </body>
   
   <script>
 
-    const ChannelModalOpen = document.getElementById('ChannelModalOpen');
-    const modalcontainer = document.getElementById('modalcontainer') ;
-    const confrirm = document.getElementById('confrirm');
+const showPopup = document.querySelector('.show-popup');
+const popupContainer = document.querySelector('.popup-container');
+const closeBtn = document.querySelector('.close-btn');
+showPopup.onclick = () => {
+    popupContainer.classList.add('active');
+}
+closeBtn.onclick = () => {
+    popupContainer.classList.remove('active');
+}
 
     ChannelModalOpen.addEventListener('click', () => { modalcontainer.classList.add('show')});
     confrirm.addEventListener('click', () => { modalcontainer.classList.remove('show')});
