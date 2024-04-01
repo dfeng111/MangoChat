@@ -219,6 +219,7 @@ opacity: 0;
     background-color: black;
     padding: 20px;
     margin-left: 50%;
+    margin-bottom: 10px;
     max-width: 120%;
     max-height: 100%;
     opacity: 1;
@@ -363,16 +364,15 @@ opacity: 0;
                           <h1>Add Channel</h1>
                           <p>
                             Please Input Channel name:
-                            <form action="/channels" method="post" name="addchannelform">
-                              {{ logform.csrf_token }}
-                              {{ logform.channel_name.label }} {{ logform.channel_name(size=20) }}
-                              <div class="logerror">
-                                {{ error }}
+                            <form action="" novalidate>
+                              <div class="form-group">
+                                <!-- Friend search bar-->
+                                  <label for="Channel">Channel name:</label>
+                                  <input type="text" id="Channel" name="Channels">
                               </div>
-                                {{ logform.chansubmit(size=20) }}
-                            </form>
+                                  </form>
                         </p>
-                          <button class="close-btn">OK</button>
+                          <button class="close-btn">Confirm</button>
                       </div>
                   </div>
                       </div>
