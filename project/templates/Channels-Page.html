@@ -71,7 +71,7 @@
         <h1>Channels</h1>
        <form action="" novalidate>
               <div class="form-group">
-                <!-- Friend search bar-->
+                <!--header search bar-->
                   <label for="Channel">Search:</label>
                   <input type="text" id="Channel" name="Channels">
               </div>
@@ -99,43 +99,37 @@
 
         <div class= "grid-container">
           
-            <div class="flex-container">
+            <div class="channel-container">
 
-              <div class="flex-column">
-                Channel 1
-                
-              </div>
+              <div class="channel-column">Channel 1</div>
             
-              <div class="flex-column">
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+              <div class="channel-column">
+                <button class="show-popup" style = "background-color: #F4BB44;">remove channel</button>
+                <div class="popup-container">
+                  <div class="popup-box">
+                      <h1>Add Channel</h1>
+                      <p>
+                        Please Input Channel name:
+                        <form action="" novalidate>
+                          <div class="form-group">
+                            <!-- Friend search bar-->
+                              <label for="Channel">Channel name:</label>
+                              <input type="text" id="Channel" name="Channels">
+                          </div>
+                              </form>
+                    </p>
+                      <button class="close-btn">Confirm</button>
                   </div>
-                </div>
-                
+              </div>
               </div>
             
-            </div>
-      </div>
-
-
-
-        
-        </div>
-
-
-  </div>  
-
-  
+ 
   </body>
   
   <script>
 
+
+// modal code
 const showPopup = document.querySelector('.show-popup');
 const popupContainer = document.querySelector('.popup-container');
 const closeBtn = document.querySelector('.close-btn');
@@ -149,6 +143,8 @@ closeBtn.onclick = () => {
     ChannelModalOpen.addEventListener('click', () => { modalcontainer.classList.add('show')});
     confrirm.addEventListener('click', () => { modalcontainer.classList.remove('show')});
 
+
+    // sidebar open/close
   let btn = document.querySelector('#btn');
   let sidebar = document.querySelector('.sidebar');
 

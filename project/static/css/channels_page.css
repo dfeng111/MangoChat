@@ -60,29 +60,20 @@ body {
 
   /* channel tabs */
 
-  .flex-container {
+  .channel-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  width: 95%;
+  margin-left: 4.5%;
   padding-left: 4.5%;
   padding-right: .5%;
 }
 
-.flex-column {
+.channel-column {
   display: flex;
   flex-direction: column;
 }
-
-  .channelbox{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .channel-colum{
-    display: flex;
-    flex-direction: column;
-  }
   
   /* Modal */
   .show-popup {
