@@ -1,0 +1,41 @@
+body {
+    background-color: orange; 
+    font-family: Arial, sans-serif;
+}
+
+.top {
+    background-color: #F2FA17   ; 
+    color: black;
+    height: 20px;
+}
+
+#logo {
+    height: 250px;
+    width: 360px;
+    margin-right: 10px;
+}
+
+.display-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 525px  ; 
+    text-align: center; 
+}
+
+.bar-item {
+    padding: 10px 20px; 
+    font-weight: bold;
+}
+
+footer {
+    background-color: #F2FA17;
+    color: black;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 1350px;
+    height: 75px;
+    bottom: 0;
+}

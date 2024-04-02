@@ -1,13 +1,21 @@
+from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
-    password = db.Column(db.String(100), nullable=False)
+    password = db.Column(db.String(256), nullable=False)
     description = db.Column(db.String(150), nullable=True)
     profile_pic = db.Column(db.LargeBinary(), nullable=True)
+    def set_password(self, passwd):
+        self.password = generate_password_hash(passwd)
+    
+    def check_password(self, passwd):
+        return check_password_hash(self.password, passwd)
+
     def __repr__(self) -> str:
         return '<User: {}, Id: {}>'.format(self.username, self.id)
 
