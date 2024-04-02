@@ -38,6 +38,10 @@ def index():
 def Friendspage():
     return render_template("Friendspage.html")
 
+@app.route('/home')
+def home():
+    return render_template('home.html')
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     regForm = RegisterForm()
