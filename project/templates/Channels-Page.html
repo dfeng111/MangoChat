@@ -2,292 +2,10 @@
 
 {% block content %}
 
-<link href="{{ url_for('static', filename='css/sidebar.css') }}" rel="stylesheet">
-<link rel = "stylesheet" type = "text/css" href = "../css/header.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/channels_page.css') }}">
 <script src="https://kit.fontawesome.com/80c51aa779.js" crossorigin="anonymous"></script>
 
-
-
-
-<style>
-  
-  
-  body { 
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: white;
-  }
-    /* Modal*/
-
-    .modalcontainer{
-      background-color: rgba(0,0,0,0.2);
-      display: flex;
-      align-items:center;
-      justify-content: center;
-      position: fixed; 
-      opacity: 0;
-      pointer-events: none;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-
-    }
-    .modalcontainer.show{
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal{
-      background-color: white;
-      padding: 30px 50px;
-      border-radius: 5px;
-      width: 50%;
-      text-align: center;
-
-    }
-
-    .modal h1{
-      margin: 0;
-    }
-
-    .modal p {
-      opacity: 0.7;
-    }
-
-
-  /* sidebar settings */
-.sidebar{
-    position: absolute;
-    left: 0;
-    height: 100%;
-    width: 80px;
-    background-color: #F4BB44;
-    padding: .4ren .8rem;
-    transition: all 0.5s ease;
-}
-
-.sidebar.active ~ main-content{
-    left: 250px;
-    width: calc(100% - 200%);
-
-}
-
-.sidebar.active{
-   width: 250px;
-}
-
-.sidebar #btn{
-    position: absolute;
-    color: black;
-    top: 0.4rem;
-    left: 50%;
-    font-size: 1.2rem;
-    line-height: 50px;
-    transform: translateX();
-    cursor: pointer;
-
-}
-
-.sidebar.active #btn{
-    left: 90%;
-}
-
-.sidebar .top .title{
-color: black;
-display: flex;
-height: 50px;
-width: 100%;
-align-items: center;
-pointer-events: none;
-opacity: 0;
-
-}
-
-.sidebar.active .top .title{
-    opacity: 1;
-}
-
-.top .title i {
- font-size: 2rem;
- margin-right: 5px;
-
-}
-
-.sidebar ul li {
-    position: relative;
-    list-style-type: none;
-    height: 50px;
-    width: 90px;
-    margin: 0.8rem auto;
-    line-height: 50px;
-}
-
-.sidebar ul li a{
-    color: black;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    border-radius: 0.8rem;
-
-}
-
-.sidebar ul li a i {
-    min-width: 50px;
-    text-align: center;
-    height: 50px;
-    border-radius: 12px;
-    line-height: 50px;
-}
-
-.sidebar .nav-item {
-    opacity: 0;
-}
-
-.sidebar.active .nav-item {
-    opacity: 1;
-}
-
-/* float text */
-.sidebar ul li .collapsed{
-    position:absolute;
-    left: 125px;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0.5rem 0.8rem rgba(0,0,0,0.2);
-    border-radius: 0.6rem;
-    padding: 0.4rem 1.2rem;
-    line-height: 1.8rem;
-    z-index: 20;
-    opacity: 0;
-
-}
-
-.sidebar ul li:hover .collapsed{
-    opacity: 1;
-    pointer-events: none;
-    background-color: lightgray;
-}
-
-.sidebar.active ul li .collapsed{
-    display: none;
-}
-
-/* container for content */
-.main-content {
-    top: 0;
-    left: 100px;
-    transition: all 0.5s ease;
-    width: calc(100% - 80px);
-    margin-left: 4.3%;
-    
-    }
-    /* channel boxxes */
-    .grid-container {
-        display: grid;
-        height: 100%;
-        width: 100%;
-        padding-top: 1%;
-        align-content: center;
-        grid-template-columns: 1;
-        background-color: white; 
-      }
-      /* channel boxxes */
-      .grid-container > div {
-        background-color: lightgrey;
-        text-align: center;
-        font-size: 30px;
-      }
-
-  
-  /* header */
-  .header {
-    overflow: hidden;
-    background-color: #F4BB44;
-    text-align: center;
-    font-size: 150%;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-bottom: 10px;
-    
-  }
-
-  /* channel tabs */
-
-  .channelbox{
-    background-color: black;
-    padding: 20px;
-    margin-left: 50%;
-    margin-bottom: 10px;
-    max-width: 120%;
-    max-height: 100%;
-    opacity: 1;
-  }
-  
-  /* Modal */
-  .show-popup {
-  padding: 18px 40px;
-  background: lightgrey;
-  border: none;
-  outline: none;
-  border-radius: 6px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 500;
-}
-.popup-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, .3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  pointer-events: none;
-}
-.popup-container.active {
-  opacity: 1;
-  pointer-events: auto;
-  transition: .4s ease;
-}
-.popup-container .popup-box {
-  width: 500px;
-  background: #f2f2f2;
-  border-radius: 6px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-  padding: 30px;
-  transform: scale(0);
-}
-.popup-container.active .popup-box {
-  transform: scale(1);
-  transition: .4s ease;
-  transition-delay: .25s;
-}
-.popup-box h1 {
-  color: #333;
-  line-height: 1;
-}
-.popup-box p {
-  color: #333;
-  margin: 12px 0 20px;
-}
-.popup-box .close-btn {
-  width: 100%;
-  height: 45px;
-  background: green;
-  border-radius: 6px;
-  border: none;
-  outline: none;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 500;
-}
-  
-  </style>
 
   </head>
   <body>
@@ -381,41 +99,33 @@ opacity: 0;
 
         <div class= "grid-container">
           
-          <div class = "Channelbox">Channel 1
-          <div class="btn-group">
-            <button type="button" class="btn btn-danger dropdown-toggle align-items-center" data-bs-toggle="dropdown" aria-expanded="false" >
-              Options
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">remove</a></li>
-              <li><a class="dropdown-item" href="#">Invite</a></li>
-            </ul>
-          </div>
-        </div>
+            <div class="flex-container">
 
-        <div class = "Channelbox">Channel 2
-          <div class="btn-group">
-            <button type="button" class="btn btn-danger dropdown-toggle align-items-center" data-bs-toggle="dropdown" aria-expanded="false" >
-              Options
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">remove</a></li>
-              <li><a class="dropdown-item" href="#">Invite</a></li>
-            </ul>
-          </div>
-        </div>
+              <div class="flex-column">
+                Channel 1
+                
+              </div>
+            
+              <div class="flex-column">
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown button
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </div>
+                
+              </div>
+            
+            </div>
+      </div>
 
-        <div class = "Channelbox">Channel 3
-          <div class="btn-group">
-            <button type="button" class="btn btn-danger dropdown-toggle align-items-center" data-bs-toggle="dropdown" aria-expanded="false" >
-              Options
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">remove</a></li>
-              <li><a class="dropdown-item" href="#">Invite</a></li>
-            </ul>
-          </div>
-        </div>
+
+
+        
         </div>
 
 

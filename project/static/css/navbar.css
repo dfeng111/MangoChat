@@ -1,16 +1,15 @@
-*{
+body { 
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
-}
-
-/* sidebar settings */
-.sidebar{
+    background-color: white;
+  }
+ 
+ /* sidebar settings */
+ .sidebar{
     position: absolute;
-    top: 0;
     left: 0;
-    height: 100vh;
+    height: 100%;
     width: 80px;
     background-color: #F4BB44;
     padding: .4ren .8rem;
@@ -115,8 +114,8 @@ opacity: 0;
 
 .sidebar ul li:hover .collapsed{
     opacity: 1;
+    pointer-events: none;
     background-color: lightgray;
-
 }
 
 .sidebar.active ul li .collapsed{
@@ -126,28 +125,25 @@ opacity: 0;
 /* container for content */
 .main-content {
     top: 0;
-    left: 80px;
+    left: 100px;
     transition: all 0.5s ease;
     width: calc(100% - 80px);
-    padding: 1rem;
+    margin-left: 4.3%;
     
     }
-    /* channel boxxes */
-    .grid-container {
-        display: grid;
-        height: 840px;
-        width: 1784px;
-        margin-left: 64px;
-        align-content: center;
-        grid-template-columns: 1;
-        gap: 10px;
-        background-color: #2196F3;
-        padding: 10px;
-      }
-      /* channel boxxes */
-      .grid-container > div {
-        background-color: rgba(255, 255, 255, 0.8);
-        text-align: center;
-        padding: 20px 0;
-        font-size: 30px;
-      }
+ /* channel boxxes */
+ .grid-container {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    padding-top: 1%;
+    align-content: center;
+    grid-template-columns: 1;
+    background-color: white; 
+  }
+  /* channel boxxes */
+  .grid-container > div {
+    background-color: lightgrey;
+    text-align: center;
+    font-size: 30px;
+  }
