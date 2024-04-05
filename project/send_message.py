@@ -13,7 +13,7 @@ def send_message(channel_name, sender_username, message_content):
         return False, "Sender does not exist."
 
     # Create the message
-    new_message = Message(channel, sender, message_content)
+    new_message = Message(channel_id=channel.id, sender_id=sender.id, content=message_content)
 
     try:
         # Add the message to the database
