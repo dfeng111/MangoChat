@@ -38,11 +38,14 @@ def index():
 def Friendspage():
     return render_template("Friendspage.html")
 
-@app.route("/channels")
+@app.route("/channels", methods=["GET"])
 @login_required
 def channels():
     channelForm = ChannelForm()
-    return render_template("Channels-Page.html", channelform=channelForm)
+    channel_id = request.args.get("channel_id")
+    if(channel_id is None):
+        channel_id = 0
+    return render_template("Channels-Page.html", channelform=channelForm, channel_id=channel_id)
 
 @app.route('/home')
 def home():
@@ -131,6 +134,7 @@ def create_channel_route():
         channel_name = request.form["channel_name"]
         # user_id = get_current_user_id()  # Implement this to get current user ID
         user_id = current_user.get_id()  # Implement this to get current user ID
+        flash(user_id)
 
         # Create the channel
         channel = create_channel(user_id, channel_name)
