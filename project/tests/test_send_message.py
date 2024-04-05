@@ -28,12 +28,26 @@ def create_test_user(app):
         db.session.delete(test_user)
         db.session.commit()
 
-def test_send_message(app, create_test_user):
-    # Create a test user
+# Creating a test channel
+@pytest.fixture
+def create_test_channel(app):
+    with app.app_context():
+        cname = "test_channel"
+        test_channel = Channel(channel_name = cname)
+        db.session.add(test_channel)
+        db.session.commit()
+        yield test_channel
+        db.session.delete(test_channel)
+        db.session.commit()
+
+
+def test_send_message(app, create_test_user, create_test_channel):
+    # Create a test user and channel
     test_user = create_test_user
+    test_channel = create_test_channel
 
     # Send a message to the test channel
-    channel_name = 'Test Channel'
+    channel_name = test_channel.channel_name
     message_content = 'Hello, this is a test message.'
 
     success, message = send_message(channel_name, test_user.username, message_content)
@@ -50,3 +64,4 @@ def test_send_message(app, create_test_user):
         assert saved_message is not None
         assert saved_message.content == message_content
         assert saved_message.sender.username == test_user.username
+        assert saved_message.channel.channel_name == channel_name
