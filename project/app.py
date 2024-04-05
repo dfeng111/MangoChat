@@ -111,6 +111,7 @@ def user():
 # ************************************************
 # TODO: Needs HTML page, and possible refactoring.
 # ************************************************
+
 @app.route("/create_channel", methods=["POST"])
 def create_channel_route():
     if request.method == "POST":
@@ -129,6 +130,7 @@ def create_channel_route():
 # ************************************************
 # TODO: Needs HTML page, and possible refactoring.
 # ************************************************
+
 @app.route("/delete_channel/<int:channel_id>", methods=["POST"])
 def delete_channel_route(channel_id):
     if request.method == "POST":
