@@ -30,7 +30,7 @@ def create_test_user(app):
 
 def test_send_message(app, create_test_user):
     # Create a test user
-    test_user = create_test_user()
+    test_user = create_test_user
 
     # Send a message to the test channel
     channel_name = 'Test Channel'
