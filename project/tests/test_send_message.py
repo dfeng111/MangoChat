@@ -40,6 +40,7 @@ def create_test_channel(app):
         db.session.delete(test_channel)
         db.session.commit()
 
+@pytest.fixture
 def test_send_message(app, create_test_user, create_test_channel):
     # Create a test user and channel
     test_user = create_test_user
@@ -51,12 +52,12 @@ def test_send_message(app, create_test_user, create_test_channel):
     assert success is True
     assert message == "Message sent successfully."
 
-    # # Query the message from the database to check if it was saved
-    # with app.app_context():
-    #     saved_message = Message.query.filter_by(content=message_content).first()
+    # Query the message from the database to check if it was saved
+    with app.app_context():
+        saved_message = Message.query.filter_by(content=message_content).first()
 
-    #     # Check if the saved message exists in the database
-    #     assert saved_message is not None
-    #     assert saved_message.content == message_content
-    #     assert saved_message.sender_id == test_user.id
-    #     assert saved_message.channel_id == test_channel.id
+        # Check if the saved message exists in the database
+        assert saved_message is not None
+        assert saved_message.content == message_content
+        assert saved_message.sender_id == test_user.id
+        assert saved_message.channel_id == test_channel.id
