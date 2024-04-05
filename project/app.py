@@ -3,7 +3,7 @@ from config import Config
 from Database.database_setup import db, User, Channel
 from channel_management import create_channel, delete_channel
 from utils import get_current_user_id, is_user_channel_admin
-from flask_login import LoginManager, login_required, login_user, logout_user
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from forms import ChannelForm, RegisterForm, LoginForm
 
 app = Flask(__name__, static_url_path='/static')
@@ -126,16 +126,17 @@ def user():
 @login_required
 def create_channel_route():
     channelForm = ChannelForm()
-    flash(str(channelForm.validate_on_submit()))
+    # flash(str(channelForm.validate_on_submit()))
     if request.method == "POST" and channelForm.validate_on_submit():
         channel_name = request.form["channel_name"]
-        user_id = get_current_user_id()  # Implement this to get current user ID
+        # user_id = get_current_user_id()  # Implement this to get current user ID
+        user_id = current_user.get_id()  # Implement this to get current user ID
 
         # Create the channel
         channel = create_channel(user_id, channel_name)
         
         # Redirect to channel page or wherever appropriate
-        return redirect(url_for("channel_page", channel_id=channel.id))
+        return redirect(url_for("channels", channel_id=channel.id))
 
     # Handle GET requests or other cases
     return redirect(url_for("index"))
@@ -145,6 +146,7 @@ def create_channel_route():
 # TODO: Delete Channel page and/or directory
 # ****************************************************
 @app.route("/delete_channel/<int:channel_id>", methods=["POST"])
+@login_required
 def delete_channel_route(channel_id):
     if request.method == "POST":
         # Ensure the current user is an admin of the channel or handle permissions as needed
