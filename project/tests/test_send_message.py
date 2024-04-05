@@ -47,19 +47,9 @@ def test_send_message(app, create_test_user, create_test_channel):
     test_channel = create_test_channel
 
     # Send a message to the test channel
-    channel_name = test_channel.channel_name
     message_content = 'Hello, this is a test message.'
-
-    # Create a Message object with correct sender_id and channel_id
-    message = Message(
-        sender_id=test_user.id,
-        channel_id=test_channel.id,
-        content=message_content
-    )
-
-    # Add the message to the session and commit
-    db.session.add(message)
-    db.session.commit()
+    message = send_message(test_channel.channel_name, test_user.username, message_content)
+    assert message == "Message sent successfully."
 
     # Query the message from the database to check if it was saved
     with app.app_context():
