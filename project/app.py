@@ -4,7 +4,7 @@ from Database.database_setup import db, User, Channel
 from channel_management import create_channel, delete_channel
 from utils import get_current_user_id, is_user_channel_admin
 from flask_login import LoginManager, login_required, login_user, logout_user
-from forms import RegisterForm, LoginForm
+from forms import ChannelForm, RegisterForm, LoginForm
 
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object(Config)
@@ -39,8 +39,10 @@ def Friendspage():
     return render_template("Friendspage.html")
 
 @app.route("/channels")
+@login_required
 def channels():
-    return render_template("Channels-Page.html")
+    channelForm = ChannelForm()
+    return render_template("Channels-Page.html", channelform=channelForm)
 
 @app.route('/home')
 def home():
@@ -121,8 +123,11 @@ def user():
 # TODO: Create Channel page and/or directory
 # ******************************************************
 @app.route("/create_channel", methods=["POST"])
+@login_required
 def create_channel_route():
-    if request.method == "POST":
+    channelForm = ChannelForm()
+    flash(str(channelForm.validate_on_submit()))
+    if request.method == "POST" and channelForm.validate_on_submit():
         channel_name = request.form["channel_name"]
         user_id = get_current_user_id()  # Implement this to get current user ID
 

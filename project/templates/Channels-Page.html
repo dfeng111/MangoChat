@@ -7,10 +7,10 @@
 <script src="https://kit.fontawesome.com/80c51aa779.js" crossorigin="anonymous"></script>
 
 
-  </head>
-  <body>
-    
-      <!-- Side menu-->
+</head>
+<body>
+
+  <!-- Side menu-->
   <div class="sidebar">
     <div class="top">
       <div class="title">
@@ -65,95 +65,98 @@
   </div>
 
   <div class="main-content">
-      <!-- CREATE CUSTOM BUTTON OUT OUT OF CHANNEL BOX CLASS-->
+    <!-- CREATE CUSTOM BUTTON OUT OUT OF CHANNEL BOX CLASS-->
 
-      <div class="header">
-        <h1>Channels</h1>
-       <form action="" novalidate>
-              <div class="form-group">
-                <!--header search bar-->
-                  <label for="Channel">Search:</label>
-                  <input type="text" id="Channel" name="Channels">
-              </div>
-                  </form>
-                  <button class="show-popup">Add channel</button>
-                  <div class="popup-container">
-                      <div class="popup-box">
-                          <h1>Add Channel</h1>
-                          <p>
-                            Please Input Channel name:
-                            <form action="" novalidate>
-                              <div class="form-group">
-                                <!-- Friend search bar-->
-                                  <label for="Channel">Channel name:</label>
-                                  <input type="text" id="Channel" name="Channels">
-                              </div>
-                                  </form>
-                        </p>
-                          <button class="close-btn">Confirm</button>
-                      </div>
-                  </div>
-                      </div>
-                  </div>
+    <div class="header">
+      <h1>Channels</h1>
+      <form action="" novalidate>
+        <div class="form-group">
+          <!--header search bar-->
+          <label for="Channel">Search:</label>
+          <input type="text" id="Channel" name="Channels">
         </div>
+      </form>
+      <button class="show-popup">Add channel</button>
+      <div class="popup-container">
+        <div class="popup-box">
+          <h1>Add Channel</h1>
+          <p>
+          Please Input Channel name:
+          <form action="/create_channel" method="POST" novalidate>
+            {{ channelform.csrf_token }}
+            <div class="form-group">
+              <!-- Channel search bar-->
+              {{ channelform.channel_name.label }} {{ channelform.channel_name(size=20) }}
+              {{ channelform.chansubmit(size=20, class_="close-btn") }}
+              <!-- <label for="Channel">Channel name:</label> -->
+              <!-- <input type="text" id="Channel" name="Channels"> -->
+            </div>
+          </form>
+          </p>
+          <!-- <button class="close-btn">Confirm</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
 
-        <div class= "grid-container">
-          
-            <div class="channel-container">
+  <div class= "grid-container">
 
-              <div class="channel-column">Channel 1</div>
-            
-              <div class="channel-column">
-                <button class="show-popup" style = "background-color: #F4BB44;">remove channel</button>
-                <div class="popup-container">
-                  <div class="popup-box">
-                      <h1>Add Channel</h1>
-                      <p>
-                        Please Input Channel name:
-                        <form action="" novalidate>
-                          <div class="form-group">
-                            <!-- Friend search bar-->
-                              <label for="Channel">Channel name:</label>
-                              <input type="text" id="Channel" name="Channels">
-                          </div>
-                              </form>
-                    </p>
-                      <button class="close-btn">Confirm</button>
-                  </div>
+    <div class="channel-container">
+
+      <div class="channel-column">Channel 1</div>
+
+      <div class="channel-column">
+        <button class="show-popup" style = "background-color: #F4BB44;">remove channel</button>
+        <div class="popup-container">
+          <div class="popup-box">
+            <h1>Add Channel</h1>
+            <p>
+            Please Input Channel name:
+            <form action="" novalidate>
+              <div class="form-group">
+                <!-- Friend search bar-->
+                <label for="Channel">Channel name:</label>
+                <input type="text" id="Channel" name="Channels">
               </div>
-              </div>
-            
- 
-  </body>
-  
-  <script>
+            </form>
+            </p>
+            <button class="close-btn">Confirm</button>
+          </div>
+        </div>
+      </div>
 
 
-// modal code
-const showPopup = document.querySelector('.show-popup');
-const popupContainer = document.querySelector('.popup-container');
-const closeBtn = document.querySelector('.close-btn');
-showPopup.onclick = () => {
+</body>
+
+<script>
+
+
+  // modal code
+  const showPopup = document.querySelector('.show-popup');
+  const popupContainer = document.querySelector('.popup-container');
+  const closeBtn = document.querySelector('.close-btn');
+  showPopup.onclick = () => {
     popupContainer.classList.add('active');
-}
-closeBtn.onclick = () => {
+  }
+  closeBtn.onclick = () => {
     popupContainer.classList.remove('active');
-}
+  }
 
-    ChannelModalOpen.addEventListener('click', () => { modalcontainer.classList.add('show')});
-    confrirm.addEventListener('click', () => { modalcontainer.classList.remove('show')});
+  ChannelModalOpen.addEventListener('click', () => { modalcontainer.classList.add('show')});
+  confrirm.addEventListener('click', () => { modalcontainer.classList.remove('show')});
 
 
-    // sidebar open/close
+  // sidebar open/close
   let btn = document.querySelector('#btn');
   let sidebar = document.querySelector('.sidebar');
 
   btn.onclick = function () {
     sidebar.classList.toggle('active');
   }
-  
-</script>
-  </script>
-  </html>
 
-  {% endblock %}
+</script>
+</script>
+</html>
+
+{% endblock %}
