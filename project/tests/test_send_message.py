@@ -40,6 +40,16 @@ def create_test_channel(app):
         db.session.delete(test_channel)
         db.session.commit()
 
+# Automatically called at the end of each test
+@pytest.fixture(autouse=True)
+def cleanup(app):
+    with app.app_context():
+        db.session.rollback()  # Rollback any uncommitted changes
+        meta = db.metadata
+        for table in reversed(meta.sorted_tables):
+            db.session.execute(table.delete())
+        db.session.commit()
+
 
 def test_send_message(app, create_test_user, create_test_channel):
     # Create a test user and channel
