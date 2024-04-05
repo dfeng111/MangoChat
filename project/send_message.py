@@ -1,25 +1,26 @@
 from Database.database_setup import db, User, Channel, Message
 
-def send_message(channel_name, sender_name, message_content):
-    # Find the channel by name and get its ID
+def send_message(channel_name, sender_username, message_content):
+    # Get the channel and user objects
     channel = Channel.query.filter_by(channel_name=channel_name).first()
-    if not channel:
-        return False, "Channel not found."
+    sender = User.query.filter_by(username=sender_username).first()
 
-    # Find the user by name and get their ID
-    sender = User.query.filter_by(username=sender_name).first()
-    if not sender:
-        return False, "User not found."
+    # Check if both channel and sender exist
+    if channel is None:
+        return False, "Channel does not exist."
+    
+    if sender is None:
+        return False, "Sender does not exist."
 
-    # Create a new message with sender_id and channel_id
-    new_message = Message(
-        sender_id=sender.id,
-        channel_id=channel.id,
-        content=message_content
-    )
+    # Create the message
+    new_message = Message(channel=channel, sender=sender, content=message_content)
 
-    # Add the message to the database
-    db.session.add(new_message)
-    db.session.commit()
-
-    return True, "Message sent successfully."
+    try:
+        # Add the message to the database
+        db.session.add(new_message)
+        db.session.commit()
+        return True, "Message sent successfully."
+    except Exception as e:
+        # If there's an error, rollback the session and return an error message
+        db.session.rollback()
+        return False, "An error occurred while sending the message."
