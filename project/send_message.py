@@ -7,13 +7,13 @@ def send_message(channel_name, sender_username, message_content):
 
     # Check if both channel and sender exist
     if channel is None:
-        return False, "Channel does not exist."
+        return False, "Channel does not exist." 
     
     if sender is None:
         return False, "Sender does not exist."
 
     # Create the message
-    new_message = Message(channel=channel, sender=sender, content=message_content)
+    new_message = Message(channel, sender, message_content)
 
     try:
         # Add the message to the database

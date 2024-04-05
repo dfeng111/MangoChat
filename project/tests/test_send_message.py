@@ -48,8 +48,9 @@ def test_send_message(app, create_test_user, create_test_channel):
 
     # Send a message to the test channel
     channel_name = test_channel.channel_name
+    sender_name = test_user.username
     message_content = 'Hello, this is a test message.'
-    success, message = send_message(channel_name, test_user.username, message_content)
+    success, message = send_message(channel_name, sender_name, message_content)
     assert success is True
     assert message == "Message sent successfully."
 
