@@ -1,19 +1,19 @@
 from Database.database_setup import db, User, Channel, Message
 
-def send_message(channel_name, sender_username, message_content):
+def send_message(channel_id, sender_id, message_content):
     # Get the channel and user objects
-    channel = Channel.query.filter_by(channel_name=channel_name).first()
-    sender = User.query.filter_by(username=sender_username).first()
+    channel = Channel.query.get(channel_id)
+    sender = User.query.get(sender_id)
 
     # Check if both channel and sender exist
-    if channel is None:
-        return False, "Channel does not exist." 
+    if not channel:
+        return False, "Channel does not exist."
     
-    if sender is None:
+    if not sender:
         return False, "Sender does not exist."
 
     # Create the message
-    new_message = Message(channel_id=channel.id, sender_id=sender.id, content=message_content)
+    new_message = Message(channel_id=channel_id, sender_id=sender_id, content=message_content)
 
     try:
         # Add the message to the database
