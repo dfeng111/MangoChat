@@ -14,7 +14,7 @@ def app_with_session():
             session.clear()
 
 @pytest.fixture(autouse=True)
-def app():
+def test_app():
     app = Flask(__name__)
     app.config['TESTING'] = True
     app.config['SECRET_KEY'] = 'test_secret_key'
