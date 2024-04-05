@@ -108,10 +108,10 @@ def logout():
 def user():
     return render_template("user.html")
 
-# ************************************************
-# TODO: Needs HTML page, and possible refactoring.
-# ************************************************
-
+# ******************************************************
+# PLACEHOLDER CODE /create_channel IS NOT CREATED YET
+# TODO: Create Channel page and/or directory
+# ******************************************************
 @app.route("/create_channel", methods=["POST"])
 def create_channel_route():
     if request.method == "POST":
@@ -127,10 +127,10 @@ def create_channel_route():
     # Handle GET requests or other cases
     return redirect(url_for("index"))
 
-# ************************************************
-# TODO: Needs HTML page, and possible refactoring.
-# ************************************************
-
+# ****************************************************
+# PLACEHOLDER CODE /delete_channel IS NOT CREATED YET
+# TODO: Delete Channel page and/or directory
+# ****************************************************
 @app.route("/delete_channel/<int:channel_id>", methods=["POST"])
 def delete_channel_route(channel_id):
     if request.method == "POST":
