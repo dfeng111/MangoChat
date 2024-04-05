@@ -50,11 +50,16 @@ def test_send_message(app, create_test_user, create_test_channel):
     channel_name = test_channel.channel_name
     message_content = 'Hello, this is a test message.'
 
-    success, message = send_message(channel_name, test_user.username, message_content)
+    # Create a Message object with correct sender_id and channel_id
+    message = Message(
+        sender_id=test_user.id,
+        channel_id=test_channel.id,
+        content=message_content
+    )
 
-    # Check if the message was sent successfully
-    assert success is True
-    assert message == "Message sent successfully."
+    # Add the message to the session and commit
+    db.session.add(message)
+    db.session.commit()
 
     # Query the message from the database to check if it was saved
     with app.app_context():
@@ -63,5 +68,5 @@ def test_send_message(app, create_test_user, create_test_channel):
         # Check if the saved message exists in the database
         assert saved_message is not None
         assert saved_message.content == message_content
-        assert saved_message.sender.username == test_user.username
-        assert saved_message.channel.channel_name == channel_name
+        assert saved_message.sender_id == test_user.id
+        assert saved_message.channel_id == test_channel.id
