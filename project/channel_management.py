@@ -16,9 +16,6 @@ def create_channel(user_id, channel_name):
     db.session.add(channel)
     db.session.commit()
 
-    # Retrieve the newly created channel to get its ID
-    # channel = Channel.query.filter_by(channel_name=channel_name).first()
-
     if channel is None:
         raise ValueError("Channel creation failed.")
 
@@ -49,6 +46,24 @@ def delete_channel(channel_id):
         # Delete the channel and related user-channel associations
         UserChannel.query.filter_by(channel_id=channel_id).delete()
         db.session.delete(channel)
+        db.session.commit()
+        return True
+    return False
+
+def appoint_channel_admin(user_id, channel_id):
+    """
+    Appoint a user as an admin of a channel.
+
+    Args:
+        user_id: ID of the user to appoint as admin.
+        channel_id: ID of the channel.
+
+    Returns:
+        True if successful, False otherwise.
+    """
+    user_channel = UserChannel.query.filter_by(user_id=user_id, channel_id=channel_id).first()
+    if user_channel:
+        user_channel.is_moderator = True
         db.session.commit()
         return True
     return False
