@@ -1,139 +1,76 @@
 body { 
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: white;
-  }
-    /* Modal*/
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: white;
+}
 
-    .modalcontainer{
-      background-color: rgba(0,0,0,0.2);
-      display: flex;
-      align-items:center;
-      justify-content: center;
-      position: fixed; 
-      opacity: 0;
-      pointer-events: none;
-      top: 0;
-      left: 0;
-      height: 50%;
-      width: 50%;
-
-    }
-    .modalcontainer.show{
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .modal{
-      background-color: white;
-      padding: 30px 50px;
-      border-radius: 5px;
-      width: 50%;
-      text-align: center;
-
-    }
-
-    .modal h1{
-      margin: 0;
-    }
-
-    .modal p {
-      opacity: 0.7;
-    }
+/* header */
+.header {
+  overflow: hidden;
+  background-color: #F4BB44;
+  text-align: center;
+  font-size: 150%;
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 10px;
   
+}
 
-  
-  /* header */
-  .header {
-    overflow: hidden;
-    background-color: #F4BB44;
-    text-align: center;
-    font-size: 150%;
-    width: 100%;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-bottom: 10px;
-    
-  }
+/* channel tabs */
 
-  /* channel tabs */
-
-  .channel-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 95%;
-  margin-left: 4.5%;
-  padding-left: 4.5%;
-  padding-right: .5%;
+.channel-container {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+width: 95%;
+margin-left: 4.5%;
+padding-left: 4.5%;
+padding-right: .5%;
 }
 
 .channel-column {
-  display: flex;
-  flex-direction: column;
+display: flex;
+flex-direction: column;
 }
-  
-  /* Modal */
-  .show-popup {
-  padding: 18px 40px;
-  background: lightgrey;
-  border: none;
-  outline: none;
-  border-radius: 6px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+
+/* Modal */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: gray;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
   cursor: pointer;
-  font-size: 18px;
-  font-weight: 500;
 }
-.popup-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, .3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  pointer-events: none;
-}
-.popup-container.active {
-  opacity: 1;
-  pointer-events: auto;
-  transition: .4s ease;
-}
-.popup-container .popup-box {
-  width: 500px;
-  background: #f2f2f2;
-  border-radius: 6px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-  padding: 30px;
-  transform: scale(0);
-}
-.popup-container.active .popup-box {
-  transform: scale(1);
-  transition: .4s ease;
-  transition-delay: .25s;
-}
-.popup-box h1 {
-  color: #333;
-  line-height: 1;
-}
-.popup-box p {
-  color: #333;
-  margin: 12px 0 20px;
-}
-.popup-box .close-btn {
-  width: 100%;
-  height: 45px;
-  background: green;
-  border-radius: 6px;
-  border: none;
-  outline: none;
-  box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-  cursor: pointer;
-  font-size: 18px;
-  font-weight: 500;
-}
-  
