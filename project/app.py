@@ -1,10 +1,10 @@
 from flask import Flask, flash, render_template, request, redirect, url_for
 from config import Config
-from Database.database_setup import db, User, Channel
+from Database.database_setup import db, User, Channel, UserChannel
 from channel_management import create_channel, delete_channel
 from utils import get_current_user_id, is_user_channel_admin
-from flask_login import LoginManager, login_required, login_user, logout_user
-from forms import RegisterForm, LoginForm
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from forms import ChannelForm, RegisterForm, LoginForm
 
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object(Config)
@@ -37,6 +37,26 @@ def index():
 @app.route("/friendspage")
 def Friendspage():
     return render_template("Friendspage.html")
+
+@app.route("/channels", methods=["GET"])
+@login_required
+def channels():
+    channelForm = ChannelForm()
+    channel_id = request.args.get("channel_id")
+    channels_query = db.session.query(Channel).order_by(Channel.id)
+    if channel_id is None:
+        channel_id = 0
+    elif(not channel_id.isnumeric()):
+        channel_id = 0
+        flash("Invalid Channel ID")
+    else:
+        channel = channels_query.filter_by(id=channel_id).first()
+        if not channel:
+            flash("No channel with that ID")
+            channel_id = 0
+
+
+    return render_template("Channels-Page.html", channelform=channelForm, channel_id=channel_id, channels_query=channels_query)
 
 @app.route('/home')
 def home():
@@ -117,16 +137,21 @@ def user():
 # TODO: Create Channel page and/or directory
 # ******************************************************
 @app.route("/create_channel", methods=["POST"])
+@login_required
 def create_channel_route():
-    if request.method == "POST":
+    channelForm = ChannelForm()
+    # flash(str(channelForm.validate_on_submit()))
+    if request.method == "POST" and channelForm.validate_on_submit():
         channel_name = request.form["channel_name"]
-        user_id = get_current_user_id()  # Implement this to get current user ID
+        # user_id = get_current_user_id()  # Implement this to get current user ID
+        user_id = current_user.get_id()
+        # flash(user_id)
 
         # Create the channel
         channel = create_channel(user_id, channel_name)
         
         # Redirect to channel page or wherever appropriate
-        return redirect(url_for("channel_page", channel_id=channel.id))
+        return redirect(url_for("channels", channel_id=channel.id))
 
     # Handle GET requests or other cases
     return redirect(url_for("index"))
@@ -135,18 +160,28 @@ def create_channel_route():
 # PLACEHOLDER CODE /delete_channel IS NOT CREATED YET
 # TODO: Delete Channel page and/or directory
 # ****************************************************
-@app.route("/delete_channel/<int:channel_id>", methods=["POST"])
-def delete_channel_route(channel_id):
+@app.route("/delete_channel/", methods=["POST"])
+def delete_channel_route():
     if request.method == "POST":
-        # Ensure the current user is an admin of the channel or handle permissions as needed
-        if is_user_channel_admin(get_current_user_id, channel_id):
-            # Delete the channel
-            if delete_channel(channel_id):
-                return redirect(url_for("index"))  # Redirect after successful deletion
+        channel_id = request.form["del_channel_id"]
+        channel = db.session.query(Channel).filter_by(id=channel_id).first();
+        if channel:
+            # Ensure the current user is an admin of the channel or handle permissions as needed
+            user_channel = db.session.query(UserChannel).filter_by(user_id=current_user.get_id()).first(); 
+            if is_user_channel_admin(current_user.get_id(), channel_id, user_channel):
+                # Delete the channel
+                if delete_channel(channel_id):
+                    flash("\"" + channel.channel_name + "\" channel successfully deleted.")
+                    return redirect(url_for("channels"))  # Redirect after successful deletion
+                else:
+                    flash("Deletion error.")
+                    return redirect(url_for("channels"))  # Redirect after successful deletion
             else:
-                return "Channel not found", 404  # Or handle deletion failure
+                flash("Permision Denied.")
+                return redirect(url_for("channels") + "?channel_id=" + channel_id)  # Redirect after successful deletion
         else:
-            return "Permission denied", 403  # Or handle permission denial
+            flash("Channel not found.")
+            return redirect(url_for("channels"))  # Redirect after successful deletion
 
     # Handle other HTTP methods if needed
     return redirect(url_for("index"))
