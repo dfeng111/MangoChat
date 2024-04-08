@@ -84,7 +84,6 @@ def login():
             # if not url_has_allowed_host_and_scheme(next, request.host):
             #     return abort(400)
 
-            flash("Successfully logged in.")
             return redirect(url_for("home", username=username))
         else:
             # Redirect back to login page with an error message
