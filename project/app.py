@@ -133,8 +133,8 @@ def create_channel_route():
     if request.method == "POST" and channelForm.validate_on_submit():
         channel_name = request.form["channel_name"]
         # user_id = get_current_user_id()  # Implement this to get current user ID
-        user_id = current_user.get_id()  # Implement this to get current user ID
-        flash(user_id)
+        user_id = current_user.get_id()
+        # flash(user_id)
 
         # Create the channel
         channel = create_channel(user_id, channel_name)
