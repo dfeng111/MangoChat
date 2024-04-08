@@ -117,7 +117,7 @@ def logout():
     return redirect(url_for("login"))
 
 @app.route("/user")
-@login_required
+#@login_required
 def user():
     return render_template("user.html")
 
