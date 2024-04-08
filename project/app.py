@@ -27,12 +27,12 @@ def load_user(user_id):
     return db.get_or_404(User, user_id)
 
 @app.route("/")
-def hello_world():
-    return "Hello World!"
+def root():
+    return redirect("/home")
 
 @app.route("/index")
 def index():
-    return render_template("index.html", sample_text="Yo Country")
+    return redirect("/home")
 
 @app.route("/friendspage")
 def Friendspage():

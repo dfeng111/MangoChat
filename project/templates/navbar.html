@@ -1,0 +1,80 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
+
+<!-- Side menu-->
+<div class="sidebar">
+  <div class="top">
+    <div class="title">
+      <i class="fa-solid fa-leaf fs-5"></i>
+      <span> Mango Chat </span>
+    </div>
+    <i class="fa-solid fa-leaf " id="btn"></i>
+
+    <ul>
+      <li>
+        <a href="{{ url_for('home')}}">
+          <i class="fa-solid fa-house fs-5"></i>
+          <span class="nav-item">Home</span>
+        </a>
+        <span class="collapsed"> Home</span>
+      </li>
+      {% if current_user.is_authenticated %}
+      <li>
+        <a href="{{ url_for('user')}}">
+          <i class="fa-solid fa-user fs-5"></i>
+          <span class="nav-item">Profile</span>
+        </a>
+        <span class="collapsed"> Profile</span>
+      </li>
+
+      <li>
+        <a href="{{ url_for('Friendspage') }}">
+          <i class="fa-solid fa-user-group fs-5"></i>
+          <span class="nav-item">Friends</span>
+        </a>
+        <span class="collapsed"> Friends</span>
+      </li>
+
+      <li>
+        <a href="{{ url_for('channels') }}">
+          <i class="fa-solid fa-comments fs-5"></i>
+          <span class="nav-item">Channels</span>
+        </a>
+        <span class="collapsed"> Channels</span>
+      </li>
+
+      <li>
+        <a href="#">
+          <i class="fa-solid fa-gears fs-5"></i>
+          <span class="nav-item">Settings</span>
+        </a>
+        <span class="collapsed">Settings</span>
+      </li>
+      <li>
+        <a href="{{ url_for('logout') }}">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span class="nav-item">Logout</span>
+        </a>
+        <span class="collapsed"> Logout</span>
+      </li>
+      {% else %}
+      <li>
+        <a href="{{ url_for('login') }}">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span class="nav-item">Login</span>
+        </a>
+        <span class="collapsed"> Login</span>
+      </li>
+      {% endif %}
+    </ul>
+
+  </div>
+</div>
+
+<script>
+  let btn = document.querySelector('#btn');
+  let sidebar = document.querySelector('.sidebar');
+
+  btn.onclick = function () {
+    sidebar.classList.toggle('active');
+  }
+</script>

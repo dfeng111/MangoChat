@@ -11,15 +11,15 @@ def test_client():
 
 def test_home_page(test_client):
     # Test home page
-    response = test_client.get('/')
+    response = test_client.get('/home', follow_redirects=True)
     assert response.status_code == 200
-    assert response.data.decode('utf-8') == "Hello World!"
+    assert b'Welcome to MangoChat' in response.data
 
 def test_index_page(test_client):
     # Test index page
-    response = test_client.get('/index')
+    response = test_client.get('/index', follow_redirects=True)
     assert response.status_code == 200
-    assert b'Yo Country' in response.data
+    assert b'Welcome to MangoChat' in response.data
 
 @pytest.fixture
 def make_test_user():
