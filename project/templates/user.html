@@ -2,11 +2,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<html>
     <style>
       body {
           background-color: #36393f; 
-          color: #ffffff; 
+          color: #ff0000; 
       }
       .avatar {
             border-radius: 50%; 
@@ -60,7 +59,9 @@
     </div>
     <div class="col">
         {% if current_user.is_authenticated %}
-        <h2 id="username">{{ current_user.username }}</h2>
+            <h1>Welcome, {{ current_user.username }}</h1>
+        {% else %}
+            <h1>Please log in to see this page.</h1>
         {% endif %}
     </div>
   </div>
@@ -86,18 +87,26 @@
               </ul>
             </div>
             <hr>
-            <p><strong>Joined Date:</strong> Nobember 12, 2019</p>
+            <p><strong>Joined Date:</strong> November 12, 2019</p>
             </div>
       </div>
   </div>
 </div>
 <hr>
+
+  
 <div class="row mt-3">
   <div class="col">
-    <button class="btn" style="background-color: blue; color: white;">Change Password</button>
+    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#passwordChangeModal">
+        Change Password
+    </button>
     <hr>
-    <br><button class="btn" style="background-color: red; color: white;">Logout</button>
-    <button class="btn" style="border: 2px solid red; color: red; background-color: transparent;">Delete Account</button>
+    <form action="{{ url_for('logout') }}" method="GET" onsubmit="return confirm('Are you sure you want to log out?');">
+        <br><button type="submit" class="btn" style="background-color: red; color: white;">Logout</button>
+    </form> 
+    <form action="{{ url_for('delete_account') }}" method="POST" onsubmit="return confirm('Are you sure you want to delete your account permanently? This action cannot be undone.');">
+        <button type="submit" class="btn btn-danger">Delete Account</button>
+    </form>
   </div>
 </div>
 
@@ -120,7 +129,5 @@
       });
   });
   </script>
-</body>
-</html>
 
 {% endblock %}

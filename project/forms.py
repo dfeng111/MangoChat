@@ -17,3 +17,9 @@ class RegisterForm(FlaskForm):
 class ChannelForm(FlaskForm):
     channel_name = StringField('Channel Name', validators=[InputRequired(), Length(min=5)], render_kw={"placeholder": "Enter a channel name:"})
     chansubmit = SubmitField('Create Channel')
+
+class ChangePasswordForm(FlaskForm):
+    current_password = PasswordField('Current Password', validators=[InputRequired()], render_kw={"placeholder": "Current Password"})
+    new_password = PasswordField('New Password', validators=[InputRequired(), Length(min=8), EqualTo('confirm_new_password', message="Passwords must match.")], render_kw={"placeholder": "New Password"})
+    confirm_new_password = PasswordField('Confirm New Password', validators=[InputRequired()], render_kw={"placeholder": "Confirm New Password"})
+    submit = SubmitField('Change Password')

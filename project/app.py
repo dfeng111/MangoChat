@@ -4,7 +4,7 @@ from Database.database_setup import db, User, Channel, UserChannel
 from channel_management import create_channel, delete_channel
 from utils import get_current_user_id, is_user_channel_admin
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from forms import ChannelForm, RegisterForm, LoginForm
+from forms import ChannelForm, RegisterForm, LoginForm, ChangePasswordForm
 
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object(Config)
@@ -117,9 +117,43 @@ def logout():
     return redirect(url_for("index"))
 
 @app.route("/user")
-# @login_required
+@login_required
 def user():
     return render_template("user.html")
+
+@app.route("/delete_account", methods=["POST"])
+@login_required
+def delete_account():
+    username = current_user.username 
+    user = User.query.filter_by(username=username).first()
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        logout_user()  
+        flash("Your account has been successfully deleted.")
+        return redirect(url_for("index"))
+    else:
+        flash("Account deletion failed.")
+        return redirect(url_for("user"))
+    
+@app.route("/update_password", methods=["POST"])
+@login_required
+def update_password():
+    changeForm = ChangePasswordForm(request.form)
+    if changeForm.validate_on_submit():
+        user = User.query.filter_by(username=current_user.username).first()
+        if user and user.password == changeForm.current_password.data:
+            user.password = changeForm.new_password.data
+            db.session.commit()
+            flash("Password updated successfully.")
+        else:
+            flash("Current password is incorrect.", "error")
+    else:
+        for fieldName, errorMessages in changeForm.errors.items():
+            for err in errorMessages:
+                flash(f"{fieldName}: {err}", "error")
+    return redirect(url_for('user'))
+
 
 # ******************************************************
 # PLACEHOLDER CODE /create_channel IS NOT CREATED YET
