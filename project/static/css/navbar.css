@@ -147,3 +147,7 @@ opacity: 0;
     text-align: center;
     font-size: 30px;
   }
+
+.title {
+    margin-left: 1em;
+}

@@ -84,7 +84,8 @@ def login():
             # if not url_has_allowed_host_and_scheme(next, request.host):
             #     return abort(400)
 
-            return redirect(url_for("success", username=username))
+            flash("Successfully logged in.")
+            return redirect(url_for("home", username=username))
         else:
             # Redirect back to login page with an error message
             flash("Incorrect username or password")
@@ -114,11 +115,6 @@ def register():
     # For GET requests, redirect to login page
     # return redirect(url_for("login"))
     return render_template("login.html", title="Login/Register", regform=regForm, logform=logForm)
-
-@app.route("/success/<username>")
-def success(username):
-    # flash("Login Success")
-    return f"Welcome back, {username}!"
 
 @app.route("/logout")
 @login_required
