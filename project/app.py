@@ -43,7 +43,7 @@ def Friendspage():
 def channels():
     channelForm = ChannelForm()
     channel_id = request.args.get("channel_id")
-    channels_list = db.session.query(Channel)
+    channels_list = db.session.query(Channel).order_by(Channel.id)
     if channel_id is None:
         channel_id = 0
     elif(not channel_id.isnumeric()):
@@ -56,7 +56,7 @@ def channels():
             channel_id = 0
 
 
-    return render_template("Channels-Page.html", channelform=channelForm, channel_id=channel_id)
+    return render_template("Channels-Page.html", channelform=channelForm, channel_id=channel_id, channels_list=channels_list)
 
 @app.route('/home')
 def home():
