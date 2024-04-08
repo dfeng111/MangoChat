@@ -45,6 +45,9 @@ def channels():
     channel_id = request.args.get("channel_id")
     if(channel_id is None):
         channel_id = 0
+    elif(not channel_id.isnumeric()):
+        channel_id = 0
+        flash("Invalid Channel ID")
     return render_template("Channels-Page.html", channelform=channelForm, channel_id=channel_id)
 
 @app.route('/home')
