@@ -43,20 +43,20 @@ def Friendspage():
 def channels():
     channelForm = ChannelForm()
     channel_id = request.args.get("channel_id")
-    channels_list = db.session.query(Channel).order_by(Channel.id)
+    channels_query = db.session.query(Channel).order_by(Channel.id)
     if channel_id is None:
         channel_id = 0
     elif(not channel_id.isnumeric()):
         channel_id = 0
         flash("Invalid Channel ID")
     else:
-        channel = channels_list.filter_by(id=channel_id).first()
+        channel = channels_query.filter_by(id=channel_id).first()
         if not channel:
             flash("No channel with that ID")
             channel_id = 0
 
 
-    return render_template("Channels-Page.html", channelform=channelForm, channel_id=channel_id, channels_list=channels_list)
+    return render_template("Channels-Page.html", channelform=channelForm, channel_id=channel_id, channels_query=channels_query)
 
 @app.route('/home')
 def home():
