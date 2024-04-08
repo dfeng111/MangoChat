@@ -43,11 +43,16 @@ def Friendspage():
 def channels():
     channelForm = ChannelForm()
     channel_id = request.args.get("channel_id")
-    if(channel_id is None):
-        channel_id = 0
-    elif(not channel_id.isnumeric()):
+    if channel_id is None or not channel_id.isnumeric():
         channel_id = 0
         flash("Invalid Channel ID")
+    else:
+        channel = db.session.query(Channel).filter_by(id=channel_id).first()
+        if not channel:
+            flash("No channel with that ID")
+            channel_id = 0
+
+
     return render_template("Channels-Page.html", channelform=channelForm, channel_id=channel_id)
 
 @app.route('/home')
