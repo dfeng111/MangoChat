@@ -56,7 +56,6 @@
         <div class="channel-column">Channel {{ channel.id }}: {{ channel.channel_name }}</div>
 
         <div class="channel-column">
-          <button class="show-popup" style = "background-color: #F4BB44;">remove channel</button>
 
           {% if channel_id != 0 %}
           <button class="myBtn_multi">Open channel</button>
@@ -70,14 +69,18 @@
                 <form style = "margin-top: 5%;">
                   <label for="messaging">type message here:</label><br>
                   <input type="text" id="messaging" name="messaging">
-                  </form>
+                </form>
               </div>
             </div>
-              <span class="close close_multi">×</span>
+            <span class="close close_multi">×</span>
           </div>
           {% else %}
           <button class="" onclick="location.href='{{ url_for('channels') }}?channel_id={{ channel.id }}';">Go to channel</button>
           {% endif %}
+          <form action="/delete_channel" method="POST">
+            <button class="show-popup" style="background-color: #F4BB44;" type="submit">Remove channel</button>
+            <input type="hidden" name="del_channel_id" value="{{ channel.id }}">
+          </form>
         </div>
       </div>
       {% endfor %}
