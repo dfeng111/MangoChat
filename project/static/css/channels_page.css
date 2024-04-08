@@ -1,5 +1,5 @@
 body { 
-    overflow: hidden;
+    /* overflow: hidden; */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,7 +8,7 @@ body {
   
   /* header */
   .header {
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: #F4BB44;
     text-align: center;
     font-size: 150%;
@@ -29,6 +29,7 @@ body {
   margin-left: 4.5%;
   padding-left: 4.5%;
   padding-right: .5%;
+  margin-bottom: 1%;
 }
 
 .channel-column {

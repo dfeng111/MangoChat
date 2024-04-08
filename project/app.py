@@ -27,12 +27,12 @@ def load_user(user_id):
     return db.get_or_404(User, user_id)
 
 @app.route("/")
-def hello_world():
-    return "Hello World!"
+def root():
+    return redirect("/home")
 
 @app.route("/index")
 def index():
-    return render_template("index.html", sample_text="Yo Country")
+    return redirect("/home")
 
 @app.route("/friendspage")
 def Friendspage():
@@ -43,9 +43,20 @@ def Friendspage():
 def channels():
     channelForm = ChannelForm()
     channel_id = request.args.get("channel_id")
-    if(channel_id is None):
+    channels_query = db.session.query(Channel).order_by(Channel.id)
+    if channel_id is None:
         channel_id = 0
-    return render_template("Channels-Page.html", channelform=channelForm, channel_id=channel_id)
+    elif(not channel_id.isnumeric()):
+        channel_id = 0
+        flash("Invalid Channel ID")
+    else:
+        channel = channels_query.filter_by(id=channel_id).first()
+        if not channel:
+            flash("No channel with that ID")
+            channel_id = 0
+
+
+    return render_template("Channels-Page.html", channelform=channelForm, channel_id=channel_id, channels_query=channels_query)
 
 @app.route('/home')
 def home():
@@ -103,11 +114,6 @@ def register():
     # For GET requests, redirect to login page
     # return redirect(url_for("login"))
     return render_template("login.html", title="Login/Register", regform=regForm, logform=logForm)
-
-@app.route("/success/<username>")
-def success(username):
-    # flash("Login Success")
-    return f"Welcome back, {username}!"
 
 @app.route("/logout")
 @login_required

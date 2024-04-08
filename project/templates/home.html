@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>MangoChat</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "base.html" %}
+
+{% block content %}
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-</head>
-<body>
 
 <div class="top">
     <a href="#home" class="bar-item button padding-large">HOME</a>
@@ -15,19 +11,21 @@
     <a href="#settings" class="bar-item button padding-large">MESSAGES</a>
     <a href="user" class="bar-item button padding-large">SETTINGS</a>
 </div>
+    {% include "navbar.html" %}
 
-<div class="display-center">
-	<img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
-      <h1>Welcome to MangoChat</h1>
-      <p><b>Connect and engange with your friends!</b></p>  
-	  <p style="width: 50%;">MangoChat is an online community where you can connect with friends, join channels of interest, and engage in discussions. Our platform offers a user-friendly interface, real-time messaging, and a variety of features to enhance your communication experience.</p> 
-	  <p>Join us today and start chatting!</p>
-</div>
+    <div class="main-content">
+        <div class="display-center">
+            <img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
+            <h1>Welcome to MangoChat</h1>
+            <p><b>Connect and engange with your friends!</b></p>  
+            <p style="width: 50%;">MangoChat is an online community where you can connect with friends, join channels of interest, and engage in discussions. Our platform offers a user-friendly interface, real-time messaging, and a variety of features to enhance your communication experience.</p> 
+            <p>Join us today and start chatting!</p>
+        </div>
 
-<footer>
-  <h3>MangoChat &copy; 2024</h3>
-  <p>Why we are better then Discord</p>
-</footer>
+        <footer>
+            <h3>MangoChat &copy; 2024</h3>
+            <p>Why we are better then Discord</p>
+        </footer>
+    </div>
 
-</body>
-</html>
+{% endblock %}

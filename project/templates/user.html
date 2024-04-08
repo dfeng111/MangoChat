@@ -2,83 +2,86 @@
 {% extends "base.html" %}
 
 {% block content %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
-<div class="container" style = "background-color: rgb(254, 188, 66); color: black;">
-  <div class="row align-items-center mb-3">   
-    <div class="col-auto">
-      <img src="..\static\images\testAvatar.png" alt="User Avatar" class="avatar">
-    </div>
-    <div class="col">
-        {% if current_user.is_authenticated %}
-            <h1>Welcome, {{ current_user.username }}</h1>
-        {% else %}
-            <h1>Please log in to see this page.</h1>
-        {% endif %}
-    </div>
-  </div>
-</div>
-<hr>
-<div class="container" style = "background-color: rgb(254, 188, 66); color: black;">
-  <div class="row">
-    <div class="col-md-12">
-        <div class="profile-section" style="background-color: orange; color: black;" >
-            <div class="profile-section"><strong>{{ current_user.username }}</strong></div>
-            <hr>
-            <div><strong>About Me:</strong></div> 
-            <div id="aboutMe" class="editable" contenteditable="true">Click to edit...<br><br><br><br></div>
-            <hr>
-            <!-- Status Dropdown -->
-            <div class="dropdown">
-              <button class="btn btn-primary dropdown-toggle" type="button" id="statusButton" data-bs-toggle="dropdown" aria-expanded="false">
-                  Choose Status
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="statusButton">
-                  <li><a class="dropdown-item" href="#" data-status="online">Online</a></li>
-                  <li><a class="dropdown-item" href="#" data-status="do-not-disturb">Do Not Disturb</a></li>
-              </ul>
+    {% include "navbar.html" %}
+    <div class="main-content">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+        <div class="container" style = "background-color: rgb(254, 188, 66); color: black;">
+            <div class="row align-items-center mb-3">   
+                <div class="col-auto">
+                    <img src="..\static\images\testAvatar.png" alt="User Avatar" class="avatar">
+                </div>
+                <div class="col">
+                    {% if current_user.is_authenticated %}
+                        <h1>Welcome, {{ current_user.username }}</h1>
+                    {% else %}
+                        <h1>Please log in to see this page.</h1>
+                    {% endif %}
+                </div>
             </div>
-            <hr>
-            <p><strong>Joined Date:</strong> November 12, 2019</p>
+        </div>
+        <hr>
+        <div class="container" style = "background-color: rgb(254, 188, 66); color: black;">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="profile-section" style="background-color: orange; color: black;" >
+                        <div class="profile-section"><strong>{{ current_user.username }}</strong></div>
+                        <hr>
+                        <div><strong>About Me:</strong></div> 
+                        <div id="aboutMe" class="editable" contenteditable="true">Click to edit...<br><br><br><br></div>
+                        <hr>
+                        <!-- Status Dropdown -->
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="statusButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Choose Status
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="statusButton">
+                                <li><a class="dropdown-item" href="#" data-status="online">Online</a></li>
+                                <li><a class="dropdown-item" href="#" data-status="do-not-disturb">Do Not Disturb</a></li>
+                            </ul>
+                        </div>
+                        <hr>
+                        <p><strong>Joined Date:</strong> November 12, 2019</p>
+                    </div>
+                </div>
             </div>
-      </div>
-  </div>
-</div>
-<hr>
+        </div>
+        <hr>
 
-  
-<div class="row mt-3">
-  <div class="col">
-    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#passwordChangeModal">
-        Change Password
-    </button>
-    <hr>
-    <form action="{{ url_for('logout') }}" method="GET" onsubmit="return confirm('Are you sure you want to log out?');">
-        <br><button type="submit" class="btn" style="background-color: red; color: white;">Logout</button>
-    </form> 
-    <form action="{{ url_for('delete_account') }}" method="POST" onsubmit="return confirm('Are you sure you want to delete your account permanently? This action cannot be undone.');">
-        <button type="submit" class="btn btn-danger">Delete Account</button>
-    </form>
-  </div>
-</div>
 
-<script>
-  $(document).ready(function() {
-      $('.dropdown-item').click(function(e) {
-          e.preventDefault();
-          var statusText = $(this).text();
-          var status = $(this).data('status');
-          
-          $('#statusButton').text(statusText).removeClass('btn-online btn-offline btn-secondary');
-  
-          if(status === 'online') {
-              $('#statusButton').addClass('btn-online');
-          } else if(status === 'do-not-disturb') {
-              $('#statusButton').addClass('btn-donotdisturb');
-          } else {
-              $('#statusButton').addClass('btn-secondary'); 
-          }
-      });
-  });
-  </script>
+        <div class="row mt-3">
+            <div class="col">
+                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#passwordChangeModal">
+                    Change Password
+                </button>
+                <hr>
+                <form action="{{ url_for('logout') }}" method="GET" onsubmit="return confirm('Are you sure you want to log out?');">
+                    <br><button type="submit" class="btn" style="background-color: red; color: white;">Logout</button>
+                </form> 
+                <form action="{{ url_for('delete_account') }}" method="POST" onsubmit="return confirm('Are you sure you want to delete your account permanently? This action cannot be undone.');">
+                    <button type="submit" class="btn btn-danger">Delete Account</button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            $(document).ready(function() {
+                $('.dropdown-item').click(function(e) {
+                    e.preventDefault();
+                    var statusText = $(this).text();
+                    var status = $(this).data('status');
+
+                    $('#statusButton').text(statusText).removeClass('btn-online btn-offline btn-secondary');
+
+                    if(status === 'online') {
+                        $('#statusButton').addClass('btn-online');
+                    } else if(status === 'do-not-disturb') {
+                        $('#statusButton').addClass('btn-donotdisturb');
+                    } else {
+                        $('#statusButton').addClass('btn-secondary'); 
+                    }
+                });
+            });
+        </script>
+    </div>
 
 {% endblock %}
