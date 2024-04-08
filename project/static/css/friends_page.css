@@ -19,9 +19,9 @@ body {
   
 }
 
-/* channel tabs */
+/* friend tabs */
 
-.channel-container {
+.friend-container {
 display: flex;
 flex-direction: row;
 justify-content: space-between;
@@ -31,7 +31,7 @@ padding-left: 4.5%;
 padding-right: .5%;
 }
 
-.channel-column {
+.friend-column {
 display: flex;
 flex-direction: column;
 }
