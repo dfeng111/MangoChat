@@ -1,12 +1,12 @@
 body {
-    background-color: orange; 
+    background-color: orange!important; 
     font-family: Arial, sans-serif;
 }
 
 #logo {
     height: 250px;
     width: 360px;
-    margin-right: 10px;
+    
 }
 
 .display-center {

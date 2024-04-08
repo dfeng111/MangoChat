@@ -2,24 +2,11 @@
 
 {% block content %}
 
-<head>
-    <title>MangoChat</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
-</head>
-
-<style>
-  body {
-      background-color: orange; 
-  }
-</style>
-<body>
 
   {% include "navbar.html" %}
 
-<div class="display-center" >
+<div class="display-center">
 	<img src="{{ url_for('static', filename='images/mango.jpg') }}" alt="Mangochat logo" id="logo">
       <h1>Welcome to MangoChat</h1>
       <p><b>Connect and engange with your friends!</b></p>  
@@ -27,14 +14,9 @@
 	  <p>Join us today and start chatting!</p>
 </div>
 
-
 <footer>
   <h3>MangoChat &copy; 2024</h3>
   <p>Why we are better then Discord</p>
 </footer>
 
-
-
-</body>
-</html>
 {% endblock %}
