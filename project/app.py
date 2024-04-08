@@ -144,6 +144,7 @@ def delete_channel_route(channel_id):
         if is_user_channel_admin(current_user.get_id(), channel_id, user_channel):
             # Delete the channel
             if delete_channel(channel_id):
+                flash("Channel number " + str(channel_id) + " successfully deleted.")
                 return redirect(url_for("index"))  # Redirect after successful deletion
             else:
                 return "Channel not found", 404  # Or handle deletion failure
