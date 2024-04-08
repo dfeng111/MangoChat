@@ -3,14 +3,14 @@
 
 {% block content %}
     <style>
-      body {
-          background-color: #36393f; 
-          color: #ffffff; 
-      }
+body {
+    background-color: #36393f; 
+    color: #ffffff; 
+}
       .avatar {
-            border-radius: 50%; 
-            width: 100px; 
-            height: 100px; 
+          border-radius: 50%; 
+          width: 100px; 
+          height: 100px; 
       }
       .dropdown-menu {
           background-color: #36393f;
@@ -53,73 +53,76 @@
     </style>
 
     {% include "navbar.html" %}
+    <div class="main-content">
 
-<div class="container">
-  <div class="row align-items-center mb-3">
-    <div class="col-auto">
-      <img src="..\static\images\testAvatar.png" alt="User Avatar" class="avatar">
-    </div>
-    <div class="col">
-        {% if current_user.is_authenticated %}
-        <h2 id="username">{{ current_user.username }}</h2>
-        {% endif %}
-    </div>
-  </div>
-</div>
-<hr>
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-        <div class="profile-section" style="background-color: rgb(31, 27, 27); color: white;" >
-            <div class="profile-section"><strong>{{ current_user.username }}</strong></div>
-            <hr>
-            <div><strong>About Me:</strong></div> 
-            <div id="aboutMe" class="editable" contenteditable="true">Click to edit...<br><br><br><br></div>
-            <hr>
-            <!-- Status Dropdown -->
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="statusButton" data-bs-toggle="dropdown" aria-expanded="false">
-                  Choose Status
-              </button>
-              <ul class="dropdown-menu" aria-labelledby="statusButton">
-                  <li><a class="dropdown-item" href="#" data-status="online">Online</a></li>
-                  <li><a class="dropdown-item" href="#" data-status="do-not-disturb">Do Not Disturb</a></li>
-              </ul>
+        <div class="container">
+            <div class="row align-items-center mb-3">
+                <div class="col-auto">
+                    <img src="..\static\images\testAvatar.png" alt="User Avatar" class="avatar">
+                </div>
+                <div class="col">
+                    {% if current_user.is_authenticated %}
+                        <h2 id="username">{{ current_user.username }}</h2>
+                    {% endif %}
+                </div>
             </div>
-            <hr>
-            <p><strong>Joined Date:</strong> Nobember 12, 2019</p>
+        </div>
+        <hr>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="profile-section" style="background-color: rgb(31, 27, 27); color: white;" >
+                        <div class="profile-section"><strong>{{ current_user.username }}</strong></div>
+                        <hr>
+                        <div><strong>About Me:</strong></div> 
+                        <div id="aboutMe" class="editable" contenteditable="true">Click to edit...<br><br><br><br></div>
+                        <hr>
+                        <!-- Status Dropdown -->
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="statusButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                Choose Status
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="statusButton">
+                                <li><a class="dropdown-item" href="#" data-status="online">Online</a></li>
+                                <li><a class="dropdown-item" href="#" data-status="do-not-disturb">Do Not Disturb</a></li>
+                            </ul>
+                        </div>
+                        <hr>
+                        <p><strong>Joined Date:</strong> Nobember 12, 2019</p>
+                    </div>
+                </div>
             </div>
-      </div>
-  </div>
-</div>
-<hr>
-<div class="row mt-3">
-  <div class="col">
-    <button class="btn" style="background-color: blue; color: white;">Change Password</button>
-    <hr>
-    <br><button class="btn" style="background-color: red; color: white;">Logout</button>
-    <button class="btn" style="border: 2px solid red; color: red; background-color: transparent;">Delete Account</button>
-  </div>
-</div>
+        </div>
+        <hr>
+        <div class="container black">
+        <div class="row mt-3">
+            <div class="col">
+                <button class="btn" style="background-color: blue; color: white;">Change Password</button>
+                <hr>
+                <br><button class="btn" style="background-color: red; color: white;">Logout</button>
+                <button class="btn" style="border: 2px solid red; color: red; background-color: transparent;">Delete Account</button>
+            </div>
+        </div>
+    </div>
 
-<script>
-  $(document).ready(function() {
-      $('.dropdown-item').click(function(e) {
-          e.preventDefault();
-          var statusText = $(this).text();
-          var status = $(this).data('status');
-          
-          $('#statusButton').text(statusText).removeClass('btn-online btn-offline btn-secondary');
-  
-          if(status === 'online') {
-              $('#statusButton').addClass('btn-online');
-          } else if(status === 'do-not-disturb') {
-              $('#statusButton').addClass('btn-donotdisturb');
-          } else {
-              $('#statusButton').addClass('btn-secondary'); 
-          }
-      });
-  });
-  </script>
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-item').click(function(e) {
+                e.preventDefault();
+                var statusText = $(this).text();
+                var status = $(this).data('status');
+
+                $('#statusButton').text(statusText).removeClass('btn-online btn-offline btn-secondary');
+
+                if(status === 'online') {
+                    $('#statusButton').addClass('btn-online');
+                } else if(status === 'do-not-disturb') {
+                    $('#statusButton').addClass('btn-donotdisturb');
+                } else {
+                    $('#statusButton').addClass('btn-secondary'); 
+                }
+            });
+        });
+    </script>
 
 {% endblock %}
