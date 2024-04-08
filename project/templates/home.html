@@ -2,19 +2,7 @@
 
 {% block content %}
 
-<head>
-    <title>MangoChat</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
-</head>
-
-<style>
-  body {
-      background-color: orange; 
-  }
-</style>
-<body>
 
   {% include "navbar.html" %}
 
@@ -32,8 +20,4 @@
   <p>Why we are better then Discord</p>
 </footer>
 
-
-
-</body>
-</html>
 {% endblock %}
