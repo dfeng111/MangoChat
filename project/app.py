@@ -27,12 +27,12 @@ def load_user(user_id):
     return db.get_or_404(User, user_id)
 
 @app.route("/")
-def hello_world():
-    return "Hello World!"
+def root():
+    return redirect("/home")
 
 @app.route("/index")
 def index():
-    return render_template("index.html", sample_text="Yo Country")
+    return redirect("/home")
 
 @app.route("/friendspage")
 def Friendspage():
@@ -84,7 +84,7 @@ def login():
             # if not url_has_allowed_host_and_scheme(next, request.host):
             #     return abort(400)
 
-            return redirect(url_for("success", username=username))
+            return redirect(url_for("home", username=username))
         else:
             # Redirect back to login page with an error message
             flash("Incorrect username or password")
@@ -114,11 +114,6 @@ def register():
     # For GET requests, redirect to login page
     # return redirect(url_for("login"))
     return render_template("login.html", title="Login/Register", regform=regForm, logform=logForm)
-
-@app.route("/success/<username>")
-def success(username):
-    # flash("Login Success")
-    return f"Welcome back, {username}!"
 
 @app.route("/logout")
 @login_required

@@ -3,7 +3,6 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/friends_page.css') }}">
 <script src="https://kit.fontawesome.com/80c51aa779.js" crossorigin="anonymous"></script>
 
@@ -11,59 +10,7 @@
   </head>
   <body>
     
-      <!-- Side menu-->
-  <div class="sidebar">
-    <div class="top">
-      <div class="title">
-        <i class="fa-solid fa-leaf fs-5"></i>
-        <span> Mango Chat </span>
-      </div>
-      <i class="fa-solid fa-leaf " id="btn"></i>
-
-      <ul>
-        <li>
-          <a href="{{ url_for('user')}}">
-            <i class="fa-solid fa-user fs-5"></i>
-            <span class="nav-item">Profile</span>
-          </a>
-          <span class="collapsed"> Profile</span>
-        </li>
-
-        <li>
-          <a href="{{ url_for('Friendspage') }}">
-            <i class="fa-solid fa-user-group fs-5"></i>
-            <span class="nav-item">Friends</span>
-          </a>
-          <span class="collapsed"> Friends</span>
-        </li>
-
-        <li>
-          <a href="{{ url_for('channels') }}">
-            <i class="fa-solid fa-comments fs-5"></i>
-            <span class="nav-item">Channels</span>
-          </a>
-          <span class="collapsed"> Channels</span>
-        </li>
-
-        <li>
-          <a href="#">
-            <i class="fa-solid fa-gears fs-5"></i>
-            <span class="nav-item">Settings</span>
-          </a>
-          <span class="collapsed">Settings</span>
-        </li>
-
-        <li>
-          <a href="{{ url_for('login') }}">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <span class="nav-item">Logout</span>
-          </a>
-          <span class="collapsed"> Logout</span>
-        </li>
-      </ul>
-
-    </div>
-  </div>
+    {% include "navbar.html" %}
 
   <div class="main-content">
       <!-- CREATE CUSTOM BUTTON OUT OUT OF CHANNEL BOX CLASS-->
@@ -93,11 +40,11 @@
 
         <div class= "grid-container">
           
-            <div class="channel-container">
+            <div class="friend-container">
 
-              <div class="channel-column"></div>
+              <div class="friend-column"></div>
             
-              <div class="channel-column">
+              <div class="friend-column">
                 <button class="myBtn_multi" style = "background-color: #F4BB44;">remove friend</button>
                 
                   <div class="modal modal_multi" >
@@ -174,14 +121,6 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 };
-
-    // sidebar open/close
-  let btn = document.querySelector('#btn');
-  let sidebar = document.querySelector('.sidebar');
-
-  btn.onclick = function () {
-    sidebar.classList.toggle('active');
-  }
   
 </script>
   </script>
