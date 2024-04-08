@@ -1,0 +1,47 @@
+body {
+    background-color: orange   ; 
+  color: black; 
+}
+.avatar {
+    border-radius: 50%; 
+    width: 100px; 
+    height: 100px; 
+}
+.dropdown-menu {
+  background-color: orange;
+}
+.dropdown-item {
+  color: black;
+}
+.dropdown-item:hover {
+  background-color: yellow;
+}
+.editable {
+  cursor: pointer;
+  border: 1px solid yellow; 
+  padding: 5px;
+  border-radius: 5px; 
+  display: inline-block; 
+  width: calc(100% - 10px); 
+  margin-top: 5px; 
+  margin-bottom: 5px; 
+  background-color: rgb(260, 180, 60); 
+}
+.btn-online {
+  background-color: #28a745; 
+  color: black;
+}
+
+.btn-donotdisturb {
+  background-color: #ffc802; 
+  color: black;
+}
+.profile-section {
+  border: 1px solid rgb(260, 180, 60); 
+  padding: 10px;
+  border-radius: 5px; 
+  margin-bottom: 15px; 
+}
+#username {
+  color: black;
+}

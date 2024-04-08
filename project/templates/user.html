@@ -2,58 +2,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <style>
-      body {
-          background-color: #36393f; 
-          color: #ff0000; 
-      }
-      .avatar {
-            border-radius: 50%; 
-            width: 100px; 
-            height: 100px; 
-      }
-      .dropdown-menu {
-          background-color: #36393f;
-      }
-      .dropdown-item {
-          color: #ffffff;
-      }
-      .dropdown-item:hover {
-          background-color: #2c2f33;
-      }
-      .editable {
-          cursor: pointer;
-          border: 1px solid #64686e; 
-          padding: 5px;
-          border-radius: 5px; 
-          display: inline-block; 
-          width: calc(100% - 10px); 
-          margin-top: 5px; 
-          margin-bottom: 5px; 
-          background-color: #2c2f33; 
-      }
-      .btn-online {
-          background-color: #28a745; 
-          color: white;
-      }
-
-      .btn-donotdisturb {
-          background-color: #ffc802; 
-          color: white;
-      }
-      .profile-section {
-          border: 1px solid #64686e; 
-          padding: 10px;
-          border-radius: 5px; 
-          margin-bottom: 15px; 
-      }
-      #username {
-          color: black;
-      }
-    </style>
-
-<div class="container">
-  <div class="row align-items-center mb-3">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+<div class="container" style = "background-color: rgb(254, 188, 66); color: black;">
+  <div class="row align-items-center mb-3">   
     <div class="col-auto">
       <img src="..\static\images\testAvatar.png" alt="User Avatar" class="avatar">
     </div>
@@ -67,10 +18,10 @@
   </div>
 </div>
 <hr>
-<div class="container">
+<div class="container" style = "background-color: rgb(254, 188, 66); color: black;">
   <div class="row">
     <div class="col-md-12">
-        <div class="profile-section" style="background-color: rgb(31, 27, 27); color: white;" >
+        <div class="profile-section" style="background-color: orange; color: black;" >
             <div class="profile-section"><strong>{{ current_user.username }}</strong></div>
             <hr>
             <div><strong>About Me:</strong></div> 
@@ -78,7 +29,7 @@
             <hr>
             <!-- Status Dropdown -->
             <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="statusButton" data-bs-toggle="dropdown" aria-expanded="false">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="statusButton" data-bs-toggle="dropdown" aria-expanded="false">
                   Choose Status
               </button>
               <ul class="dropdown-menu" aria-labelledby="statusButton">

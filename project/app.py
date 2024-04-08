@@ -73,7 +73,7 @@ def login():
             # if not url_has_allowed_host_and_scheme(next, request.host):
             #     return abort(400)
 
-            return redirect(url_for("success", username=username))
+            return redirect(url_for("home"))
         else:
             # Redirect back to login page with an error message
             flash("Incorrect username or password")
@@ -114,7 +114,7 @@ def success(username):
 def logout():
     logout_user()
     flash("Successfully logged out.")
-    return redirect(url_for("index"))
+    return redirect(url_for("login"))
 
 @app.route("/user")
 @login_required
@@ -131,7 +131,7 @@ def delete_account():
         db.session.commit()
         logout_user()  
         flash("Your account has been successfully deleted.")
-        return redirect(url_for("index"))
+        return redirect(url_for("login"))
     else:
         flash("Account deletion failed.")
         return redirect(url_for("user"))
