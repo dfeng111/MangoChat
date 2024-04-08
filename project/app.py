@@ -149,22 +149,28 @@ def create_channel_route():
 # PLACEHOLDER CODE /delete_channel IS NOT CREATED YET
 # TODO: Delete Channel page and/or directory
 # ****************************************************
-@app.route("/delete_channel/<int:channel_id>", methods=["GET", "POST"])
-# @app.route("/delete_channel/<int:channel_id>", methods=["POST"])
-def delete_channel_route(channel_id):
-    # if request.method == "POST":
-    if True:
-        # Ensure the current user is an admin of the channel or handle permissions as needed
-        user_channel = db.session.query(UserChannel).filter_by(user_id=current_user.get_id()).first();
-        if is_user_channel_admin(current_user.get_id(), channel_id, user_channel):
-            # Delete the channel
-            if delete_channel(channel_id):
-                flash("Channel number " + str(channel_id) + " successfully deleted.")
-                return redirect(url_for("index"))  # Redirect after successful deletion
+@app.route("/delete_channel/", methods=["POST"])
+def delete_channel_route():
+    if request.method == "POST":
+        channel_id = request.form["del_channel_id"]
+        channel = db.session.query(Channel).filter_by(id=channel_id).first();
+        if channel:
+            # Ensure the current user is an admin of the channel or handle permissions as needed
+            user_channel = db.session.query(UserChannel).filter_by(user_id=current_user.get_id()).first(); 
+            if is_user_channel_admin(current_user.get_id(), channel_id, user_channel):
+                # Delete the channel
+                if delete_channel(channel_id):
+                    flash("\"" + channel.channel_name + "\" channel successfully deleted.")
+                    return redirect(url_for("channels"))  # Redirect after successful deletion
+                else:
+                    flash("Deletion error.")
+                    return redirect(url_for("channels"))  # Redirect after successful deletion
             else:
-                return "Channel not found", 404  # Or handle deletion failure
+                flash("Permision Denied.")
+                return redirect(url_for("channels") + "?channel_id=" + channel_id)  # Redirect after successful deletion
         else:
-            return "Permission denied", 403  # Or handle permission denial
+            flash("Channel not found.")
+            return redirect(url_for("channels"))  # Redirect after successful deletion
 
     # Handle other HTTP methods if needed
     return redirect(url_for("index"))
