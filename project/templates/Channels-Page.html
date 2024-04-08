@@ -71,7 +71,7 @@
         <h1>Channels</h1>
         <button class="myBtn_multi" >Add channel</button>
         {% if channel_id != 0 %}
-        <button class="" onclick="location.href='{{ url_for('channels') }}';">See all channels</button>
+          <button class="" onclick="location.href='{{ url_for('channels') }}';">See all channels</button>
         {% endif %}
         <div class="modal modal_multi">
           <div class="modal-content" style = "background-color: white;">
@@ -113,7 +113,7 @@
             <button class="show-popup" style = "background-color: #F4BB44;">remove channel</button>
 
             {% if channel_id != 0 %}
-            <button class="myBtn_multi">Open channel</button>
+              <button class="myBtn_multi">Open channel</button>
               <div class="modal modal_multi" >
                 <div class="modal-content">
                   <!-- <h1>{{ channel.id }}</h1> -->
@@ -127,8 +127,8 @@
                   </div></div>
                   <span class="close close_multi">×</span>
               </div>
-              {% else %}
-                <button class="" onclick="location.href='{{ url_for('channels') }}?channel_id={{ channel.id }}';">Go to channel</button>
+            {% else %}
+              <button class="" onclick="location.href='{{ url_for('channels') }}?channel_id={{ channel.id }}';">Go to channel</button>
             {% endif %}
           </div>
         </div>
@@ -136,8 +136,6 @@
       <!-- end the loop here -->
     </div>
     </div>
-
-
   </body>
 
   <script>
