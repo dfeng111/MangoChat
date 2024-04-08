@@ -2,150 +2,153 @@
 
 {% block content %}
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/channels_page.css') }}">
-  <script src="https://kit.fontawesome.com/80c51aa779.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/channels_page.css') }}">
+<script src="https://kit.fontawesome.com/80c51aa779.js" crossorigin="anonymous"></script>
 
 
-  </head>
-  <body>
+</head>
+<body>
 
-    <!-- Side menu-->
-    {% include "navbar.html" %}
+  <!-- Side menu-->
+  {% include "navbar.html" %}
 
-    <div class="main-content">
-      <!-- CREATE CUSTOM BUTTON OUT OUT OF CHANNEL BOX CLASS-->
+  <div class="main-content">
+    <!-- CREATE CUSTOM BUTTON OUT OUT OF CHANNEL BOX CLASS-->
 
-      <div class="header">
-        <h1>Channels</h1>
-        <button class="myBtn_multi" >Add channel</button>
-        {% if channel_id != 0 %}
-          <button class="" onclick="location.href='{{ url_for('channels') }}';">See all channels</button>
-        {% endif %}
-        <div class="modal modal_multi">
-          <div class="modal-content" style = "background-color: white;">
-            <h1>Add Channel</h1>
-            <span class="close close_multi">×</span>
-            <p>
-            Please Input Channel name:
-            <form action="/create_channel" method="POST" novalidate>
-              {{ channelform.csrf_token }}
-              <div class="form-group">
-                <!-- Channel search bar-->
-                {{ channelform.channel_name.label }} {{ channelform.channel_name(size=20) }}
-                {{ channelform.chansubmit(size=20, class_="close-btn") }}
-                <!-- <label for="Channel">Channel name:</label> -->
-                <!-- <input type="text" id="Channel" name="Channels"> -->
-              </div>
-            </form>
-            </p>
+    <div class="header">
+      <h1>Channels</h1>
+      <button class="myBtn_multi" >Add channel</button>
+      {% if channel_id != 0 %}
+      <button class="" onclick="location.href='{{ url_for('channels') }}';">See all channels</button>
+      {% endif %}
+      <div class="modal modal_multi">
+        <div class="modal-content" style = "background-color: white;">
+          <h1>Add Channel</h1>
+          <span class="close close_multi">×</span>
+          <p>
+          Please Input Channel name:
+          <form action="/create_channel" method="POST" novalidate>
+            {{ channelform.csrf_token }}
+            <div class="form-group">
+              <!-- Channel search bar-->
+              {{ channelform.channel_name.label }} {{ channelform.channel_name(size=20) }}
+              {{ channelform.chansubmit(size=20, class_="close-btn") }}
+              <!-- <label for="Channel">Channel name:</label> -->
+              <!-- <input type="text" id="Channel" name="Channels"> -->
+            </div>
+          </form>
+          </p>
 
-          </div>
         </div>
       </div>
-    </div>
     </div>
 
     <div class= "grid-container">
       {% if channel_id != 0 %}
-        {# set channel = channels_list.filter_by(id=channel_id).first() #}
-        {% set channels_list = [ channels_query.filter_by(id=channel_id).first() ] %}
+      {# set channel = channels_list.filter_by(id=channel_id).first() #}
+      {% set channels_list = [ channels_query.filter_by(id=channel_id).first() ] %}
       {% else %}
-        {% set channels_list = channels_query.all() %}
+      {% set channels_list = channels_query.all() %}
       {% endif %}
       {% for channel in channels_list %}
-        <div class="channel-container">
+      <div class="channel-container">
 
-          <div class="channel-column">Channel {{ channel.id }}: {{ channel.channel_name }}</div>
+        <div class="channel-column">Channel {{ channel.id }}: {{ channel.channel_name }}</div>
 
-          <div class="channel-column">
-            <button class="show-popup" style = "background-color: #F4BB44;">remove channel</button>
+        <div class="channel-column">
 
-            {% if channel_id != 0 %}
-              <button class="myBtn_multi">Open channel</button>
-              <div class="modal modal_multi" >
-                <div class="modal-content">
-                  <!-- <h1>{{ channel.id }}</h1> -->
-                  <!-- <h1>{{ channel.channel_name }}</h1> -->
-                  <h1>Channel {{ channel.id }}: {{ channel.channel_name }}</h1>
+          {% if channel_id != 0 %}
+          <button class="myBtn_multi">Open channel</button>
+          <div class="modal modal_multi" >
+            <div class="modal-content">
+              <!-- <h1>{{ channel.id }}</h1> -->
+              <!-- <h1>{{ channel.channel_name }}</h1> -->
+              <h1>Channel {{ channel.id }}: {{ channel.channel_name }}</h1>
 
-                  <div class="channel-column" style = "margin-top: 100%;">
-                    <form style = "margin-top: 5%;">
-                      <label for="messaging">type message here:</label><br>
-                      <input type="text" id="messaging" name="messaging">
-                  </div></div>
-                  <span class="close close_multi">×</span>
+              <div class="channel-column" style = "margin-top: 100%;">
+                <form style = "margin-top: 5%;">
+                  <label for="messaging">type message here:</label><br>
+                  <input type="text" id="messaging" name="messaging">
+                </form>
               </div>
-            {% else %}
-              <button class="" onclick="location.href='{{ url_for('channels') }}?channel_id={{ channel.id }}';">Go to channel</button>
-            {% endif %}
+            </div>
+            <span class="close close_multi">×</span>
           </div>
+          {% else %}
+          <button class="" onclick="location.href='{{ url_for('channels') }}?channel_id={{ channel.id }}';">Go to channel</button>
+          {% endif %}
+          <form action="/delete_channel" method="POST">
+            <button class="show-popup" style="background-color: #F4BB44;" type="submit">Remove channel</button>
+            <input type="hidden" name="del_channel_id" value="{{ channel.id }}">
+          </form>
         </div>
+      </div>
       {% endfor %}
       <!-- end the loop here -->
     </div>
-    </div>
-  </body>
+  </div>
+</body>
 
-  <script>
-
-
-    // modal code
-    var modalparent = document.getElementsByClassName("modal_multi");
-
-    // Get the button that opens the modal
-
-    var modal_btn_multi = document.getElementsByClassName("myBtn_multi");
-
-    // Get the <span> element that closes the modal
-    var span_close_multi = document.getElementsByClassName("close_multi");
-
-    // When the user clicks the button, open the modal
-    function setDataIndex() {
-
-      for (i = 0; i < modal_btn_multi.length; i++)
-      {
-        modal_btn_multi[i].setAttribute('data-index', i);
-        modalparent[i].setAttribute('data-index', i);
-        span_close_multi[i].setAttribute('data-index', i);
-      }
-    }
+<script>
 
 
+  // modal code
+  var modalparent = document.getElementsByClassName("modal_multi");
+
+  // Get the button that opens the modal
+
+  var modal_btn_multi = document.getElementsByClassName("myBtn_multi");
+
+  // Get the <span> element that closes the modal
+  var span_close_multi = document.getElementsByClassName("close_multi");
+
+  // When the user clicks the button, open the modal
+  function setDataIndex() {
 
     for (i = 0; i < modal_btn_multi.length; i++)
     {
-      modal_btn_multi[i].onclick = function() {
-        var ElementIndex = this.getAttribute('data-index');
-        modalparent[ElementIndex].style.display = "block";
-      };
+      modal_btn_multi[i].setAttribute('data-index', i);
+      modalparent[i].setAttribute('data-index', i);
+      span_close_multi[i].setAttribute('data-index', i);
+    }
+  }
 
-      // When the user clicks on <span> (x), close the modal
-      span_close_multi[i].onclick = function() {
-        var ElementIndex = this.getAttribute('data-index');
-        modalparent[ElementIndex].style.display = "none";
-      };
 
+
+  for (i = 0; i < modal_btn_multi.length; i++)
+  {
+    modal_btn_multi[i].onclick = function() {
+      var ElementIndex = this.getAttribute('data-index');
+      modalparent[ElementIndex].style.display = "block";
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span_close_multi[i].onclick = function() {
+      var ElementIndex = this.getAttribute('data-index');
+      modalparent[ElementIndex].style.display = "none";
+    };
+
+  }
+
+  window.onload = function() {
+
+    setDataIndex();
+  };
+
+  window.onclick = function(event) {
+    if (event.target === modalparent[event.target.getAttribute('data-index')]) {
+      modalparent[event.target.getAttribute('data-index')].style.display = "none";
     }
 
-    window.onload = function() {
+    // OLD CODE
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  };
 
-      setDataIndex();
-    };
+  // sidebar open/close
 
-    window.onclick = function(event) {
-      if (event.target === modalparent[event.target.getAttribute('data-index')]) {
-        modalparent[event.target.getAttribute('data-index')].style.display = "none";
-      }
-
-      // OLD CODE
-      if (event.target === modal) {
-        modal.style.display = "none";
-      }
-    };
-
-    // sidebar open/close
-
-  </script>
-  </html>
+</script>
+</html>
 
 {% endblock %}

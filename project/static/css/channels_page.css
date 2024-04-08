@@ -1,5 +1,5 @@
 body { 
-    overflow: hidden;
+    /* overflow: hidden; */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,7 +8,7 @@ body {
   
   /* header */
   .header {
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: #F4BB44;
     text-align: center;
     font-size: 150%;
