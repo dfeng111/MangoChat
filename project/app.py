@@ -1,6 +1,6 @@
 from flask import Flask, flash, render_template, request, redirect, url_for
 from config import Config
-from Database.database_setup import db, User, Channel, UserChannel
+from Database.database_setup import Message, db, User, Channel, UserChannel
 from channel_management import create_channel, delete_channel
 from utils import get_current_user_id, is_user_channel_admin
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
@@ -68,11 +68,12 @@ def message():
         return redirect(url_for("channels"))
     else:
         channel = channels_query.filter_by(id=channel_id).first()
+        messages = db.session.query(Message).filter_by(channel=channel).all()
         if not channel:
             flash("No channel with that ID")
             return redirect(url_for("channels"))
 
-    return render_template("message.html", channel=channel, messageform=messageForm)
+    return render_template("message.html", channel=channel, messages=messages, messageform=messageForm)
 
 
 @app.route('/home')
