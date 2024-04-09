@@ -16,74 +16,13 @@
     <!-- CREATE CUSTOM BUTTON OUT OUT OF CHANNEL BOX CLASS-->
 
     <div class="header">
-      <h1>Channels</h1>
-      <button class="myBtn_multi" >Add channel</button>
-      {% if channel_id != 0 %}
+      <h1>Channel {{ channel.id }}: {{ channel.channel_name }}</h1>
       <button class="" onclick="location.href='{{ url_for('channels') }}';">See all channels</button>
-      {% endif %}
-      <div class="modal modal_multi">
-        <div class="modal-content" style = "background-color: white;">
-          <h1>Add Channel</h1>
-          <span class="close close_multi">×</span>
-          <p>
-          Please Input Channel name:
-          <form action="/create_channel" method="POST" novalidate>
-            {{ channelform.csrf_token }}
-            <div class="form-group">
-              <!-- Channel search bar-->
-              {{ channelform.channel_name.label }} {{ channelform.channel_name(size=20) }}
-              {{ channelform.chansubmit(size=20, class_="close-btn") }}
-              <!-- <label for="Channel">Channel name:</label> -->
-              <!-- <input type="text" id="Channel" name="Channels"> -->
-            </div>
-          </form>
-          </p>
-
-        </div>
-      </div>
     </div>
 
     <div class= "grid-container">
-      {% if channel_id != 0 %}
-      {# set channel = channels_list.filter_by(id=channel_id).first() #}
-      {% set channels_list = [ channels_query.filter_by(id=channel_id).first() ] %}
-      {% else %}
-      {% set channels_list = channels_query.all() %}
-      {% endif %}
-      {% for channel in channels_list %}
       <div class="channel-container">
-
-        <div class="channel-column">Channel {{ channel.id }}: {{ channel.channel_name }}</div>
-
-        <div class="channel-column">
-
-          {% if channel_id != 0 %}
-          <button class="myBtn_multi">Open channel</button>
-          <div class="modal modal_multi" >
-            <div class="modal-content">
-              <!-- <h1>{{ channel.id }}</h1> -->
-              <!-- <h1>{{ channel.channel_name }}</h1> -->
-              <h1>Channel {{ channel.id }}: {{ channel.channel_name }}</h1>
-
-              <div class="channel-column" style = "margin-top: 100%;">
-                <form style = "margin-top: 5%;">
-                  <label for="messaging">type message here:</label><br>
-                  <input type="text" id="messaging" name="messaging">
-                </form>
-              </div>
-            </div>
-            <span class="close close_multi">×</span>
-          </div>
-          {% else %}
-          <button class="" onclick="location.href='{{ url_for('channels') }}?channel_id={{ channel.id }}';">Go to channel</button>
-          {% endif %}
-          <form action="/delete_channel" method="POST">
-            <button class="show-popup" style="background-color: #F4BB44;" type="submit">Remove channel</button>
-            <input type="hidden" name="del_channel_id" value="{{ channel.id }}">
-          </form>
-        </div>
       </div>
-      {% endfor %}
       <!-- end the loop here -->
     </div>
   </div>

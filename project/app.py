@@ -72,7 +72,7 @@ def message():
             flash("No channel with that ID")
             return redirect(url_for("channels"))
 
-    return render_template("message.html", channelform=channelForm, channel_id=channel_id, channels_query=channels_query)
+    return render_template("message.html", channel=channel)
 
 
 @app.route('/home')
