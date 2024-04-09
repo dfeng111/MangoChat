@@ -78,11 +78,11 @@ def message():
 
     return render_template("message.html", channel=channel, messages=messages, messageform=messageForm)
 
-@socketio.on('/send_message')
+@socketio.on('message')
 def handle_send_message(data):
     messageForm = MessageForm(data)
     if messageForm.validate_on_submit():
-        alert("cheese")
+        flash("cheese")
         return redirect(url_for("home"))
 
 
