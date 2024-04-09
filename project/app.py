@@ -54,9 +54,26 @@ def channels():
         if not channel:
             flash("No channel with that ID")
             channel_id = 0
-
+        return redirect(url_for("message") + "?channel_id=" + str(channel_id))
 
     return render_template("Channels-Page.html", channelform=channelForm, channel_id=channel_id, channels_query=channels_query)
+
+@app.route("/message", methods=["GET"])
+@login_required
+def message():
+    channelForm = ChannelForm()
+    channel_id = request.args.get("channel_id")
+    channels_query = db.session.query(Channel).order_by(Channel.id)
+    if channel_id is None or not channel_id.isnumeric():
+        return redirect(url_for("channels"))
+    else:
+        channel = channels_query.filter_by(id=channel_id).first()
+        if not channel:
+            flash("No channel with that ID")
+            return redirect(url_for("channels"))
+
+    return render_template("message.html", channelform=channelForm, channel_id=channel_id, channels_query=channels_query)
+
 
 @app.route('/home')
 def home():
