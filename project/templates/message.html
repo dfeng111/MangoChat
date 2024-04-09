@@ -22,16 +22,19 @@
   </div>
 
   <div class= "grid-container">
+    {% for message in messages %}
     <div class="channel-container">
-      {% for message in messages %}
-      <div>
-        {{ message.sender.username }}: {{ message.content }}
+      <div class="msg_username">
+        {{ message.sender.username }}: 
       </div>
-      <div>
+      <div class="msg_content">
+        {{ message.content }}
+      </div>
+      <div class="msg_timestamp">
         Sent at {{message.timestamp}}
       </div>
-      {% endfor %}
     </div>
+    {% endfor %}
     <!-- end the loop here -->
   </div>
 </div>
