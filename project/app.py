@@ -5,9 +5,12 @@ from channel_management import create_channel, delete_channel
 from utils import get_current_user_id, is_user_channel_admin
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from forms import ChannelForm, MessageForm, RegisterForm, LoginForm
+from flask_socketio import SocketIO
 
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object(Config)
+
+socketio = SocketIO(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -74,6 +77,13 @@ def message():
             return redirect(url_for("channels"))
 
     return render_template("message.html", channel=channel, messages=messages, messageform=messageForm)
+
+@socketio.on('/send_message')
+def handle_send_message(data):
+    messageForm = MessageForm(data)
+    if messageForm.validate_on_submit():
+        alert("cheese")
+        return redirect(url_for("home"))
 
 
 @app.route('/home')
@@ -200,4 +210,5 @@ def delete_channel_route():
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
-    app.run(host="localhost", port=3000, debug=True)
+    # app.run(host="localhost", port=3000, debug=True)
+    socketio.run(app, host="localhost", port=3000, debug=True, use_reloader=True, log_output=True)
