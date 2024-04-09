@@ -2,52 +2,57 @@
 
 {% block content %}
 
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/messaging.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/messaging.css') }}">
 
 
-  <!-- Side menu-->
-  {% include "navbar.html" %}
-  <script type="text/javascript" charset="utf-8">
-    var socket = io();
-    socket.on('connect', function() {
-      socket.emit('my event', {data: 'I\'m connected!'});
-    });
-  </script>
-  <div class="main-content">
-    <!-- CREATE CUSTOM BUTTON OUT OUT OF CHANNEL BOX CLASS-->
+<!-- Side menu-->
+{% include "navbar.html" %}
+<script type="text/javascript" charset="utf-8">
+  var socket = io();
+  socket.on('connect', function() {
+    socket.emit('my event', {data: 'I\'m connected!'});
+  });
+</script>
+<div class="main-content">
+  <!-- CREATE CUSTOM BUTTON OUT OUT OF CHANNEL BOX CLASS-->
 
-    <div class="header">
-      <h1>Channel {{ channel.id }}: {{ channel.channel_name }}</h1>
-      <button class="" onclick="location.href='{{ url_for('channels') }}';">See all channels</button>
-    </div>
-
-    <div class= "grid-container">
-      <div class="channel-container">
-        {% for message in messages %}
-          <div>
-            {{ message.sender.username }}: {{ message.content }}
-          </div>
-          <div>
-            Sent at {{message.timestamp}}
-          </div>
-        {% endfor %}
-      </div>
-      <!-- end the loop here -->
-    </div>
+  <div class="header">
+    <h1>Channel {{ channel.id }}: {{ channel.channel_name }}</h1>
+    <button class="" onclick="location.href='{{ url_for('channels') }}';">See all channels</button>
   </div>
 
-  <footer>
-    <form method="POST" action="#">
-      <!-- <input type="text" id="message" name="message" style = "width: 50%; height: 50%"> -->
-      {{ messageform.csrf_token }}
-      {{ messageform.user_id(value=current_user.get_id()) }}
-      {{ messageform.message_text() }}
-      {{ messageform.message_submit(size=20) }}
-    </form>
-  </footer>
+  <div class= "grid-container">
+    <div class="channel-container">
+      {% for message in messages %}
+      <div>
+        {{ message.sender.username }}: {{ message.content }}
+      </div>
+      <div>
+        Sent at {{message.timestamp}}
+      </div>
+      {% endfor %}
+    </div>
+    <!-- end the loop here -->
+  </div>
+</div>
 
-  <script>
+<footer>
+  <form method="POST" action="#">
+    <!-- <input type="text" id="message" name="message" style = "width: 50%; height: 50%"> -->
+    {{ messageform.csrf_token }}
+    {{ messageform.user_id(value=current_user.get_id()) }}
+    {{ messageform.message_text() }}
+    {{ messageform.message_submit(size=20) }}
+  </form>
+</footer>
 
-  </script>
+<script>
+  $(
+    $('form#message_submit').submit(function(event) {
+      socket.emit('message_sent', {data: $('#message_text').val()});
+      return false;
+    });
+  );
+</script>
 
 {% endblock %}
