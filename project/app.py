@@ -4,7 +4,7 @@ from Database.database_setup import db, User, Channel, UserChannel
 from channel_management import create_channel, delete_channel
 from utils import get_current_user_id, is_user_channel_admin
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from forms import ChannelForm, RegisterForm, LoginForm
+from forms import ChannelForm, MessageForm, RegisterForm, LoginForm
 
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object(Config)
@@ -61,7 +61,7 @@ def channels():
 @app.route("/message", methods=["GET"])
 @login_required
 def message():
-    channelForm = ChannelForm()
+    messageForm = MessageForm()
     channel_id = request.args.get("channel_id")
     channels_query = db.session.query(Channel).order_by(Channel.id)
     if channel_id is None or not channel_id.isnumeric():
@@ -72,7 +72,7 @@ def message():
             flash("No channel with that ID")
             return redirect(url_for("channels"))
 
-    return render_template("message.html", channel=channel)
+    return render_template("message.html", channel=channel, messageform=messageForm)
 
 
 @app.route('/home')
