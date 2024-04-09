@@ -2,12 +2,9 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/channels_page.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/messaging.css') }}">
 <script src="https://kit.fontawesome.com/80c51aa779.js" crossorigin="anonymous"></script>
 
-
-</head>
-<body>
 
   <!-- Side menu-->
   {% include "navbar.html" %}
@@ -26,7 +23,10 @@
       <!-- end the loop here -->
     </div>
   </div>
-</body>
+
+  <footer>
+    <input type="text" id="message" name="message" style = "width: 50%; height: 50%">
+  </footer>
 
 <script>
 
