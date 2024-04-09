@@ -87,3 +87,8 @@ footer {
     text-decoration: none;
     cursor: pointer;
 }
+
+#message_text {
+  width: 50%;
+  height: 50%;
+}

@@ -32,7 +32,13 @@
   </div>
 
   <footer>
-    <input type="text" id="message" name="message" style = "width: 50%; height: 50%">
+    <form method="POST">
+      <!-- <input type="text" id="message" name="message" style = "width: 50%; height: 50%"> -->
+        {{ messageform.csrf_token }}
+        {{ messageform.user_id(value=current_user.get_id()) }}
+        {{ messageform.message_text() }}
+        {{ messageform.message_submit(size=20) }}
+    </form>
   </footer>
 
   <script>

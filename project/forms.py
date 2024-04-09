@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from sqlalchemy import String
-from wtforms import (PasswordField, StringField, SubmitField, validators)
-from wtforms.validators import InputRequired, Length, EqualTo, DataRequired
+from wtforms import (PasswordField, StringField, SubmitField,HiddenField, validators)
+from wtforms.validators import InputRequired, Length, EqualTo, DataRequired, NumberRange
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired()], render_kw={"placeholder": "Enter your username"})
@@ -20,5 +20,6 @@ class ChannelForm(FlaskForm):
     chansubmit = SubmitField('Create Channel')
 
 class MessageForm(FlaskForm):
-    user_id = StringField('User ID', validators=[DataRequired()])
+    user_id = HiddenField('User ID', validators=[DataRequired(), NumberRange(min=1, message="Must be a positive Number")])
     message_text = StringField('Message Input', validators=[InputRequired()], render_kw={"placeholder": "Send a message"})
+    message_submit = SubmitField('Send Message')
