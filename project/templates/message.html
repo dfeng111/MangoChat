@@ -7,27 +7,27 @@
 
 <!-- Side menu-->
 {% include "navbar.html" %}
+<div class="header">
+  <h1>Channel {{ channel.id }}: {{ channel.channel_name }}</h1>
+  <button class="" onclick="location.href='{{ url_for('channels') }}';">See all channels</button>
+</div>
 <div class="main-content">
   <!-- CREATE CUSTOM BUTTON OUT OUT OF CHANNEL BOX CLASS-->
 
-  <div class="header">
-    <h1>Channel {{ channel.id }}: {{ channel.channel_name }}</h1>
-    <button class="" onclick="location.href='{{ url_for('channels') }}';">See all channels</button>
-  </div>
 
-  <div class= "grid-container">
+  <div class= "channel-contents">
     {% for message in messages %}
-    <div class="message-container">
-      <div class="msg_username">
+    <article class="message-container">
+      <div class="msg-username">
         {{ message.sender.username }}: 
       </div>
-      <div class="msg_content">
+      <div class="msg-content">
         {{ message.content }}
       </div>
-      <div class="msg_timestamp">
+      <div class="msg-timestamp">
         Sent at {{message.timestamp}}
       </div>
-    </div>
+    </article>
     {% endfor %}
     <!-- end the loop here -->
   </div>
@@ -51,7 +51,6 @@
    $(document).ready(function() {
   $('#send_message').on("submit", function(event) {
       event.preventDefault();
-    //socket.emit('message_sent', {data: $('#message_text').val()});
       var formData = $(this).serialize();
       //alert(formData);
       var url = "{{ url_for("send_message_route") }}";
