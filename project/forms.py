@@ -16,7 +16,7 @@ class RegisterForm(FlaskForm):
     regsubmit = SubmitField('Register')
 
 class ChannelForm(FlaskForm):
-    channel_name = StringField('Channel Name', validators=[InputRequired(), Length(min=5)], render_kw={"placeholder": "Enter a channel name:"})
+    channel_name = StringField('Channel Name', validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder": "Enter a channel name:"})
     chansubmit = SubmitField('Create Channel')
 
 class MessageForm(FlaskForm):
