@@ -30,6 +30,8 @@ body {
   padding-left: 4.5%;
   padding-right: .5%;
   margin-bottom: 1%;
+  border-radius: 5px;
+  border: 1px solid black;
 }
 
 .channel-column {
