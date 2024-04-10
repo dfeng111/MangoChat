@@ -26,7 +26,7 @@
           <h1>Add Channel</h1>
           <span class="close close_multi">×</span>
           <p>
-          Please Input Channel name:
+          Please Input Channel name (1-30 chars):
           <form action="/create_channel" method="POST" novalidate>
             {{ channelform.csrf_token }}
             <div class="form-group">
@@ -149,6 +149,5 @@
   // sidebar open/close
 
 </script>
-</html>
 
 {% endblock %}

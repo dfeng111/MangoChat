@@ -1,13 +1,18 @@
-from flask import Flask, flash, render_template, request, redirect, url_for
+from flask import Flask, flash, jsonify, render_template, request, redirect, url_for
 from config import Config
-from Database.database_setup import db, User, Channel, UserChannel
+from Database.database_setup import Message, db, User, Channel, UserChannel
 from channel_management import create_channel, delete_channel
 from utils import get_current_user_id, is_user_channel_admin
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from forms import ChannelForm, RegisterForm, LoginForm
+from forms import ChannelForm, MessageForm, RegisterForm, LoginForm
+from flask_socketio import SocketIO
+import sys
+from send_message import send_message
 
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object(Config)
+
+socketio = SocketIO(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -54,9 +59,48 @@ def channels():
         if not channel:
             flash("No channel with that ID")
             channel_id = 0
-
+        return redirect(url_for("message") + "?channel_id=" + str(channel_id))
 
     return render_template("Channels-Page.html", channelform=channelForm, channel_id=channel_id, channels_query=channels_query)
+
+@app.route("/send_message", methods=["POST"])
+def send_message_route():
+    print(request.method, file=sys.stderr)
+    print(request.form.to_dict(), file=sys.stderr)
+    # print(request.values.to_dict(), file=sys.stderr)
+    # for field in request.form:
+    #     print("%s : %s" % (field, request.form[field]), file=sys.stderr)
+    messageForm = MessageForm()
+    # Convert user_id from a string to an int
+    if messageForm.user_id.data.isnumeric():
+        messageForm.user_id.data = int(messageForm.user_id.data)
+    if messageForm.channel_id.data.isnumeric():
+        messageForm.channel_id.data = int(messageForm.channel_id.data)
+    if messageForm.validate_on_submit():
+        send_message(channel_id=messageForm.channel_id.data,
+                     sender_id=messageForm.user_id.data,
+                     message_content=messageForm.message_text.data)
+    messageForm = MessageForm()
+    results =  {"processed": "true"}
+    return jsonify(results)
+
+@app.route("/message", methods=["GET"])
+@login_required
+def message():
+    messageForm = MessageForm()
+    channel_id = request.args.get("channel_id")
+    channels_query = db.session.query(Channel).order_by(Channel.id)
+    if channel_id is None or not channel_id.isnumeric():
+        return redirect(url_for("channels"))
+    else:
+        channel = channels_query.filter_by(id=channel_id).first()
+        messages = db.session.query(Message).filter_by(channel=channel).all()
+        if not channel:
+            flash("No channel with that ID")
+            return redirect(url_for("channels"))
+
+    return render_template("message.html", channel=channel, messages=messages, messageform=messageForm)
+
 
 @app.route('/home')
 def home():
@@ -144,7 +188,7 @@ def create_channel_route():
 
         # Create the channel
         channel = create_channel(user_id, channel_name)
-        
+
         # Redirect to channel page or wherever appropriate
         return redirect(url_for("channels", channel_id=channel.id))
 
@@ -162,7 +206,7 @@ def delete_channel_route():
         channel = db.session.query(Channel).filter_by(id=channel_id).first();
         if channel:
             # Ensure the current user is an admin of the channel or handle permissions as needed
-            user_channel = db.session.query(UserChannel).filter_by(user_id=current_user.get_id()).first(); 
+            user_channel = db.session.query(UserChannel).filter_by(user_id=current_user.get_id(), channel=channel).first(); 
             if is_user_channel_admin(current_user.get_id(), channel_id, user_channel):
                 # Delete the channel
                 if delete_channel(channel_id):
@@ -183,3 +227,4 @@ def delete_channel_route():
 
 if __name__ == "__main__":
     app.run(host="localhost", port=3000, debug=True)
+    # socketio.run(app, host="localhost", port=3000, debug=True, use_reloader=True, log_output=True)

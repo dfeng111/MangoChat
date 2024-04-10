@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/messaging.css') }}">
+
+
+<!-- Side menu-->
+{% include "navbar.html" %}
+<div class="header">
+  <h1>Channel {{ channel.id }}: {{ channel.channel_name }}</h1>
+  <button class="" onclick="location.href='{{ url_for('channels') }}';">See all channels</button>
+</div>
+<div class="main-content">
+  <!-- CREATE CUSTOM BUTTON OUT OUT OF CHANNEL BOX CLASS-->
+
+
+  <div class= "channel-contents">
+    {% for message in messages %}
+    <article class="message-container">
+      <div class="msg-username">
+        {{ message.sender.username }}: 
+      </div>
+      <div class="msg-content">
+        {{ message.content }}
+      </div>
+      <div class="msg-timestamp">
+        Sent at {{message.timestamp}}
+      </div>
+    </article>
+    {% endfor %}
+    <!-- end the loop here -->
+  </div>
+</div>
+
+<footer>
+  <form method="POST" id="send_message">
+    {{ messageform.csrf_token }}
+    {{ messageform.user_id(value=current_user.get_id()) }}
+    {{ messageform.channel_id(value=channel.id) }}
+    {{ messageform.message_text() }}
+    {{ messageform.message_submit(size=20) }}
+  </form>
+  <!-- <form method="POST" action="#" id="send_message">
+    <input type="text" id="message" name="message" style = "width: 50%; height: 50%">
+    <input type="submit" name="message_submit" value="">
+    </form> -->
+</footer>
+
+<script>
+  // refresh page every 10 seconds
+  setInterval(function() { location.reload(); }, 10000);
+  //scroll messages to bottom
+  $(".channel-contents").scrollTop($(".channel-contents")[0].scrollHeight);
+  $(document).ready(function() {
+    $('#send_message').on("submit", function(event) {
+      event.preventDefault();
+      var formData = $(this).serialize();
+      //alert(formData);
+      var url = "{{ url_for("send_message_route") }}";
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: formData,
+        success: function(data){
+          console.log(data)
+          $(".channel-contents").animate({ scrollTop: $(".channel-contents").prop("scrollHeight")}, 1000);
+          $("#message_text").val("");
+          //this.reset()
+          //alert('message submitted successfully');
+          location.reload();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          // Handle the error response from the server
+          alert(jqXHR.responseText);
+          console.log(errorThrown);
+          console.log(textStatus);
+        },
+        cache: false,
+        contentType: "application/x-www-form-urlencoded",
+        processData: true
+      });
+
+    });
+
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader("X-CSRFToken", "{{ messageform.csrf_token._value() }}")
+        }
+      }
+    })
+  }); 
+</script>
+
+
+{% endblock %}

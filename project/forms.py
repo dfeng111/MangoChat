@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import (PasswordField, StringField, SubmitField)
-from wtforms.validators import InputRequired, Length, EqualTo
+from sqlalchemy import String
+from wtforms import (PasswordField, StringField, SubmitField,HiddenField, validators)
+from wtforms.validators import InputRequired, Length, EqualTo, DataRequired, NumberRange
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[InputRequired()], render_kw={"placeholder": "Enter your username"})
@@ -15,5 +16,11 @@ class RegisterForm(FlaskForm):
     regsubmit = SubmitField('Register')
 
 class ChannelForm(FlaskForm):
-    channel_name = StringField('Channel Name', validators=[InputRequired(), Length(min=5)], render_kw={"placeholder": "Enter a channel name:"})
+    channel_name = StringField('Channel Name', validators=[InputRequired(), Length(min=1, max=30)], render_kw={"placeholder": "Enter a channel name:"})
     chansubmit = SubmitField('Create Channel')
+
+class MessageForm(FlaskForm):
+    user_id = HiddenField('User ID', validators=[DataRequired(), NumberRange(min=1, message="Must be a positive Number")])
+    channel_id = HiddenField('Channel ID', validators=[DataRequired(), NumberRange(min=1, message="Must be a positive Number")])
+    message_text = StringField('Message Input', validators=[InputRequired()], render_kw={"placeholder": "Send a message"})
+    message_submit = SubmitField('Send Message')

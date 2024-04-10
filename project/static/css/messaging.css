@@ -1,0 +1,86 @@
+body { 
+  /* overflow: hidden; */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+/* header */
+.header {
+  /* overflow: hidden; */
+  background-color: #F4BB44;
+  text-align: center;
+  font-size: 150%;
+  width: 100%;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-bottom: 10px;
+  height: 5em;
+}
+
+
+footer {
+  background-color: #F4BB44;
+  color: black;
+  text-align: center;
+  padding: 10px 0;
+  position: fixed;
+  width: 100%;
+  height: 3em;
+  bottom: 0;
+}
+
+/* channel tabs */
+
+.message-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 95%;
+  margin-left: 4.5%;
+  padding-left: 4.5%;
+  padding-right: .5%;
+  margin-bottom: 1%;
+  border-radius: 5px;
+  border: 1px black solid;
+  background-color: lightgray;
+}
+
+.channel-contents {
+  display: flex;
+  flex-direction: column;
+  /* grid-template-columns: repeat(3, 1fr) */
+  height: calc(100vh - 11em);
+  max-width: calc(100vw - 80px);
+  padding-top: 1%;
+  align-content: center;
+  grid-template-columns: 1;
+  background-color: white; 
+
+
+  overflow-y: auto;
+  /* max-height: 500px; */
+}
+
+.msg-username, .msg-content, .msg-timestamp {
+  padding: 0.5em;
+  border-radius: 5px;
+}
+
+.msg-username {
+  /* grid-column: 1; */
+}
+
+.msg-content {
+  /* grid-column: 2; */
+}
+
+.msg-timestamp {
+  /* grid-column: 3; */
+}
+
+.main-content {
+  /* margin-top: 5em; */
+  margin-bottom: 3em;
+}
