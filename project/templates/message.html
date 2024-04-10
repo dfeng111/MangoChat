@@ -65,6 +65,7 @@
         success: function(data){
           console.log(data)
           $(".channel-contents").animate({ scrollTop: $(".channel-contents").prop("scrollHeight")}, 1000);
+          $("#message_text").val("");
           //this.reset()
           //alert('message submitted successfully');
           location.reload();
