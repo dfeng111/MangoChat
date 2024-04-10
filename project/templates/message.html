@@ -17,7 +17,7 @@
 
   <div class= "grid-container">
     {% for message in messages %}
-    <div class="channel-container">
+    <div class="message-container">
       <div class="msg_username">
         {{ message.sender.username }}: 
       </div>
@@ -53,7 +53,7 @@
       event.preventDefault();
     //socket.emit('message_sent', {data: $('#message_text').val()});
       var formData = $(this).serialize();
-      alert(formData);
+      //alert(formData);
       var url = "{{ url_for("send_message_route") }}";
       $.ajax({
         url: url,

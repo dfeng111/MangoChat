@@ -33,7 +33,7 @@ footer {
 
   /* channel tabs */
 
-  .channel-container {
+  .message-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -42,6 +42,8 @@ footer {
   padding-left: 4.5%;
   padding-right: .5%;
   margin-bottom: 1%;
+  border-radius: 5px;
+  border: 1px black solid;
 }
 
 .channel-column {
@@ -91,4 +93,8 @@ footer {
 #message_text {
   width: 50%;
   height: 50%;
+}
+
+.main-content {
+      margin-bottom: 75px;
 }
