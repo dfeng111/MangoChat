@@ -48,8 +48,9 @@
 </footer>
 
 <script>
-   $(document).ready(function() {
-  $('#send_message').on("submit", function(event) {
+  $(".channel-contents").scrollTop($(".channel-contents")[0].scrollHeight);
+  $(document).ready(function() {
+    $('#send_message').on("submit", function(event) {
       event.preventDefault();
       var formData = $(this).serialize();
       //alert(formData);
@@ -60,6 +61,7 @@
         data: formData,
         success: function(data){
           console.log(data)
+          $(".channel-contents").animate({ scrollTop: $(".channel-contents").prop("scrollHeight")}, 1000);
           //this.reset()
           //alert('message submitted successfully');
           location.reload();
