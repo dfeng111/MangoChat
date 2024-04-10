@@ -206,7 +206,7 @@ def delete_channel_route():
         channel = db.session.query(Channel).filter_by(id=channel_id).first();
         if channel:
             # Ensure the current user is an admin of the channel or handle permissions as needed
-            user_channel = db.session.query(UserChannel).filter_by(user_id=current_user.get_id()).first(); 
+            user_channel = db.session.query(UserChannel).filter_by(user_id=current_user.get_id(), channel=channel).first(); 
             if is_user_channel_admin(current_user.get_id(), channel_id, user_channel):
                 # Delete the channel
                 if delete_channel(channel_id):
