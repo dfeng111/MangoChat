@@ -48,6 +48,9 @@
 </footer>
 
 <script>
+  // refresh page every 10 seconds
+  setInterval(function() { location.reload(); }, 10000);
+  //scroll messages to bottom
   $(".channel-contents").scrollTop($(".channel-contents")[0].scrollHeight);
   $(document).ready(function() {
     $('#send_message').on("submit", function(event) {
