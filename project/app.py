@@ -1,4 +1,4 @@
-from flask import Flask, flash, render_template, request, redirect, url_for
+from flask import Flask, flash, jsonify, render_template, request, redirect, url_for
 from config import Config
 from Database.database_setup import Message, db, User, Channel, UserChannel
 from channel_management import create_channel, delete_channel
@@ -6,6 +6,8 @@ from utils import get_current_user_id, is_user_channel_admin
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from forms import ChannelForm, MessageForm, RegisterForm, LoginForm
 from flask_socketio import SocketIO
+import sys
+from send_message import send_message
 
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object(Config)
@@ -61,6 +63,27 @@ def channels():
 
     return render_template("Channels-Page.html", channelform=channelForm, channel_id=channel_id, channels_query=channels_query)
 
+@app.route("/send_message", methods=["POST"])
+def send_message_route():
+    print(request.method, file=sys.stderr)
+    print(request.form.to_dict(), file=sys.stderr)
+    # print(request.values.to_dict(), file=sys.stderr)
+    # for field in request.form:
+    #     print("%s : %s" % (field, request.form[field]), file=sys.stderr)
+    messageForm = MessageForm()
+    # Convert user_id from a string to an int
+    if messageForm.user_id.data.isnumeric():
+        messageForm.user_id.data = int(messageForm.user_id.data)
+    if messageForm.channel_id.data.isnumeric():
+        messageForm.channel_id.data = int(messageForm.channel_id.data)
+    if messageForm.validate_on_submit():
+        send_message(channel_id=messageForm.channel_id.data,
+                     sender_id=messageForm.user_id.data,
+                     message_content=messageForm.message_text.data)
+    messageForm = MessageForm()
+    results =  {"processed": "true"}
+    return jsonify(results)
+
 @app.route("/message", methods=["GET"])
 @login_required
 def message():
@@ -77,13 +100,6 @@ def message():
             return redirect(url_for("channels"))
 
     return render_template("message.html", channel=channel, messages=messages, messageform=messageForm)
-
-@socketio.on('message')
-def handle_send_message(data):
-    messageForm = MessageForm(data)
-    if messageForm.validate_on_submit():
-        flash("cheese")
-        return redirect(url_for("home"))
 
 
 @app.route('/home')
@@ -172,7 +188,7 @@ def create_channel_route():
 
         # Create the channel
         channel = create_channel(user_id, channel_name)
-        
+
         # Redirect to channel page or wherever appropriate
         return redirect(url_for("channels", channel_id=channel.id))
 
@@ -210,5 +226,5 @@ def delete_channel_route():
     return redirect(url_for("index"))
 
 if __name__ == "__main__":
-    # app.run(host="localhost", port=3000, debug=True)
-    socketio.run(app, host="localhost", port=3000, debug=True, use_reloader=True, log_output=True)
+    app.run(host="localhost", port=3000, debug=True)
+    # socketio.run(app, host="localhost", port=3000, debug=True, use_reloader=True, log_output=True)

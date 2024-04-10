@@ -21,5 +21,6 @@ class ChannelForm(FlaskForm):
 
 class MessageForm(FlaskForm):
     user_id = HiddenField('User ID', validators=[DataRequired(), NumberRange(min=1, message="Must be a positive Number")])
+    channel_id = HiddenField('Channel ID', validators=[DataRequired(), NumberRange(min=1, message="Must be a positive Number")])
     message_text = StringField('Message Input', validators=[InputRequired()], render_kw={"placeholder": "Send a message"})
     message_submit = SubmitField('Send Message')

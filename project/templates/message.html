@@ -7,12 +7,6 @@
 
 <!-- Side menu-->
 {% include "navbar.html" %}
-<script type="text/javascript" charset="utf-8">
-  var socket = io();
-  socket.on('connect', function() {
-    socket.emit('my event', {data: 'I\'m connected!'});
-  });
-</script>
 <div class="main-content">
   <!-- CREATE CUSTOM BUTTON OUT OUT OF CHANNEL BOX CLASS-->
 
@@ -40,22 +34,59 @@
 </div>
 
 <footer>
-  <form method="POST" action="#">
-    <!-- <input type="text" id="message" name="message" style = "width: 50%; height: 50%"> -->
+  <form method="POST" id="send_message">
     {{ messageform.csrf_token }}
     {{ messageform.user_id(value=current_user.get_id()) }}
+    {{ messageform.channel_id(value=channel.id) }}
     {{ messageform.message_text() }}
     {{ messageform.message_submit(size=20) }}
   </form>
+  <!-- <form method="POST" action="#" id="send_message">
+    <input type="text" id="message" name="message" style = "width: 50%; height: 50%">
+    <input type="submit" name="message_submit" value="">
+    </form> -->
 </footer>
 
 <script>
-  $(
-    $('form#message_submit').submit(function(event) {
-      socket.emit('message_sent', {data: $('#message_text').val()});
-      return false;
+   $(document).ready(function() {
+  $('#send_message').on("submit", function(event) {
+      event.preventDefault();
+    //socket.emit('message_sent', {data: $('#message_text').val()});
+      var formData = $(this).serialize();
+      alert(formData);
+      var url = "{{ url_for("send_message_route") }}";
+      $.ajax({
+        url: url,
+        type: 'POST',
+        data: formData,
+        success: function(data){
+          console.log(data)
+          //this.reset()
+          //alert('message submitted successfully');
+          location.reload();
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+          // Handle the error response from the server
+          alert(jqXHR.responseText);
+          console.log(errorThrown);
+          console.log(textStatus);
+        },
+        cache: false,
+        contentType: "application/x-www-form-urlencoded",
+        processData: true
+      });
+
     });
-  );
+
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+        if (!/^(GET|HEAD|OPTIONS|TRACE)$/i.test(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader("X-CSRFToken", "{{ messageform.csrf_token._value() }}")
+        }
+      }
+    })
+  }); 
 </script>
+
 
 {% endblock %}
