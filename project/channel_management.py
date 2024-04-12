@@ -1,4 +1,4 @@
-from Database.database_setup import db, Channel, UserChannel
+from Database.database_setup import Message, db, Channel, UserChannel
 
 def create_channel(user_id, channel_name):
     """
@@ -43,8 +43,7 @@ def delete_channel(channel_id):
     # channel = Channel.query.get(channel_id)
     channel = db.session.query(Channel).get(channel_id)
     if channel:
-        # Delete the channel and related user-channel associations
-        UserChannel.query.filter_by(channel_id=channel_id).delete()
+        # Deletions are taken care of with on delete cascade.
         db.session.delete(channel)
         db.session.commit()
         return True

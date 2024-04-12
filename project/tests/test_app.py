@@ -1,8 +1,8 @@
 from flask_login import current_user
 import pytest
 from app import app
-from Database.database_setup import db, User
-from forms import RegisterForm, LoginForm
+from Database.database_setup import db, User, Channel, Message
+from forms import MessageForm, RegisterForm, LoginForm
 
 @pytest.fixture
 def test_client():
@@ -24,13 +24,26 @@ def test_index_page(test_client):
 
 @pytest.fixture
 def make_test_user():
-    test_user = User(username='john')
+    test_user = User()
+    test_user.username = 'john'
     test_user.set_password("Password123")
     with app.app_context():
         db.session.add(test_user)
         db.session.commit()
         yield test_user
         db.session.delete(test_user)
+        db.session.commit()
+
+
+@pytest.fixture
+def make_test_channel():
+    test_channel = Channel()
+    test_channel.channel_name = 'testchannel'
+    with app.app_context():
+        db.session.add(test_channel)
+        db.session.commit()
+        yield test_channel
+        db.session.delete(test_channel)
         db.session.commit()
 
 def test_login_page(test_client, make_test_user):
@@ -67,3 +80,21 @@ def test_register_page(test_client):
         response = test_client.post('/register', data=registerform.data, follow_redirects=True)
         assert response.status_code == 200
         assert db.session.query(User).filter_by(username=registerform.username.data).first()
+
+def test_message_page(test_client, make_test_user, make_test_channel):
+    with app.app_context():
+        response = test_client.get('/message', follow_redirects=True)
+        assert response.status_code == 200
+        messageform = MessageForm()
+        messageform.user_id.data = make_test_user.id
+        messageform.channel_id.data = make_test_channel.id
+        messageform.message_text.data = "test message"
+        response = test_client.post('/send_message', data=messageform.data)
+        assert response.status_code == 200
+        message = db.session.query(Message).filter_by(sender=make_test_user, channel=make_test_channel).first()
+        assert message
+        db.session.delete(message)
+        db.session.commit()
+
+
+

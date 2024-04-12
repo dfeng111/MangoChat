@@ -31,8 +31,8 @@ class UserChannel(db.Model):
     channel_id = db.Column(db.Integer, db.ForeignKey('channel.id'), nullable=False)
     is_moderator = db.Column(db.Boolean, default=False)
     is_banned = db.Column(db.Boolean, default=False)
-    user = db.relationship('User', backref=db.backref('user_channels', lazy=True))
-    channel = db.relationship('Channel', backref=db.backref('channel_users', lazy=True))
+    user = db.relationship('User', backref=db.backref('user_channels', lazy=True, cascade="all, delete-orphan"))
+    channel = db.relationship('Channel', backref=db.backref('channel_users', lazy=True, cascade="all, delete-orphan"))
     db.UniqueConstraint('user_id', 'channel_id', name='unique_user_channel')
     def __repr__(self) -> str:
         return '<User: {}, Channel: {} Id: {}>'.format(self.user or self.user_id, self.channel or self.channel_id, self.id)
@@ -43,8 +43,8 @@ class Message(db.Model):
     sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     content = db.Column(db.Text, nullable=False)
     timestamp = db.Column(db.TIMESTAMP, server_default=db.func.current_timestamp(), nullable=False)
-    channel = db.relationship('Channel', backref=db.backref('messages', lazy=True))
-    sender = db.relationship('User', backref=db.backref('sent_messages', lazy=True))
+    channel = db.relationship('Channel', backref=db.backref('messages', lazy=True, cascade="all, delete-orphan"))
+    sender = db.relationship('User', backref=db.backref('sent_messages', lazy=True, cascade="all, delete-orphan"))
     def __repr__(self) -> str:
         return '<Channel: {}, Sender: {}, Message: {}, id: {}>'.format(
             self.channel.channel_name or self.channel_id,
