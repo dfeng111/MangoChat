@@ -1,7 +1,7 @@
 import pytest
 from flask import Flask
 from Database.database_setup import db, User, Channel, UserChannel
-from project.channel_management import create_channel, delete_channel, appoint_channel_admin
+from channel_management import create_channel, delete_channel, appoint_channel_admin
 
 # Creating the Flask app and setting up the database
 @pytest.fixture(autouse=True)
