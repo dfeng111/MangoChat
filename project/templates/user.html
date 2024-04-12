@@ -2,88 +2,208 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% include "navbar.html" %}
-    <div class="main-content">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
-        <div class="container" style = "background-color: rgb(254, 188, 66); color: black;">
-            <div class="row align-items-center mb-3">   
-                <div class="col-auto">
-                    <img src="..\static\images\testAvatar.png" alt="User Avatar" class="avatar">
-                </div>
-                <div class="col">
-                    {% if current_user.is_authenticated %}
-                        <h1>Welcome, {{ current_user.username }}</h1>
-                    {% else %}
-                        <h1>Please log in to see this page.</h1>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        <hr>
-        <div class="container" style = "background-color: rgb(254, 188, 66); color: black;">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="profile-section" style="background-color: orange; color: black;" >
-                        <div class="profile-section"><strong>{{ current_user.username }}</strong></div>
-                        <hr>
-                        <div><strong>About Me:</strong></div> 
-                        <div id="aboutMe" class="editable" contenteditable="true">Click to edit...<br><br><br><br></div>
-                        <hr>
-                        <!-- Status Dropdown -->
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="statusButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                Choose Status
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="statusButton">
-                                <li><a class="dropdown-item" href="#" data-status="online">Online</a></li>
-                                <li><a class="dropdown-item" href="#" data-status="do-not-disturb">Do Not Disturb</a></li>
-                            </ul>
-                        </div>
-                        <hr>
-                        <p><strong>Joined Date:</strong> November 12, 2019</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr>
-
-
-        <div class="container" style = "background-color: unset; color: black;">
-            <div class="row mt-3">
-                <div class="col">
-                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#passwordChangeModal">
-                        Change Password
-                    </button>
-                    <hr>
-                    <form action="{{ url_for('logout') }}" method="GET" onsubmit="return confirm('Are you sure you want to log out?');">
-                        <br><button type="submit" class="btn" style="background-color: red; color: white;">Logout</button>
-                    </form> 
-                    <form action="{{ url_for('delete_account') }}" method="POST" onsubmit="return confirm('Are you sure you want to delete your account permanently? This action cannot be undone.');">
-                        <button type="submit" class="btn btn-danger">Delete Account</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <script>
-            $(document).ready(function() {
-                $('.dropdown-item').click(function(e) {
-                    e.preventDefault();
-                    var statusText = $(this).text();
-                    var status = $(this).data('status');
-
-                    $('#statusButton').text(statusText).removeClass('btn-online btn-offline btn-secondary');
-
-                    if(status === 'online') {
-                        $('#statusButton').addClass('btn-online');
-                    } else if(status === 'do-not-disturb') {
-                        $('#statusButton').addClass('btn-donotdisturb');
-                    } else {
-                        $('#statusButton').addClass('btn-secondary'); 
-                    }
-                });
-            });
-        </script>
+{% include "navbar.html" %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+<div class="main-content">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/user.css') }}">
+  <div class="container" style="background-color: rgb(254, 188, 66); color: black;">
+    <div class="row align-items-center mb-3">
+      <div class="col-auto">
+        <img src="..\static\images\mango.jpg" alt="User Avatar" class="avatar">
+      </div>
+      <div class="col">
+        {% if current_user.is_authenticated %}
+        <h1>Welcome, {{ current_user.username }}</h1>
+        {% else %}
+        <h1>Please log in to see this page.</h1>
+        {% endif %}
+      </div>
     </div>
+  </div>
+  <hr>
+  <div class="container" style="background-color: rgb(254, 188, 66); color: black;">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="profile-section" style="background-color: orange; color: black;">
+          <div class="profile-header">
+            <strong>{{ current_user.username }}</strong>
+            <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editUsernameModal"
+              title="Edit Username">
+              <i class="fas fa-pencil-alt"></i>
+            </button>
+          </div>
+          <hr>
+          <div><strong>About Me:</strong></div>
+          <div class="aboutme-section">
+            <strong>{{ current_user.description }}</strong>
+            <div class="pencil">
+              <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#editDescriptionModal"
+                title="Edit Username">
+                <hr><i class="fas fa-pencil-alt"></i>
+              </button>
+            </div>
+          </div>
+          <hr>
+          <!-- Status Dropdown -->
+          <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="statusButton" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Choose Status
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="statusButton">
+              <li><a class="dropdown-item" href="#" data-status="online">Online</a></li>
+              <li><a class="dropdown-item" href="#" data-status="do-not-disturb">Do Not Disturb</a></li>
+            </ul>
+          </div>
+          <hr>
+          <p><strong>Joined Date:</strong> November 12, 2019</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <!-- Password Change Modal -->
+  <div class="modal fade" id="passwordChangeModal" tabindex="-1" aria-labelledby="passwordChangeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="passwordChangeModalLabel">Change Password</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{{ url_for('update_password') }}" method="post">
+          <div class="modal-body">
+            {{ changeForm.hidden_tag() }}
+            <div class="mb-3">
+              {{ changeForm.current_password.label(class_="form-label") }}
+              {{ changeForm.current_password(class_="form-control", placeholder="Current Password") }}
+              {% for error in changeForm.current_password.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+              {% endfor %}
+            </div>
+            <div class="mb-3">
+              {{ changeForm.new_password.label(class_="form-label") }}
+              {{ changeForm.new_password(class_="form-control", placeholder="New Password") }}
+              {% for error in changeForm.new_password.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+              {% endfor %}
+            </div>
+            <div class="mb-3">
+              {{ changeForm.confirm_new_password.label(class_="form-label") }}
+              {{ changeForm.confirm_new_password(class_="form-control", placeholder="Confirm New Password") }}
+              {% for error in changeForm.confirm_new_password.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Update Password</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Edit Username Modal -->
+  <div class="modal fade" id="editUsernameModal" tabindex="-1" aria-labelledby="editUsernameModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editUsernameModalLabel">Edit Username</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{{ url_for('update_username') }}" method="post">
+          <div class="modal-body">
+            {{ usernameForm.hidden_tag() }}
+            <div class="mb-3">
+              {{ usernameForm.new_username.label(class_="form-label") }}
+              {{ usernameForm.new_username(class_="form-control", placeholder="Enter new username") }}
+              {% for error in usernameForm.new_username.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Update Username</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Description Modal -->
+  <div class="modal fade" id="editDescriptionModal" tabindex="-1" aria-labelledby="editDescriptionModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editDescriptionModal">Edit Description</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="{{ url_for('change_description') }}" method="post">
+          <div class="modal-body">
+            {{ descriptionForm.hidden_tag() }}
+            <div class="mb-3">
+              {{ descriptionForm.new_description.label(class_="form-label") }}
+              {{ descriptionForm.new_description(class_="form-control", placeholder="Enter your description") }}
+              {% for error in usernameForm.new_username.errors %}
+              <div class="invalid-feedback">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Update Description</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container" style="background-color: unset; color: black;">
+    <div class="row mt-3">
+      <div class="col">
+        <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#passwordChangeModal">
+          Change Password
+        </button>
+        <hr>
+        <form action="{{ url_for('logout') }}" method="GET"
+          onsubmit="return confirm('Are you sure you want to log out?');">
+          <br><button type="submit" class="btn" style="background-color: red; color: white;">Logout</button>
+        </form>
+        <form action="{{ url_for('delete_account') }}" method="POST"
+          onsubmit="return confirm('Are you sure you want to delete your account permanently? This action cannot be undone.');">
+          <button type="submit" class="btn btn-danger">Delete Account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $('.dropdown-item').click(function (e) {
+        e.preventDefault();
+        var statusText = $(this).text();
+        var status = $(this).data('status');
+
+        $('#statusButton').text(statusText).removeClass('btn-online btn-offline btn-secondary');
+
+        if (status === 'online') {
+          $('#statusButton').addClass('btn-online');
+        } else if (status === 'do-not-disturb') {
+          $('#statusButton').addClass('btn-donotdisturb');
+        } else {
+          $('#statusButton').addClass('btn-secondary');
+        }
+      });
+    });
+  </script>
+</div>
 
 {% endblock %}
