@@ -4,7 +4,7 @@ from Database.database_setup import Message, db, User, Channel, UserChannel
 from channel_management import create_channel, delete_channel
 from utils import get_current_user_id, is_user_channel_admin
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
-from forms import ChannelForm, MessageForm, RegisterForm, LoginForm
+from forms import ChannelForm, MessageForm, RegisterForm, LoginForm, ChangePasswordForm, EditUsernameForm, editDescriptionForm
 from flask_socketio import SocketIO
 import sys
 from message_management import send_message
@@ -132,7 +132,7 @@ def login():
             # if not url_has_allowed_host_and_scheme(next, request.host):
             #     return abort(400)
 
-            return redirect(url_for("home", username=username))
+            return redirect(url_for("home"))
         else:
             # Redirect back to login page with an error message
             flash("Incorrect username or password")
@@ -168,12 +168,93 @@ def register():
 def logout():
     logout_user()
     flash("Successfully logged out.")
-    return redirect(url_for("index"))
+    return redirect(url_for("login"))
 
 @app.route("/user")
-# @login_required
+@login_required
 def user():
-    return render_template("user.html")
+    changeForm = ChangePasswordForm()
+    usernameForm = EditUsernameForm()
+    descriptionForm = editDescriptionForm()
+    return render_template("user.html", changeForm=changeForm, usernameForm = usernameForm, descriptionForm = descriptionForm)
+
+@app.route("/delete_account", methods=["POST"])
+@login_required
+def delete_account():
+    username = current_user.username 
+    user = User.query.filter_by(username=username).first()
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        logout_user()  
+        flash("Your account has been successfully deleted.")
+        return redirect(url_for("login"))
+    else:
+        flash("Account deletion failed.")
+        return redirect(url_for("user"))
+    
+@app.route("/update_password", methods=["POST"])
+@login_required
+def update_password():
+    changeForm = ChangePasswordForm()
+    if changeForm.validate_on_submit():
+        user = User.query.filter_by(username=current_user.username).first()
+        if user and user.check_password(changeForm.current_password.data):
+            user.set_password(changeForm.new_password.data)
+            db.session.commit()
+            flash("Password updated successfully.")
+            return redirect(url_for('user')) 
+        else:
+            flash("Current password is incorrect.", "error")
+            return redirect(url_for('user'))
+    else:
+        for fieldName, errorMessages in changeForm.errors.items():
+            for err in errorMessages:
+                flash(f"{fieldName}: {err}", "error")
+
+    return redirect(url_for('user'))
+
+@app.route("/update_username", methods=["POST"])
+@login_required
+def update_username():
+    usernameForm = EditUsernameForm()
+    if usernameForm.validate_on_submit():
+        existing_user = User.query.filter(User.username == usernameForm.new_username.data).first()
+        if existing_user is not None and existing_user.username != current_user.username:
+            flash("Username already been used. Please try a different username.", "error")
+            return redirect(url_for('user')) 
+
+        user = User.query.filter_by(username=current_user.username).first()
+        user.username = usernameForm.new_username.data
+        db.session.commit()
+        flash("Your username has been updated.")
+        return redirect(url_for('user'))
+
+    else:
+        for fieldName, errorMessages in usernameForm.errors.items():
+            for err in errorMessages:
+                flash(f"{fieldName}: {err}", "error")
+
+    return redirect(url_for('user'))
+
+@app.route("/change_description", methods=["POST"])
+@login_required
+def change_description():
+    descriptionForm = editDescriptionForm()
+    if descriptionForm.validate_on_submit():
+        user = User.query.filter_by(username=current_user.username).first()
+        user.description = descriptionForm.new_description.data
+        db.session.commit()
+        flash("Your description has been updated.")
+        return redirect(url_for('user'))
+    
+    else:
+        for fieldName, errorMessages in descriptionForm.errors.items():
+            for err in errorMessages:
+                flash(f"{fieldName}: {err}", "error")
+
+    return redirect(url_for('user'))
+
 
 # ******************************************************
 # PLACEHOLDER CODE /create_channel IS NOT CREATED YET
