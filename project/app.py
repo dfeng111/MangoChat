@@ -39,6 +39,10 @@ def root():
 def index():
     return redirect("/home")
 
+@app.route("/favicon.ico")
+def favicon():
+    return app.send_static_file('mango.ico')
+
 @app.route("/friendspage")
 def Friendspage():
     return render_template("Friendspage.html")
