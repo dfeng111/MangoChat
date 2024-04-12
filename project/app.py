@@ -7,7 +7,7 @@ from flask_login import LoginManager, login_required, login_user, logout_user, c
 from forms import ChannelForm, MessageForm, RegisterForm, LoginForm
 from flask_socketio import SocketIO
 import sys
-from send_message import send_message
+from message_management import send_message
 
 app = Flask(__name__, static_url_path='/static')
 app.config.from_object(Config)
