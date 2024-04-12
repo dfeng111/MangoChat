@@ -3,188 +3,117 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/navbar.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/friends_page.css') }}">
-<script src="https://kit.fontawesome.com/80c51aa779.js" crossorigin="anonymous"></script>
 
+{% include "navbar.html" %}
 
-  </head>
-  <body>
-    
-      <!-- Side menu-->
-  <div class="sidebar">
-    <div class="top">
-      <div class="title">
-        <i class="fa-solid fa-leaf fs-5"></i>
-        <span> Mango Chat </span>
-      </div>
-      <i class="fa-solid fa-leaf " id="btn"></i>
+<div class="main-content">
+    <!-- CREATE CUSTOM BUTTON OUT OUT OF CHANNEL BOX CLASS-->
 
-      <ul>
-        <li>
-          <a href="{{ url_for('user')}}">
-            <i class="fa-solid fa-user fs-5"></i>
-            <span class="nav-item">Profile</span>
-          </a>
-          <span class="collapsed"> Profile</span>
-        </li>
-
-        <li>
-          <a href="{{ url_for('Friendspage') }}">
-            <i class="fa-solid fa-user-group fs-5"></i>
-            <span class="nav-item">Friends</span>
-          </a>
-          <span class="collapsed"> Friends</span>
-        </li>
-
-        <li>
-          <a href="{{ url_for('channels') }}">
-            <i class="fa-solid fa-comments fs-5"></i>
-            <span class="nav-item">Channels</span>
-          </a>
-          <span class="collapsed"> Channels</span>
-        </li>
-
-        <li>
-          <a href="#">
-            <i class="fa-solid fa-gears fs-5"></i>
-            <span class="nav-item">Settings</span>
-          </a>
-          <span class="collapsed">Settings</span>
-        </li>
-
-        <li>
-          <a href="{{ url_for('login') }}">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <span class="nav-item">Logout</span>
-          </a>
-          <span class="collapsed"> Logout</span>
-        </li>
-      </ul>
-
-    </div>
-  </div>
-
-  <div class="main-content">
-      <!-- CREATE CUSTOM BUTTON OUT OUT OF CHANNEL BOX CLASS-->
-
-      <div class="header">
+    <div class="header">
         <h1>Friends Page</h1>
-                <button class = "myBtn_multi" >Add Friend</button>
-                  <div class="modal modal_multi">
-                      <div class="modal-content" style = "background-color: white;">
-                          <h1>Add Friend</h1>
-                          <span class="close close_multi">×</span>
-                          <p>
-                            Please Input Friend id:
-                            <form action="/create_channel" method="POST" novalidate>
-                              
-                              <div class="form-group">
+        <button class = "myBtn_multi" >Add Friend</button>
+        <div class="modal modal_multi">
+            <div class="modal-content" style = "background-color: white;">
+                <h1>Add Friend</h1>
+                <span class="close close_multi">×</span>
+                <p>
+                Please Input Friend id:
+                <form action="/create_channel" method="POST" novalidate>
 
-                              </div>
-                            </form>
-                        </p>
-                          
-                      </div>
-                  </div>
-                      </div>
-                  </div>
+                    <div class="form-group">
+
+                    </div>
+                </form>
+                </p>
+
+            </div>
         </div>
+    </div>
 
-        <div class= "grid-container">
-          
-            <div class="channel-container">
+    <div class= "grid-container">
 
-              <div class="channel-column"></div>
-            
-              <div class="channel-column">
+        <div class="friend-container">
+
+            <div class="friend-column"></div>
+
+            <div class="friend-column">
                 <button class="myBtn_multi" style = "background-color: #F4BB44;">remove friend</button>
-                
-                  <div class="modal modal_multi" >
-                      <div class="modal-content">
-                          <h1>are you sure you want to remove this person from your friends list</h1>
-                        
-                          <button class="close close_multi">confrim</span>
-                            <button class="close close_multi">cancel</span>
-                            </div>
-                          </div>
-                          
-                      </div>
-                  </div>
-                   </div>
-              </div>
-              </div>
-            
- 
-  </body>
-  
-  <script>
+
+                <div class="modal modal_multi" >
+                    <div class="modal-content">
+                        <h1>are you sure you want to remove this person from your friends list</h1>
+
+                        <button class="close close_multi">confrim</span>
+                        <button class="close close_multi">cancel</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
-// modal code
-var modalparent = document.getElementsByClassName("modal_multi");
+<script>
 
-// Get the button that opens the modal
 
-var modal_btn_multi = document.getElementsByClassName("myBtn_multi");
+    // modal code
+    var modalparent = document.getElementsByClassName("modal_multi");
 
-// Get the <span> element that closes the modal
-var span_close_multi = document.getElementsByClassName("close_multi");
+    // Get the button that opens the modal
 
-// When the user clicks the button, open the modal
-function setDataIndex() {
+    var modal_btn_multi = document.getElementsByClassName("myBtn_multi");
+
+    // Get the <span> element that closes the modal
+    var span_close_multi = document.getElementsByClassName("close_multi");
+
+    // When the user clicks the button, open the modal
+    function setDataIndex() {
+
+        for (i = 0; i < modal_btn_multi.length; i++)
+        {
+            modal_btn_multi[i].setAttribute('data-index', i);
+            modalparent[i].setAttribute('data-index', i);
+            span_close_multi[i].setAttribute('data-index', i);
+        }
+    }
+
+
 
     for (i = 0; i < modal_btn_multi.length; i++)
     {
-        modal_btn_multi[i].setAttribute('data-index', i);
-        modalparent[i].setAttribute('data-index', i);
-        span_close_multi[i].setAttribute('data-index', i);
+        modal_btn_multi[i].onclick = function() {
+            var ElementIndex = this.getAttribute('data-index');
+            modalparent[ElementIndex].style.display = "block";
+        };
+
+        // When the user clicks on <span> (x), close the modal
+        span_close_multi[i].onclick = function() {
+            var ElementIndex = this.getAttribute('data-index');
+            modalparent[ElementIndex].style.display = "none";
+        };
+
     }
-}
 
+    window.onload = function() {
 
-
-for (i = 0; i < modal_btn_multi.length; i++)
-{
-    modal_btn_multi[i].onclick = function() {
-        var ElementIndex = this.getAttribute('data-index');
-        modalparent[ElementIndex].style.display = "block";
+        setDataIndex();
     };
 
-    // When the user clicks on <span> (x), close the modal
-    span_close_multi[i].onclick = function() {
-        var ElementIndex = this.getAttribute('data-index');
-        modalparent[ElementIndex].style.display = "none";
+    window.onclick = function(event) {
+        if (event.target === modalparent[event.target.getAttribute('data-index')]) {
+            modalparent[event.target.getAttribute('data-index')].style.display = "none";
+        }
+
+        // OLD CODE
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
     };
 
-}
-
-window.onload = function() {
-
-    setDataIndex();
-};
-
-window.onclick = function(event) {
-    if (event.target === modalparent[event.target.getAttribute('data-index')]) {
-        modalparent[event.target.getAttribute('data-index')].style.display = "none";
-    }
-
-    // OLD CODE
-    if (event.target === modal) {
-        modal.style.display = "none";
-    }
-};
-
-    // sidebar open/close
-  let btn = document.querySelector('#btn');
-  let sidebar = document.querySelector('.sidebar');
-
-  btn.onclick = function () {
-    sidebar.classList.toggle('active');
-  }
-  
 </script>
-  </script>
-  </html>
+</script>
+</html>
 
-  {% endblock %}
+{% endblock %}

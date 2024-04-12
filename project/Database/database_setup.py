@@ -46,7 +46,13 @@ class Message(db.Model):
     channel = db.relationship('Channel', backref=db.backref('messages', lazy=True))
     sender = db.relationship('User', backref=db.backref('sent_messages', lazy=True))
     def __repr__(self) -> str:
-        return '<Channel: {}, Sender: {}, Message: {}, id: {}>'.format(self.channel or self.channel_id, self.sender or self.sender.id, self.content, self.id)
+        return '<Channel: {}, Sender: {}, Message: {}, id: {}>'.format(
+            self.channel.channel_name or self.channel_id,
+            self.sender.username or self.sender_id,
+            self.content,
+            self.id
+        )
+
 
 class Friend(db.Model):
     id = db.Column(db.Integer, primary_key=True)

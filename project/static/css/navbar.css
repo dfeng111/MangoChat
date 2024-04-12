@@ -1,29 +1,25 @@
-body { 
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    background-color: white;
-  }
- 
- /* sidebar settings */
- .sidebar{
-    position: absolute;
+/* sidebar settings */
+.sidebar{
+    position: sticky;
+    float: left;
+    z-index: 100;
     left: 0;
-    height: 100%;
+    top: 0;
+    height: 100vh;
     width: 80px;
     background-color: #F4BB44;
     padding: .4ren .8rem;
     transition: all 0.5s ease;
 }
 
-.sidebar.active ~ main-content{
+/* .sidebar.active ~ main-content{
     left: 250px;
     width: calc(100% - 200%);
 
-}
+} */
 
 .sidebar.active{
-   width: 250px;
+    width: 250px;
 }
 
 .sidebar #btn{
@@ -43,13 +39,13 @@ body {
 }
 
 .sidebar .top .title{
-color: black;
-display: flex;
-height: 50px;
-width: 100%;
-align-items: center;
-pointer-events: none;
-opacity: 0;
+    color: black;
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    pointer-events: none;
+    opacity: 0;
 
 }
 
@@ -58,8 +54,8 @@ opacity: 0;
 }
 
 .top .title i {
- font-size: 2rem;
- margin-right: 5px;
+    font-size: 2rem;
+    margin-right: 5px;
 
 }
 
@@ -129,21 +125,24 @@ opacity: 0;
     transition: all 0.5s ease;
     width: calc(100% - 80px);
     margin-left: 4.3%;
-    
-    }
- /* channel boxxes */
- .grid-container {
+
+}
+/* channel boxxes */
+.grid-container {
     display: grid;
     height: 100%;
-    width: 100%;
     padding-top: 1%;
     align-content: center;
     grid-template-columns: 1;
     background-color: white; 
-  }
-  /* channel boxxes */
-  .grid-container > div {
+}
+/* channel boxxes */
+.grid-container > div {
     background-color: lightgrey;
     text-align: center;
     font-size: 30px;
-  }
+}
+
+.title {
+    margin-left: 1em;
+}
