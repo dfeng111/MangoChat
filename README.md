@@ -47,3 +47,16 @@ System should not disclose login information with other users
 
 ## Use Case Diagram
 ![Mango Chat Class Diagram](Requirements/MangoUseCase.png)
+
+## Running the website:
+
+### Prerequisites:
+- Docker
+- Git Bash or Bash
+- Python
+
+### Install steps:
+1. Open this location in Bash or Git Bash.
+2. run `./setup.sh`.
+3. Wait until it says "Serving Flask app 'app'".
+4. To take down the server, hit CTRL-c, and then run `docker-compose down`.

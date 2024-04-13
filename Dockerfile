@@ -12,4 +12,4 @@ EXPOSE 3000
 ENV FLASK_ENV=development
 
 # "--host=0.0.0.0" is a built-in development server
-CMD ["flask", "run", "--host=0.0.0.0"] 
+CMD "python app.py"
